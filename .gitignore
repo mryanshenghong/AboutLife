@@ -2,7 +2,9 @@
 node_modules
 /dist
 
-/tests/e2e/reports/
+/tests/
+__test__
+coverage
 selenium-debug.log
 chromedriver.log
 geckodriver.log
@@ -24,3 +26,15 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# lock file
+package-lock.json
+
+# local env files
+.env.local
+.env.*.local
+
+
+# others
+*.zip
+*.rar
