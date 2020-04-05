@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
       test: /\.(js|vue|css|json|txt|html|ico|svg)(\?.*)?$/i,
       threshold: 1024,
       minRatio: 0.8,
-      deleteOriginalAssets: false
+      deleteOriginalAssets: false,
     })
   )
 }
@@ -35,14 +35,14 @@ module.exports = {
   // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
   pwa: {},
   css: {
-    // 是否使用css分离插件 ExtractTextPlugin
-    extract: true,
+    // 是否使用css分离插件 ExtractTextPlugin dev环境下如果开启的话就不会热更新样式
+    // extract: true,
     // 开启 CSS source maps?
     sourceMap: false,
     // css预设器配置项
     loaderOptions: {},
     // 启用 CSS modules for all css / pre-processor files.
-    requireModuleExtension: false
+    requireModuleExtension: true,
   },
   configureWebpack: {
     plugins: myPlugins,
@@ -54,26 +54,26 @@ module.exports = {
             name: 'chunk-libs',
             test: /[\\/]node_modules[\\/]/,
             priority: 10,
-            chunks: 'initial' // 只打包初始时依赖的第三方
+            chunks: 'initial', // 只打包初始时依赖的第三方
           },
           elementUI: {
             name: 'chunk-elementUI', // 单独将 elementUI 拆包
             priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-            test: /[\\/]node_modules[\\/]element-ui[\\/]/
+            test: /[\\/]node_modules[\\/]element-ui[\\/]/,
           },
           commons: {
             name: 'chunk-commons',
             test: resolve('src/components'), // 可自定义拓展你的规则
             minChunks: 3, // 最小公用次数
             priority: 5,
-            reuseExistingChunk: true
-          }
-        }
-      }
-    }
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
   },
   devServer: {
     open: true,
-    port: 8080
-  }
+    port: 8080,
+  },
 }

@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <el-container>
+      <el-main>
+        <mainHeader></mainHeader>
+        <router-view />
+      </el-main>
+    </el-container>
+
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-
-@Component
-export default class App extends Vue {}
+import mainHeader from '@/components/header.vue'
+@Component({
+  components: { mainHeader }
+})
+export default class App extends Vue { }
 </script>
 
 <style lang="scss">
@@ -21,19 +25,16 @@ export default class App extends Vue {}
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+  background: #f2f3f7;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .el-container {
+    height: 100vh;
+    overflow-y: hidden;
+    .el-main {
+      overflow: scroll;
+      -webkit-overflow-scrolling: touch;
     }
   }
 }
