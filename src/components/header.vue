@@ -1,6 +1,12 @@
 <template>
   <div class="main-header-container">
-    <div class="header-left">About Life</div>
+    <div class="header-left">
+      <img
+        src="@/assets/logo.png"
+        alt=""
+        height="40"
+      >
+    </div>
     <div class="header-right">
       <span class="main-header-user">Welcome:</span>
       <!-- <el-button
@@ -11,9 +17,13 @@
       <el-button
         class="login-btn"
         size="mini"
+        type="info"
       >
         <!-- {{$t('message.login.headerBtn')}}-->Login</el-button>
-      <el-dropdown trigger="click">
+      <el-dropdown
+        szie="mini"
+        trigger="click"
+      >
         <span class="el-dropdown-link">
           <!-- {{ $t('message.langSwich.language')
           }} -->
