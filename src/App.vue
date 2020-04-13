@@ -21,11 +21,10 @@ export default class App extends Vue { }
 </script>
 
 <style lang="scss">
+@import './styles/consts.scss';
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #f2f3f7;
+  background: $theme-color;
   ::-webkit-scrollbar {
     display: none;
   }

@@ -1,34 +1,9 @@
-# aboutlife
+# 记录开发过程中各种 UI 插件选用
 
-## Project setup
-```
-npm install
-```
+## 滚动视差插件 最后选择 vue-parallaxy, 完全能满足我的视差滚动的构思
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+github 地址: [vue-parallaxy](https://github.com/apertureless/vue-parallax)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 平滑滚动插件 Vuescroll.js
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+文档地址 [Vuescroll.js](https://vuescrolljs.yvescoding.org/zh/demo/)
