@@ -13,6 +13,7 @@ import {
   Timeline,
   TimelineItem,
   Card,
+  Row,
   Col,
   Image,
   Tag,
@@ -25,7 +26,7 @@ import {
   Input,
   Form,
   FormItem,
-  Message
+  Message,
 } from 'element-ui'
 Vue.use(Carousel)
 Vue.use(CarouselItem)
@@ -34,6 +35,7 @@ Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Card)
 Vue.use(Col)
+Vue.use(Row)
 Vue.use(Image)
 Vue.use(Tag)
 Vue.use(Container)

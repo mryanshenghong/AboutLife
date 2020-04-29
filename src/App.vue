@@ -4,9 +4,9 @@
       <el-main>
         <mainHeader></mainHeader>
         <router-view />
+        <mainFooter />
       </el-main>
     </el-container>
-
   </div>
 </template>
 
@@ -14,10 +14,11 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import mainHeader from '@/components/header.vue'
+import mainFooter from '@/components/footer.vue'
 @Component({
-  components: { mainHeader }
+  components: { mainHeader, mainFooter },
 })
-export default class App extends Vue { }
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">
