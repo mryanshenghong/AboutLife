@@ -1,10 +1,8 @@
 <template>
   <el-card class="box-card">
-    <h3 @click="select(id)" class="title">{{ title }}</h3>
     <div class="info">
-      <span class="cat">
-        测试
-        <el-tag type="info" size="small">{{ cat }}</el-tag>
+      <span class="tag">
+        <h3 @click="select(id)" class="title">{{ title }}</h3>
       </span>
       <span class="time">
         测试
@@ -14,7 +12,7 @@
   </el-card>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import Vue from 'vue'
 import { format } from '../utils/formatTime'
 import Component from 'vue-class-component'
@@ -22,7 +20,7 @@ const CardViewProps = Vue.extend({
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     time: {
       types: String,
@@ -36,14 +34,14 @@ const CardViewProps = Vue.extend({
       type: String,
       default: '',
     },
-  }
+  },
 })
 export default class CardView extends CardViewProps {
-
-  select = (id: string) => {
+  public select = (id: string): void => {
+    console.log(id)
     this.$emit('select', id)
   }
-  formatTime = (time: string) => {
+  public formatTime = (time: string) => {
     return format(time)
   }
 }
@@ -51,7 +49,9 @@ export default class CardView extends CardViewProps {
 <style lang="scss" scoped>
 .box-card {
   max-width: 1000px;
-  background: #f2f3f7;
+  background: transparent;
+  box-shadow: none !important;
+  border: none;
   margin: 0 auto;
   .title {
     cursor: pointer;

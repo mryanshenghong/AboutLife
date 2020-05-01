@@ -96,7 +96,6 @@
         <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
         <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
         <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-
       </div>
     </vuescroll>
   </div>
@@ -112,7 +111,7 @@ import CardView from '@/components/CardView.vue'
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
-  scrollOptions: object = {
+  public scrollOptions: object = {
     vuescroll: {
       mode: 'native',
       wheelScrollDuration: 60,
@@ -125,7 +124,7 @@ export default class Blogs extends Vue {
       size: 0,
     },
   }
-  created(): void {
+  private created(): void {
     const vs = this.$refs['vs'] as vuescroll
   }
 }
@@ -134,7 +133,7 @@ export default class Blogs extends Vue {
 <style lang="scss" scoped>
 .blogs-wrapper {
   overflow-y: scroll !important;
-  height: calc(100vh - 138px) !important;
+  height: calc(100vh - 158px) !important;
   margin-top: 80px;
   .blog-navs {
     display: flex;

@@ -3,13 +3,13 @@
     <div class="intro-content">
       <h1 class="intro-title">Anything</h1>
       <div class="intro-detail">
+        <img class="intro-img" src="@/assets/bambi.jpeg" alt="" />
         <p class="intro-sentence">日常生活琐碎小事....</p>
         <p class="intro-sentence">吹吹牛皮...</p>
         <p class="intro-sentence">所见所闻...</p>
         <p class="intro-sentence">anything...</p>
       </div>
     </div>
-    <img class="intro-img" src="@/assets/bambi.jpeg" alt="" />
   </div>
 </template>
 
@@ -18,17 +18,17 @@ export default {}
 </script>
 <style lang="scss" scoped>
 #intro-wrapper {
-  position: relative;
   font-weight: 500;
-  z-index: 2;
+
   background-color: transparent !important;
   .intro-content {
-    // padding: 10px;
     margin-top: 30px;
     .intro-title {
       font-size: 30px;
     }
     .intro-detail {
+      z-index: 2;
+      position: relative;
       margin-top: 20px;
       .intro-sentence {
         padding: 10px 10px;
@@ -36,10 +36,10 @@ export default {}
     }
   }
   .intro-img {
-    top: 50px;
+    top: 100px;
+    right: 0;
     position: absolute;
     width: 80%;
-    padding: 20px;
     z-index: -1;
     background: transparent;
     filter: blur(3px);

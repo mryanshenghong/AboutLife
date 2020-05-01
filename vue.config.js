@@ -7,7 +7,8 @@ function resolve(dir) {
 }
 
 let myPlugins = []
-// myPlugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)) //这个打开后导致 moment找不到 locale.js
+//这个打开后导致 moment找不到 locale.js
+myPlugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
 if (process.env.NODE_ENV === 'production') {
   myPlugins.push(
     new CompressionWebpackPlugin({

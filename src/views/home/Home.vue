@@ -18,7 +18,7 @@ import Blogs from './components/Blogs.vue'
 @Component({
   components: { Introduction, Blogs },
 })
-export default class Home extends Vue { }
+export default class Home extends Vue {}
 </script>
 <style scoped lang="scss">
 .home {
