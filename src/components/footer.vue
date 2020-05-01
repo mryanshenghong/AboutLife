@@ -65,6 +65,7 @@ export default {}
   .flex-left {
     display: flex;
     justify-content: flex-start;
+    opacity: 0;
   }
   .flex-center {
     display: flex;
