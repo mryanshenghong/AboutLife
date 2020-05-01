@@ -23,7 +23,7 @@ export default {}
   z-index: 2;
   background-color: transparent !important;
   .intro-content {
-    padding: 10px;
+    // padding: 10px;
     margin-top: 30px;
     .intro-title {
       font-size: 30px;
@@ -38,7 +38,8 @@ export default {}
   .intro-img {
     top: 50px;
     position: absolute;
-    width: 100%;
+    width: 80%;
+    padding: 20px;
     z-index: -1;
     background: transparent;
     filter: blur(3px);
