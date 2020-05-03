@@ -1,101 +1,25 @@
 <template>
   <div class="blogs-wrapper">
-    <div class="blog-navs">
-      <p class="blog-nav"><a href="">Anything</a></p>
-      <p class="blog-nav"><a href="">Music</a></p>
-      <p class="blog-nav"><a href="">Dota</a></p>
-      <p class="blog-nav"><a href="">Bambi</a></p>
-    </div>
-    <vuescroll ref="vs" :ops="scrollOptions">
+    <vuescroll
+      ref="vs"
+      :ops="scrollOptions"
+    >
       <div class="blog-list">
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
-        <CardView title="测试" time="2020-04-05T21:14:54.014Z" cat="测试"></CardView>
+        <CardView
+          title="测试"
+          time="2020-04-05T21:14:54.014Z"
+          cat="测试"
+        ></CardView>
+        <CardView
+          title="测试"
+          time="2020-04-05T21:14:54.014Z"
+          cat="测试"
+        ></CardView>
+        <CardView
+          title="测试"
+          time="2020-04-05T21:14:54.014Z"
+          cat="测试"
+        ></CardView>
       </div>
     </vuescroll>
   </div>
@@ -114,7 +38,7 @@ export default class Blogs extends Vue {
   public scrollOptions: object = {
     vuescroll: {
       mode: 'native',
-      wheelScrollDuration: 60,
+      wheelScrollDuration: 1000,
       detectResize: true,
     },
     scrollPanel: {
@@ -132,23 +56,9 @@ export default class Blogs extends Vue {
 
 <style lang="scss" scoped>
 .blogs-wrapper {
-  overflow-y: scroll !important;
+  //   overflow-y: scroll !important;
   height: calc(100vh - 158px) !important;
-  margin-top: 80px;
-  .blog-navs {
-    display: flex;
-    justify-content: center;
-    .blog-nav {
-      display: inline-block;
-      padding: 0 20px 0 0;
-      line-height: 38px;
-      a {
-        text-decoration: none;
-        color: black;
-        font-weight: 700;
-      }
-    }
-  }
+  margin-top: 30px;
   .blog-list {
     padding-left: 20px;
   }

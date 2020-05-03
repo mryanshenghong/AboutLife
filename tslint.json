@@ -13,5 +13,6 @@
     "quotemark": [true, "single"],
     "trailing-comma": false,
     "semicolon": [false, "never"]
-  }
+  },
+  "member-access": [true, "no-public"]
 }

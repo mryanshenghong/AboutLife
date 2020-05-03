@@ -18,7 +18,7 @@ import mainFooter from '@/components/footer.vue'
 @Component({
   components: { mainHeader, mainFooter },
 })
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
 <style lang="scss">
@@ -32,6 +32,7 @@ export default class App extends Vue {}
   .el-container {
     height: 100vh;
     overflow-y: hidden;
+    padding: 0 50px;
     .el-main {
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
