@@ -7,6 +7,7 @@
         <p class="intro-sentence">所见所闻...</p>
         <p class="intro-sentence">anything...</p>
       </div>
+      <img class="intro-img" src="@/assets/bambi.jpg" alt="" />
     </div>
   </div>
 </template>
@@ -18,16 +19,17 @@ export default {}
 #intro-wrapper {
   font-weight: 500;
   height: calc(100vh - 158px) !important;
-  background-image: url('../../../assets/bambi.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 400px;
   .intro-content {
     .intro-detail {
       margin-top: 20px;
       .intro-sentence {
         padding: 10px 10px;
       }
+    }
+    .intro-img {
+      max-width: 350px;
+      padding-left: 10px;
+      animation: imgFirstLandingAni 1s ease-in-out;
     }
   }
 }
