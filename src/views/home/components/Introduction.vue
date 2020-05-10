@@ -2,18 +2,49 @@
   <div id="intro-wrapper">
     <div class="intro-content">
       <div class="intro-detail">
-        <p class="intro-sentence">日常生活琐碎小事....</p>
-        <p class="intro-sentence">吹吹牛皮...</p>
-        <p class="intro-sentence">所见所闻...</p>
-        <p class="intro-sentence">anything...</p>
+        <p
+          class="intro-sentence"
+          v-for="(sentence,index) in content"
+        >{{sentence}}</p>
       </div>
-      <img class="intro-img" src="@/assets/bambi.jpg" alt="" />
+      <img
+        v-if="media_type==='img'"
+        class="intro-img"
+        :src="media"
+        alt=""
+      />
+      <video
+        v-if="media_type==='video'"
+        class="intro-video"
+        :src="media"
+        controls
+      />
     </div>
   </div>
 </template>
 
-<script>
-export default {}
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+const IntroProps = Vue.extend({
+  props: {
+    content: {
+      type: Array,
+      default: () => []
+    },
+    media_type: {
+      type: String,
+      default: ''
+    },
+    media: {
+      type: String,
+      default: ''
+    }
+  }
+})
+export default class Introduction extends IntroProps {
+
+}
 </script>
 <style lang="scss" scoped>
 #intro-wrapper {
@@ -23,11 +54,18 @@ export default {}
     .intro-detail {
       margin-top: 20px;
       .intro-sentence {
+        font-weight: 100;
         padding: 10px 10px;
       }
+      margin-bottom: 30px;
     }
     .intro-img {
-      max-width: 350px;
+      max-width: 400px;
+      padding-left: 10px;
+      animation: imgFirstLandingAni 1s ease-in-out;
+    }
+    .intro-video {
+      max-width: 400px;
       padding-left: 10px;
       animation: imgFirstLandingAni 1s ease-in-out;
     }

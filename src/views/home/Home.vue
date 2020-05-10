@@ -1,16 +1,20 @@
 <template>
   <div class="home">
     <div class="home-nav">
-      <h1 class="home-title">Anything</h1>
+      <h1 class="home-title">{{ intro.title }}</h1>
       <div class="blog-navs">
-        <p class="blog-nav"><a href="">Anything</a></p>
-        <p class="blog-nav"><a href="">Music</a></p>
-        <p class="blog-nav"><a href="">Dota</a></p>
-        <p class="blog-nav"><a href="">Bambi</a></p>
+        <p class="blog-nav"><a @click="changeIntro('anything')">Anything</a></p>
+        <p class="blog-nav"><a @click="changeIntro('music')">Music</a></p>
+        <p class="blog-nav"><a @click="changeIntro('dota')">Dota</a></p>
+        <p class="blog-nav"><a @click="changeIntro('bambi')">Bambi</a></p>
       </div>
     </div>
     <el-col :span="12">
-      <Introduction />
+      <Introduction
+        :content='intro.content'
+        :media="intro.media"
+        :media_type="intro.media_type"
+      />
     </el-col>
     <el-col :span="12">
       <Blogs />
@@ -22,12 +26,20 @@
 // @ is an alias to /src
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { namespace } from 'vuex-class'
 import Introduction from './components/Introduction.vue'
 import Blogs from './components/Blogs.vue'
+
+const homeModule = namespace('MODULE_HOME')
+
 @Component({
   components: { Introduction, Blogs },
 })
-export default class Home extends Vue { }
+export default class Home extends Vue {
+  @homeModule.Getter('getIntroduction') public intro!: object
+  @homeModule.Mutation('changIntroduction') public changeIntro!: Function
+  created() { console.log(this.intro) }
+}
 </script>
 <style scoped lang="scss">
 .home {
