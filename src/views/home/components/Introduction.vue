@@ -73,10 +73,10 @@ export default class Introduction extends IntroProps {
 }
 
 @keyframes imgFirstLandingAni {
-  0% {
+  from {
     filter: blur(20px);
   }
-  100% {
+  to {
     filter: blur(3px);
   }
 }
