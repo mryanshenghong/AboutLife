@@ -54,7 +54,7 @@ export default class Introduction extends IntroProps {
     .intro-detail {
       margin-top: 20px;
       .intro-sentence {
-        font-weight: 100;
+        font-weight: 200;
         padding: 10px 10px;
       }
       margin-bottom: 30px;
