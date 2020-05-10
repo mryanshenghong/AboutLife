@@ -58,6 +58,7 @@ export default class Home extends Vue {
       border-left: 5px solid black;
       display: flex;
       justify-content: center;
+      cursor: pointer;
       .blog-nav {
         display: inline-block;
         padding: 0 20px 0 5px;
