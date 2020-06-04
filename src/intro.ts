@@ -19,8 +19,8 @@ export const intro = {
       'CNDOTA BEST DOTA...',
       '怀念和大家通宵Dota打话费的日子...',
     ],
-    media_type: '',
-    media_url: '',
+    media_type: 'img',
+    media_url: require('./assets/ti10.jpg'),
   },
   bambi: {
     title: 'Bambi',
