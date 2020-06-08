@@ -60,12 +60,12 @@ export default class Introduction extends IntroProps {
       margin-bottom: 30px;
     }
     .intro-img {
-      max-width: 400px;
+      max-width: 450px;
       padding-left: 10px;
       animation: imgFirstLandingAni 1s ease-in-out;
     }
     .intro-video {
-      max-width: 400px;
+      max-width: 450px;
       padding-left: 10px;
       animation: imgFirstLandingAni 1s ease-in-out;
     }
