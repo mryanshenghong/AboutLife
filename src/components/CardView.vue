@@ -37,8 +37,8 @@ import Component from 'vue-class-component'
 })
 export default class CardView extends Vue {
   public select(id: string): void {
-    // console.log('asd')
-    // this.$emit('select', id)
+    console.log('asd')
+    this.$emit('select', id)
   }
 
   formatTime(time: string) {

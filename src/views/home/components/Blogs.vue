@@ -6,20 +6,13 @@
     >
       <div class="blog-list">
         <CardView
-          title="测试"
-          time="2020-04-05T21:14:54.014Z"
-          cat="测试"
-        ></CardView>
-        <CardView
-          title="测试"
-          time="2020-04-05T21:14:54.014Z"
-          cat="测试"
-        ></CardView>
-        <CardView
-          title="测试"
-          time="2020-04-05T21:14:54.014Z"
-          cat="测试"
-        ></CardView>
+          v-for="(blog,index) in intro.blogs"
+          :title="blog.title"
+          :time="blog.createdAt"
+          :cat="blog.cat"
+          :key="blog.id"
+          @select="viewContent"
+        />
       </div>
     </vuescroll>
   </div>
@@ -28,13 +21,22 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { namespace } from 'vuex-class'
 import vuescroll from 'vuescroll'
 import CardView from '@/components/CardView.vue'
+import { Blog } from '@/store/home'
+const homeModule = namespace('MODULE_HOME')
 
 @Component({
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
+  $store
+  $router
+  @homeModule.Getter('getIntroduction') public intro!:
+    {
+      blogs: Blog[]
+    }
   public scrollOptions: object = {
     vuescroll: {
       mode: 'native',
@@ -48,8 +50,13 @@ export default class Blogs extends Vue {
       size: 0,
     },
   }
-  private created(): void {
-    const vs = this.$refs['vs'] as vuescroll
+  public created(): void {
+    const vs = this.$refs.vs as vuescroll
+  }
+
+  public viewContent(id: string) {
+    console.log(this.$store)
+    this.$router.push(`/content/${id}`)
   }
 }
 </script>

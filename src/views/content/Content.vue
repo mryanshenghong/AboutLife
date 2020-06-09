@@ -58,7 +58,7 @@
 
 <script>
 const Markdown = (resolve) => require.ensure([], () => resolve(require('../../components/MarkDown.vue')), 'MarkDown')
-// import { getBlog, saveBlog } from '@/api/blog'
+import { getBlog, /*saveBlog*/ } from '@/api/blog'
 import { mapGetters } from 'vuex'
 export default {
   name: 'blogContent',
@@ -162,7 +162,7 @@ export default {
     },
   },
   mounted () {
-    // this.getBlog()
+    this.getBlog()
   },
   // deactivated() {
   //   this.content = ''
