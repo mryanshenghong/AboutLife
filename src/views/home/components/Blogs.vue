@@ -25,14 +25,13 @@ import { namespace } from 'vuex-class'
 import vuescroll from 'vuescroll'
 import CardView from '@/components/CardView.vue'
 import { Blog } from '@/store/home'
+import VueRouter from 'vue-router'
 const homeModule = namespace('MODULE_HOME')
 
 @Component({
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
-  $store
-  $router
   @homeModule.Getter('getIntroduction') public intro!:
     {
       blogs: Blog[]
