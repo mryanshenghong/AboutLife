@@ -54,7 +54,6 @@ export default class Blogs extends Vue {
   }
 
   public viewContent(id: string) {
-    console.log(this.$store)
     this.$router.push(`/content/${id}`)
   }
 }
