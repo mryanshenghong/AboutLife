@@ -27,13 +27,13 @@ import { verifyToken } from './api/login'
   components: { mainHeader, mainFooter, Login },
 })
 export default class App extends Vue {
-  @Mutation('SET_LOGIN') setLogin!: Function;
-  @Mutation('SET_USERINFO') setUseInfo!: Function;
+  @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void;
+  @Mutation('SET_USERINFO') public setUseInfo!: (res: any) => void;
   public modalShow: boolean = false;
-  public showModal(show: boolean) {
+  public showModal (show: boolean) {
     this.modalShow = show
   }
-  public mounted() {
+  public mounted () {
     if (localStorage.user_name && localStorage.role && localStorage.token) {
       verifyToken(localStorage.user_name, localStorage.token).then((res: any) => {
         if (!res.invalid) {

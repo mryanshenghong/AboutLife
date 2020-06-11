@@ -5,7 +5,7 @@ export const login = (email: string, pwd: string) => {
     axios
       .post(`${process.env.VUE_APP_URL}/myWeb/user/login`, {
         data: {
-          email: email,
+          email,
           user_pwd: pwd,
         },
       })
@@ -23,8 +23,8 @@ export const verifyToken = (user_name: string, token: string) => {
     axios
       .post(`${process.env.VUE_APP_URL}/myWeb/verifyToken`, {
         data: {
-          user_name: user_name,
-          token: token,
+          user_name,
+          token,
         },
       })
       .then((res) => {
@@ -43,7 +43,7 @@ export const logout = (email: string) => {
     axios
       .post(`${process.env.VUE_APP_URL}/myWeb/user/logout`, {
         data: {
-          email: email,
+          email,
         },
       })
       .then((res) => {

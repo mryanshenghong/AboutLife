@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '@/views/home/Home.vue'
 
 Vue.use(VueRouter)
-const Content = () => import('@/views/content/Content.vue')
+// const Content = () => import('@/views/content/Content.vue')
+// 如果Content 是按需引入的话 会出现网页元素闪动 所以就不按需引入了
+import Content from '@/views/content/Content.vue'
 const routes = [
   {
     path: '/',

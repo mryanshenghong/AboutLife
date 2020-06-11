@@ -6,7 +6,7 @@ export const getBlogsBasicInfo = (cat: string) => {
       .get(`${process.env.VUE_APP_URL}/myWeb/findBlogsByCate`, {
         params: {
           isTech: false,
-          cat: cat,
+          cat,
         },
       })
       .then((res) => {
@@ -23,7 +23,7 @@ export const getBlog = (id: string) => {
     axios
       .get(`${process.env.VUE_APP_URL}/myWeb/getBlog`, {
         params: {
-          id: id,
+          id,
         },
       })
       .then((res) => {
@@ -35,20 +35,20 @@ export const getBlog = (id: string) => {
   })
 }
 
-// export const saveBlog = (blogInfo, token) => {
-//     return new Promise((resolve, reject) => {
-//       axios
-//         .post(`${process.env.VUE_APP_URL}/myWeb/updateBlog`, blogInfo, {
-//           headers: {
-//             authorization: 'Bearer ' + token,
-//             'Content-Type': 'application/json',
-//           },
-//         })
-//         .then((res) => {
-//           resolve(res)
-//         })
-//         .catch((err) => {
-//           reject(err)
-//         })
-//     })
-//   }
+export const saveBlog = (blogInfo: any, token: string) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${process.env.VUE_APP_URL}/myWeb/updateBlog`, blogInfo, {
+        headers: {
+          authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((res) => {
+        resolve(res)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

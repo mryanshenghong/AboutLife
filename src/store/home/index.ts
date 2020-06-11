@@ -24,7 +24,7 @@ export const state: HomeState = {
   blogs: [],
 }
 
-export type Blog = {
+export interface Blog {
   cat: string
   createdAt: number
   id: string

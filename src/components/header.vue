@@ -1,6 +1,9 @@
 <template>
   <div class="main-header-container">
-    <div class="header-left">
+    <div
+      class="header-left"
+      @click="goHome"
+    >
       <h2 class="main-font first-letter">A</h2>
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
@@ -36,6 +39,10 @@ export default class Header extends Vue {
         break
       default:
     }
+  }
+
+  public goHome() {
+    this.$router.push('/');
   }
 }
 </script>

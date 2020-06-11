@@ -2,12 +2,18 @@
   <el-card class="box-card">
     <div class="info">
       <div>
-        <h3 @click="select(id)" class="title">{{ title }}<i class="el-icon-right"></i></h3>
+        <h3
+          @click="select(id)"
+          class="title"
+        >{{ title }}<i class="el-icon-right"></i></h3>
         <p class="content">搜索结果</p>
         <div class="insight"><i class="el-icon-chat-line-round">&nbsp;0</i> <i class="el-icon-view">&nbsp; 0</i></div>
       </div>
       <span class="time">
-        <el-tag type="info" size="small">{{ formatTime(time) }}</el-tag>
+        <el-tag
+          type="info"
+          size="small"
+        >{{ formatTime(time) }}</el-tag>
       </span>
     </div>
   </el-card>
@@ -27,11 +33,11 @@ import Component from 'vue-class-component'
   },
 })
 export default class CardView extends Vue {
-  public select(id: string): void {
+  public select (id: string): void {
     this.$emit('select', id)
   }
 
-  formatTime(time: string) {
+  public formatTime (time: string) {
     return format(time)
   }
 }

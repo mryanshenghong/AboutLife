@@ -8,17 +8,43 @@
     :lock-scroll="true"
     :modal-append-to-body="false"
   >
-    <el-form ref="loginModal" @submit.native.prevent :model="form" :rules="rules">
-      <el-form-item :label="$t('message.login.modalEmailLabel')" prop="email">
-        <el-input v-model="form.email" autocomplete="off"></el-input>
+    <el-form
+      ref="loginModal"
+      @submit.native.prevent
+      :model="form"
+      :rules="rules"
+    >
+      <el-form-item
+        :label="$t('message.login.modalEmailLabel')"
+        prop="email"
+      >
+        <el-input
+          v-model="form.email"
+          autocomplete="off"
+        ></el-input>
       </el-form-item>
-      <el-form-item :label="$t('message.login.modalPwdLabel')" prop="password">
-        <el-input v-model="form.password" type="password" autocomplete="off"></el-input>
+      <el-form-item
+        :label="$t('message.login.modalPwdLabel')"
+        prop="password"
+      >
+        <el-input
+          v-model="form.password"
+          type="password"
+          autocomplete="off"
+        ></el-input>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="login-footer">
+    <div
+      slot="footer"
+      class="login-footer"
+    >
       <el-button @click="closeModal">{{ $t('message.login.modalCancel') }}</el-button>
-      <el-button :disabled="!canSubmit" :loading="submiting" @click="submitLogin" type="primary">{{
+      <el-button
+        :disabled="!canSubmit"
+        :loading="submiting"
+        @click="submitLogin"
+        type="primary"
+      >{{
         $t('message.login.modalConfirm')
       }}</el-button>
     </div>
@@ -36,7 +62,7 @@ export default {
     },
   },
   watch: {
-    'form.email'(val) {
+    'form.email' (val) {
       if (val.length > 0) {
         if (this.form.password.length > 0) {
           this.canSubmit = true
@@ -45,7 +71,7 @@ export default {
         this.canSubmit = false
       }
     },
-    'form.password'(val) {
+    'form.password' (val) {
       if (val.length > 0) {
         if (this.form.email.length > 0) {
           this.canSubmit = true
@@ -55,7 +81,7 @@ export default {
       }
     },
   },
-  data() {
+  data () {
     const $t = this.$t.bind(this)
     return {
       form: {
@@ -77,12 +103,12 @@ export default {
     }
   },
   methods: {
-    closeModal() {
-      this.$refs['loginModal'].resetFields()
+    closeModal () {
+      this.$refs.loginModal.resetFields()
       this.canSubmit = false
       this.$emit('closeModal', false)
     },
-    submitLogin() {
+    submitLogin () {
       this.submiting = true
       login(this.form.email, this.form.password)
         .then((res) => {
@@ -116,7 +142,6 @@ export default {
       setUseInfo: 'SET_USERINFO',
     }),
   },
-  mounted() {},
 }
 </script>
 

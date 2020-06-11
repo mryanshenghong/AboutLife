@@ -5,8 +5,8 @@ import en from '@/langs/en'
 import cn from '@/langs/cn'
 Vue.use(VueI18n)
 const messages = {
-  en: en,
-  cn: cn,
+  en,
+  cn,
 }
 
 const i18n = new VueI18n({

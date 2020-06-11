@@ -1,6 +1,9 @@
 <template>
   <div class="blogs-wrapper">
-    <vuescroll ref="vs" :ops="scrollOptions">
+    <vuescroll
+      ref="vs"
+      :ops="scrollOptions"
+    >
       <div class="blog-list">
         <CardView
           v-for="(blog, index) in intro.blogs"
@@ -46,11 +49,11 @@ export default class Blogs extends Vue {
       size: 0,
     },
   }
-  public created(): void {
+  public created (): void {
     const vs = this.$refs.vs as vuescroll
   }
 
-  public viewContent(id: string) {
+  public viewContent (id: string) {
     this.$router.push(`/content/${id}`)
   }
 }

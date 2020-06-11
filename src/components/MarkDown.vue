@@ -17,12 +17,12 @@
 
 <script>
 import { mavonEditor } from 'mavon-editor'
-// import { uploadImg } from '../api/file'
+import { uploadImg } from '../api/file'
 export default {
   props: {
     content: {
       type: String,
-      default: '',
+      default: undefined,
     },
     defaultOpen: {
       type: String,
@@ -60,6 +60,12 @@ export default {
         })
     },
   },
+
+  mounted () {
+    this.$nextTick(() => {
+      console.log(this.content)
+    })
+  }
 }
 </script>
 <style lang="scss" scoped>

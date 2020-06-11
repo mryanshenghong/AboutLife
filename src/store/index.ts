@@ -62,7 +62,7 @@ const store: StoreOptions<RootState> = {
       state.user = user
     },
   },
-  getters: getters,
+  getters,
   modules: { MODULE_HOME },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
