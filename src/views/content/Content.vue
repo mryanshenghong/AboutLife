@@ -12,11 +12,9 @@
           v-for="(tag, index) in tags"
           :key="index"
           class="tag"
-        >{{ tag }}</el-tag>
-        <div
-          class="edit-tag-box"
-          v-if="canEdit"
+          >{{ tag }}</el-tag
         >
+        <div class="edit-tag-box" v-if="canEdit">
           <el-input
             class="new-tag-input"
             v-if="inputVisible"
@@ -27,20 +25,11 @@
             @blur="handleInputConfirm"
           >
           </el-input>
-          <el-button
-            v-else
-            class="button-new-tag"
-            size="mini"
-            @click="showInput"
-          >+ New Tag</el-button>
+          <el-button v-else class="button-new-tag" size="mini" @click="showInput">+ New Tag</el-button>
         </div>
       </div>
       <div v-if="userInfo.role === 0">
-        <el-button
-          @click="toggleEdit"
-          class="edit-btn"
-          size="mini"
-        >
+        <el-button @click="toggleEdit" class="edit-btn" size="mini">
           {{ $t('message.content.edit') }}
         </el-button>
       </div>
@@ -57,12 +46,14 @@
 </template>
 
 <script>
-const Markdown = (resolve) => require.ensure([], () => resolve(require('../../components/MarkDown.vue')), 'MarkDown')
-import { getBlog, /*saveBlog*/ } from '@/api/blog'
+// const Markdown = (resolve) => require.ensure([], () => resolve(require('../../components/MarkDown.vue')), 'MarkDown')
+const Markdown = () => import('@/components/MarkDown.vue').then((m) => m.default)
+
+import { getBlog /*saveBlog*/ } from '@/api/blog'
 import { mapGetters } from 'vuex'
 export default {
   name: 'blogContent',
-  data () {
+  data() {
     return {
       content: '',
       tags: [],
@@ -83,7 +74,7 @@ export default {
     ...mapGetters(['userInfo']),
   },
   methods: {
-    saveContent (content) {
+    saveContent(content) {
       const { id } = this.$route.params
       const { token } = localStorage
       if (id && token) {
@@ -122,17 +113,17 @@ export default {
         })
       }
     },
-    toggleEdit () {
+    toggleEdit() {
       this.canEdit = !this.canEdit
       this.showToolBars = !this.showToolBars
       this.isSubField = !this.isSubField
     },
-    getBlog () {
+    getBlog() {
       let id = this.$route.params.id
       this.loading = true
       getBlog(id)
         .then((res) => {
-          this.content = res.data.result.content
+          this.content = JSON.stringify(res.data.result.content)
           this.tags = res.data.result.tags
           this.allInfo = res.data.result
           this.hasContent = true
@@ -143,16 +134,16 @@ export default {
           throw new Error('Get blog failed' + err)
         })
     },
-    handleClose (tag) {
+    handleClose(tag) {
       this.tags.splice(this.tags.indexOf(tag), 1)
     },
-    showInput () {
+    showInput() {
       this.inputVisible = true
       this.$nextTick((_) => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-    handleInputConfirm () {
+    handleInputConfirm() {
       let inputValue = this.inputValue
       if (inputValue) {
         this.tags.push(inputValue)
@@ -161,7 +152,7 @@ export default {
       this.inputValue = ''
     },
   },
-  mounted () {
+  mounted() {
     this.getBlog()
   },
   // deactivated() {

@@ -2,9 +2,13 @@
   <div id="app">
     <el-container>
       <el-main>
-        <mainHeader></mainHeader>
+        <mainHeader @showModal="showModal"></mainHeader>
         <router-view />
         <mainFooter />
+        <Login
+          :show="modalShow"
+          @closeModal="showModal"
+        />
       </el-main>
     </el-container>
   </div>
@@ -15,10 +19,31 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import mainHeader from '@/components/header.vue'
 import mainFooter from '@/components/footer.vue'
+import { Mutation } from 'vuex-class'
+const Login = () => import('./components/loginModal.vue')
+import { verifyToken } from './api/login'
 @Component({
-  components: { mainHeader, mainFooter },
+  name: 'App',
+  components: { mainHeader, mainFooter, Login },
 })
-export default class App extends Vue { }
+export default class App extends Vue {
+  @Mutation('SET_LOGIN') setLogin!: Function;
+  @Mutation('SET_USERINFO') setUseInfo!: Function;
+  public modalShow: boolean = false;
+  public showModal(show: boolean) {
+    this.modalShow = show
+  }
+  public mounted() {
+    if (localStorage.user_name && localStorage.role && localStorage.token) {
+      verifyToken(localStorage.user_name, localStorage.token).then((res: any) => {
+        if (!res.invalid) {
+          this.setLogin(true)
+          this.setUseInfo(res)
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">

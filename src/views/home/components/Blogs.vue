@@ -1,15 +1,13 @@
 <template>
   <div class="blogs-wrapper">
-    <vuescroll
-      ref="vs"
-      :ops="scrollOptions"
-    >
+    <vuescroll ref="vs" :ops="scrollOptions">
       <div class="blog-list">
         <CardView
-          v-for="(blog,index) in intro.blogs"
+          v-for="(blog, index) in intro.blogs"
           :title="blog.title"
           :time="blog.createdAt"
           :cat="blog.cat"
+          :id="blog.id"
           :key="blog.id"
           @select="viewContent"
         />
@@ -32,10 +30,9 @@ const homeModule = namespace('MODULE_HOME')
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
-  @homeModule.Getter('getIntroduction') public intro!:
-    {
-      blogs: Blog[]
-    }
+  @homeModule.Getter('getIntroduction') public intro!: {
+    blogs: Blog[]
+  }
   public scrollOptions: object = {
     vuescroll: {
       mode: 'native',
