@@ -63,7 +63,7 @@ export default class Blogs extends Vue {
 .blogs-wrapper {
   //   overflow-y: scroll !important;
   height: calc(100vh - 158px) !important;
-  margin-top: 30px;
+  padding-top: 30px;
   .blog-list {
     padding-left: 20px;
   }

@@ -3,7 +3,7 @@ export const intro = {
     title: 'Anything',
     intro: ['日常生活琐碎小事...', '吹吹牛皮...', '所见所闻...', 'anything...'],
     media_type: 'img',
-    media_url: require('./assets/bambi.jpg'),
+    media_url: require('./assets/home.jpg'),
   },
   music: {
     title: 'Music',

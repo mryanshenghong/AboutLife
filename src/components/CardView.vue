@@ -6,7 +6,6 @@
           @click="select(id)"
           class="title"
         >{{ title }}<i class="el-icon-right"></i></h3>
-        <p class="content">搜索结果</p>
         <div class="insight"><i class="el-icon-chat-line-round">&nbsp;0</i> <i class="el-icon-view">&nbsp; 0</i></div>
       </div>
       <span class="time">

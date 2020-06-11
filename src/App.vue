@@ -55,11 +55,10 @@ export default class App extends Vue {
     display: none;
   }
   .el-container {
-    max-width: 1460px;
+    max-width: 1200px;
     margin: 0 auto;
     height: 100vh;
     overflow-y: hidden;
-    padding: 0 50px;
     .el-main {
       overflow: scroll;
       -webkit-overflow-scrolling: touch;

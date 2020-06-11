@@ -9,14 +9,26 @@
         <p class="blog-nav"><a @click="getBlogsAndInfo('Bambi')">Bambi</a></p>
       </div>
     </div>
-    <el-col :span="12">
+    <el-col
+      :xs="24"
+      :sm="24"
+      :md="12"
+      :lg="12"
+      :xl="12"
+    >
       <Introduction
         :content='intro.content'
         :media="intro.media"
         :media_type="intro.media_type"
       />
     </el-col>
-    <el-col :span="12">
+    <el-col
+      :xs="24"
+      :sm="24"
+      :md="12"
+      :lg="12"
+      :xl="12"
+    >
       <Blogs />
     </el-col>
   </div>
@@ -58,6 +70,7 @@ export default class Home extends Vue {
   .home-nav {
     display: flex;
     justify-content: left;
+    overflow-x: scroll;
     .home-title {
       font-weight: 600;
       font-size: 30px;
