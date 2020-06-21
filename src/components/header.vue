@@ -32,7 +32,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 @Component({})
 export default class Header extends Vue {
-  public onCommandChange(cm: string) {
+  public onCommandChange (cm: string) {
     switch (cm) {
       case 'login':
         this.$emit('showModal', true)
@@ -41,7 +41,7 @@ export default class Header extends Vue {
     }
   }
 
-  public goHome() {
+  public goHome () {
     this.$router.push('/');
   }
 }
@@ -62,6 +62,7 @@ export default class Header extends Vue {
     margin-right: 10px;
   }
   .header-left {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: baseline;

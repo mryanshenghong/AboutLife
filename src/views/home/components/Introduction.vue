@@ -80,7 +80,7 @@ export default class Introduction extends IntroProps {
 
 .blur-enter-active,
 .blur-leave-active {
-  transition: all 0.5s;
+  transition: all 0.5s ease-in-out;
 }
 .blur-enter,
 .blur-leave-to {
