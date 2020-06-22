@@ -1,21 +1,14 @@
 <template>
   <div class="main-header-container">
-    <div
-      class="header-left"
-      @click="goHome"
-    >
+    <div class="header-left" @click="goHome">
       <h2 class="main-font first-letter">A</h2>
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-dropdown
-        szie="mini"
-        @command="onCommandChange"
-        trigger="click"
-      >
+      <el-dropdown szie="mini" @command="onCommandChange" trigger="click">
         <el-avatar size="medium">user</el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="login">
+          <el-dropdown-item v-if="!isLogin" command="login">
             login
           </el-dropdown-item>
           <el-dropdown-item command="profile">
@@ -27,12 +20,18 @@
   </div>
 </template>
 
-<script lang='ts'>
+<script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
+import { namespace, State } from 'vuex-class'
+
+const rootStore = namespace('')
+
 @Component({})
 export default class Header extends Vue {
-  public onCommandChange (cm: string) {
+  @State('isLogin') public isLogin!: boolean
+
+  public onCommandChange(cm: string) {
     switch (cm) {
       case 'login':
         this.$emit('showModal', true)
@@ -41,8 +40,11 @@ export default class Header extends Vue {
     }
   }
 
-  public goHome () {
-    this.$router.push('/');
+  public goHome() {
+    this.$router.push('/')
+  }
+  public mounted() {
+    console.log(this.isLogin)
   }
 }
 </script>
