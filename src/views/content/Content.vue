@@ -1,5 +1,11 @@
 <template>
-  <div v-loading="!hasContent">
+  <div
+    v-loading="!hasContent"
+    class="content-wrapper"
+  >
+    <div class="blog-title">
+      <h1>{{title}}</h1>
+    </div>
     <div class="content-header">
       <div>
         <span>Tags:</span>
@@ -57,13 +63,16 @@
 </template>
 
 <script>
-const Markdown = (resolve) => require.ensure([], () => resolve(require('../../components/MarkDown.vue')), 'MarkDown')
-// import { getBlog, saveBlog } from '@/api/blog'
+const markdown = (resolve) => require.ensure([], async () => await resolve(require('../../components/MarkDown.vue')), 'MarkDown')
+// import Markdown from '@/components/MarkDown'
+
+import { getBlog, saveBlog } from '@/api/blog'
 import { mapGetters } from 'vuex'
 export default {
   name: 'blogContent',
   data () {
     return {
+      title: '',
       content: '',
       tags: [],
       allInfo: '',
@@ -77,7 +86,7 @@ export default {
     }
   },
   components: {
-    Markdown,
+    Markdown: markdown,
   },
   computed: {
     ...mapGetters(['userInfo']),
@@ -90,7 +99,7 @@ export default {
         saveBlog(
           {
             ...this.allInfo,
-            content: content,
+            content,
           },
           token
         )
@@ -128,10 +137,11 @@ export default {
       this.isSubField = !this.isSubField
     },
     getBlog () {
-      let id = this.$route.params.id
+      const id = this.$route.params.id
       this.loading = true
       getBlog(id)
         .then((res) => {
+          this.title = res.data.result.title
           this.content = res.data.result.content
           this.tags = res.data.result.tags
           this.allInfo = res.data.result
@@ -153,7 +163,7 @@ export default {
       })
     },
     handleInputConfirm () {
-      let inputValue = this.inputValue
+      const inputValue = this.inputValue
       if (inputValue) {
         this.tags.push(inputValue)
       }
@@ -162,7 +172,7 @@ export default {
     },
   },
   mounted () {
-    // this.getBlog()
+    this.getBlog()
   },
   // deactivated() {
   //   this.content = ''
@@ -170,26 +180,32 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.content-header {
-  display: flex;
-  justify-content: space-between;
-  .edit-tag-box {
-    display: inline-block;
-    .new-tag-input {
-      width: 100px;
+.content-wrapper {
+  height: calc(100vh - 58px);
+  margin-top: 20px;
+  .content-header {
+    margin-top: 20px;
+    font-family: 'main-font';
+    display: flex;
+    justify-content: space-between;
+    .edit-tag-box {
+      display: inline-block;
+      .new-tag-input {
+        width: 100px;
+      }
+      .button-new-tag {
+        margin: 0 10px;
+      }
     }
-    .button-new-tag {
+    .edit-btn {
+      color: rgba(0, 0, 0, 0.7);
+      background-color: #f2f3f7;
+      border-color: #f2f3f7;
+    }
+    .tag {
+      display: inline-block;
       margin: 0 10px;
     }
-  }
-  .edit-btn {
-    color: rgba(0, 0, 0, 0.7);
-    background-color: #f2f3f7;
-    border-color: #f2f3f7;
-  }
-  .tag {
-    display: inline-block;
-    margin: 0 10px;
   }
 }
 </style>

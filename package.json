@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build -- --report",
+    "build": "vue-cli-service build --report",
     "production": "vue-cli-service build --mode production",
     "test": "vue-cli-service serve --mode test",
     "test:unit": "vue-cli-service test:unit",
@@ -20,6 +20,7 @@
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
+    "vue-i18n": "^8.8.1",
     "vue-parallax": "^1.1.1",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.5",

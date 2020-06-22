@@ -10,6 +10,7 @@ export const homeGetter: GetterTree<HomeState, RootState> = {
       content: state.currentContent,
       media_type: state.currentMedia,
       media: state.currentMediaSrc,
+      blogs: state.blogs,
     }
   },
 }

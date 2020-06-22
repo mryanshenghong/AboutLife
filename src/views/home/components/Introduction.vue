@@ -1,25 +1,33 @@
 <template>
   <div id="intro-wrapper">
-    <div class="intro-content">
-      <div class="intro-detail">
-        <p
-          class="intro-sentence"
-          v-for="(sentence,index) in content"
-        >{{sentence}}</p>
+    <el-col :span='24'>
+      <div class="intro-content">
+        <div class="intro-detail">
+          <p
+            class="intro-sentence"
+            v-for="(sentence,index) in content"
+          >{{sentence}}</p>
+        </div>
+        <transition
+          name="blur"
+          mode="out-in"
+        >
+          <img
+            v-if="media_type==='img'"
+            class="intro-img"
+            :src="media"
+            alt=""
+            :key="media"
+          />
+          <video
+            v-if="media_type==='video'"
+            class="intro-video"
+            :src="media"
+            controls
+          />
+        </transition>
       </div>
-      <img
-        v-if="media_type==='img'"
-        class="intro-img"
-        :src="media"
-        alt=""
-      />
-      <video
-        v-if="media_type==='video'"
-        class="intro-video"
-        :src="media"
-        controls
-      />
-    </div>
+    </el-col>
   </div>
 </template>
 
@@ -60,24 +68,22 @@ export default class Introduction extends IntroProps {
       margin-bottom: 30px;
     }
     .intro-img {
-      max-width: 450px;
+      max-width: 500px;
       padding-left: 10px;
-      animation: imgFirstLandingAni 1s ease-in-out;
     }
     .intro-video {
-      max-width: 450px;
+      max-width: 500px;
       padding-left: 10px;
-      animation: imgFirstLandingAni 1s ease-in-out;
     }
   }
 }
 
-@keyframes imgFirstLandingAni {
-  from {
-    filter: blur(20px);
-  }
-  to {
-    filter: blur(3px);
-  }
+.blur-enter-active,
+.blur-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+.blur-enter,
+.blur-leave-to {
+  filter: blur(20px);
 }
 </style>

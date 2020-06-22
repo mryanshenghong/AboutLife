@@ -5,12 +5,8 @@
         <h3
           @click="select(id)"
           class="title"
-        >{{ title }}<i class="el-icon-right"></i>
-        </h3>
-        <p class="content">搜索结果</p>
-        <div class="insight">
-          <i class="el-icon-chat-line-round">&nbsp;0</i> <i class="el-icon-view">&nbsp; 0</i>
-        </div>
+        >{{ title }}<i class="el-icon-right"></i></h3>
+        <div class="insight"><i class="el-icon-chat-line-round">&nbsp;0</i> <i class="el-icon-view">&nbsp; 0</i></div>
       </div>
       <span class="time">
         <el-tag
@@ -36,12 +32,11 @@ import Component from 'vue-class-component'
   },
 })
 export default class CardView extends Vue {
-  public select(id: string): void {
-    // console.log('asd')
-    // this.$emit('select', id)
+  public select (id: string): void {
+    this.$emit('select', id)
   }
 
-  formatTime(time: string) {
+  public formatTime (time: string) {
     return format(time)
   }
 }

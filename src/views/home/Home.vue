@@ -3,20 +3,32 @@
     <div class="home-nav">
       <h1 class="home-title">{{ intro.title }}</h1>
       <div class="blog-navs">
-        <p class="blog-nav"><a @click="changeIntro('anything')">Anything</a></p>
-        <p class="blog-nav"><a @click="changeIntro('music')">Music</a></p>
-        <p class="blog-nav"><a @click="changeIntro('dota')">Dota</a></p>
-        <p class="blog-nav"><a @click="changeIntro('bambi')">Bambi</a></p>
+        <p class="blog-nav"><a @click="getBlogsAndInfo('Anything')">Anything</a></p>
+        <p class="blog-nav"><a @click="getBlogsAndInfo('Music')">Music</a></p>
+        <p class="blog-nav"><a @click="getBlogsAndInfo('Dota')">Dota</a></p>
+        <p class="blog-nav"><a @click="getBlogsAndInfo('Bambi')">Bambi</a></p>
       </div>
     </div>
-    <el-col :span="12">
+    <el-col
+      :xs="24"
+      :sm="24"
+      :md="12"
+      :lg="12"
+      :xl="12"
+    >
       <Introduction
         :content='intro.content'
         :media="intro.media"
         :media_type="intro.media_type"
       />
     </el-col>
-    <el-col :span="12">
+    <el-col
+      :xs="24"
+      :sm="24"
+      :md="12"
+      :lg="12"
+      :xl="12"
+    >
       <Blogs />
     </el-col>
   </div>
@@ -36,9 +48,18 @@ const homeModule = namespace('MODULE_HOME')
   components: { Introduction, Blogs },
 })
 export default class Home extends Vue {
-  @homeModule.Getter('getIntroduction') public intro!: object
-  @homeModule.Mutation('changIntroduction') public changeIntro!: Function
-  created() { console.log(this.intro) }
+  @homeModule.Getter('getIntroduction') public intro!:
+    {
+      nav: string,
+      title: string,
+      content: string,
+      media_type: string,
+      media: string,
+    }
+  @homeModule.Action('changIntroduction') public getBlogsAndInfo!: (navName: string) => void
+  public created () {
+    this.getBlogsAndInfo(this.intro.nav)
+  }
 }
 </script>
 <style scoped lang="scss">
@@ -49,6 +70,7 @@ export default class Home extends Vue {
   .home-nav {
     display: flex;
     justify-content: left;
+    overflow-x: scroll;
     .home-title {
       font-weight: 600;
       font-size: 30px;

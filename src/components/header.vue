@@ -1,20 +1,24 @@
 <template>
   <div class="main-header-container">
-    <div class="header-left">
+    <div
+      class="header-left"
+      @click="goHome"
+    >
       <h2 class="main-font first-letter">A</h2>
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
       <el-dropdown
         szie="mini"
+        @command="onCommandChange"
         trigger="click"
       >
         <el-avatar size="medium">user</el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="zh">
+          <el-dropdown-item command="login">
             login
           </el-dropdown-item>
-          <el-dropdown-item command="en">
+          <el-dropdown-item command="profile">
             profile
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -23,11 +27,23 @@
   </div>
 </template>
 
-<script>
-import { Component, Prop, Vue } from 'vue-property-decorator'
-@Component
+<script lang='ts'>
+import Vue from 'vue'
+import Component from 'vue-class-component'
+@Component({})
 export default class Header extends Vue {
+  public onCommandChange (cm: string) {
+    switch (cm) {
+      case 'login':
+        this.$emit('showModal', true)
+        break
+      default:
+    }
+  }
 
+  public goHome () {
+    this.$router.push('/');
+  }
 }
 </script>
 
@@ -46,6 +62,7 @@ export default class Header extends Vue {
     margin-right: 10px;
   }
   .header-left {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: baseline;

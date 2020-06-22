@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 const sourceMap = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  publicPath: './', //输出的根路径  默认是/ 如果你的网站是app.com/vue 这更改此配置项
+  publicPath: '/', //输出的根路径  默认是/ 如果你的网站是app.com/vue 这更改此配置项
   outputDir: 'dist', //构建输出目录
   assetsDir: 'assets', //静态资源目录(js,css,img,fonts)
   // 生产环境是否生成 sourceMap 文件
@@ -39,7 +39,7 @@ module.exports = {
     // 是否使用css分离插件 ExtractTextPlugin dev环境下如果开启的话就不会热更新样式
     // extract: true,
     // 开启 CSS source maps?
-    sourceMap: false,
+    // sourceMap: true,
     // css预设器配置项
     loaderOptions: {},
     // 启用 CSS modules for all css / pre-processor files.

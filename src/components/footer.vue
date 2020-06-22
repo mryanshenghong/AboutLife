@@ -4,7 +4,7 @@
                    第二行 一列 个人邮箱
  -->
   <div class="footer">
-    <el-row>
+    <!-- <el-row>
       <el-col :span="8">
         <div class="flex-left">
           <p class="footer-nav"><a href="">Anything</a></p>
@@ -33,7 +33,7 @@
           </p>
         </div>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-row>
       <el-col>
         <div class="email">©2020<a href="mailto:mryanshenghong@gamil.com">&nbsp; Shenghong Yan</a></div>
