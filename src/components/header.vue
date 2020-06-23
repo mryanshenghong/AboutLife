@@ -1,18 +1,37 @@
 <template>
   <div class="main-header-container">
-    <div class="header-left" @click="goHome">
+    <div
+      class="header-left"
+      @click="goHome"
+    >
       <h2 class="main-font first-letter">A</h2>
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-dropdown szie="mini" @command="onCommandChange" trigger="click">
+      <el-dropdown
+        szie="mini"
+        @command="onCommandChange"
+        trigger="click"
+      >
         <el-avatar size="medium">user</el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="!isLogin" command="login">
+          <el-dropdown-item
+            v-if="!isLogin"
+            command="login"
+          >
             login
           </el-dropdown-item>
-          <el-dropdown-item command="profile">
+          <el-dropdown-item
+            v-if="isLogin"
+            command="profile"
+          >
             profile
+          </el-dropdown-item>
+          <el-dropdown-item
+            v-if="isLogin"
+            command="logout"
+          >
+            logout
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -23,28 +42,50 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { namespace, State } from 'vuex-class'
+import { namespace, State, Mutation } from 'vuex-class'
+import { logout as userLogout } from '@/api/login';
 
-const rootStore = namespace('')
+const rootStore = namespace('root')
 
 @Component({})
 export default class Header extends Vue {
   @State('isLogin') public isLogin!: boolean
-
+  @State('user') public userInfo: any
+  @Mutation('SET_USERINFO') public setUserInfo!: (user: { user_name: string, email: string, role: null }) => void;
+  @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void;
   public onCommandChange(cm: string) {
     switch (cm) {
       case 'login':
         this.$emit('showModal', true)
+      case 'logout':
+        this.onLogout()
         break
       default:
     }
+  }
+
+  private onLogout() {
+    userLogout(this.userInfo.email)
+      .then((res: any) => {
+        if (res.data.code === 200) {
+          this.setUserInfo({ user_name: '', email: '', role: null })
+          this.setLogin(false)
+          localStorage.clear()
+        }
+      })
+      .catch(() => {
+        this.$message({
+          message: 'Can not logout',
+          type: 'error',
+        })
+      })
   }
 
   public goHome() {
     this.$router.push('/')
   }
   public mounted() {
-    console.log(this.isLogin)
+    console.log(this.userInfo)
   }
 }
 </script>
