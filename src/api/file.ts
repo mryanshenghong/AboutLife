@@ -5,7 +5,7 @@ export const uploadImg = (imgFile: any, token: string) => {
     const fordata = new FormData()
     fordata.append('data', imgFile)
     axios
-      .post(`${process.env.VUE_APP_URL}/api/myWeb/uploadImg`, fordata, {
+      .post(`${process.env.VUE_APP_URL}/myWeb/uploadImg`, fordata, {
         headers: { authorization: 'Bearer ' + token, 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => {
