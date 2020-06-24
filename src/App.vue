@@ -13,6 +13,7 @@
           @closeModal="showModal"
         />
         <CreateModal
+          v-if="isLogin"
           :showCreateModal="isCreateModalShow"
           @onCloseCreateModal="showCreateModal"
           @onCreateBlog="createBlog"
@@ -27,7 +28,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import mainHeader from '@/components/header.vue'
 import mainFooter from '@/components/footer.vue'
-import { Mutation } from 'vuex-class'
+import { Mutation, State } from 'vuex-class'
 const Login = () => import('./components/loginModal.vue')
 const CreateModal = () => import('./components/createBlog.vue')
 
@@ -38,6 +39,7 @@ import { createBlog } from '@/api/blog'
   components: { mainHeader, mainFooter, Login, CreateModal },
 })
 export default class App extends Vue {
+  @State('isLogin') public isLogin!: boolean
   @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void;
   @Mutation('SET_USERINFO') public setUseInfo!: (res: any) => void;
   public modalShow: boolean = false;
