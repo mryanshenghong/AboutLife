@@ -2,12 +2,20 @@
   <div id="app">
     <el-container>
       <el-main>
-        <mainHeader @showModal="showModal"></mainHeader>
+        <mainHeader
+          @showModal="showModal"
+          @onShowCreateModal="showCreateModal"
+        ></mainHeader>
         <router-view />
         <mainFooter />
         <Login
           :show="modalShow"
           @closeModal="showModal"
+        />
+        <CreateModal
+          :showCreateModal="isCreateModalShow"
+          @onCloseCreateModal="showCreateModal"
+          @onCreateBlog="createBlog"
         />
       </el-main>
     </el-container>
@@ -21,19 +29,52 @@ import mainHeader from '@/components/header.vue'
 import mainFooter from '@/components/footer.vue'
 import { Mutation } from 'vuex-class'
 const Login = () => import('./components/loginModal.vue')
+const CreateModal = () => import('./components/createBlog.vue')
+
 import { verifyToken } from './api/login'
+import { createBlog } from '@/api/blog'
 @Component({
   name: 'App',
-  components: { mainHeader, mainFooter, Login },
+  components: { mainHeader, mainFooter, Login, CreateModal },
 })
 export default class App extends Vue {
   @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void;
   @Mutation('SET_USERINFO') public setUseInfo!: (res: any) => void;
   public modalShow: boolean = false;
-  public showModal (show: boolean) {
+  public isCreateModalShow: boolean = false;
+  public showModal(show: boolean) {
     this.modalShow = show
   }
-  public mounted () {
+
+  public showCreateModal(show: boolean) {
+    this.isCreateModalShow = show
+  }
+
+  public createBlog(newBlog: any) {
+    this.showCreateModal(false)
+    if (!localStorage.token) {
+      this.$message({
+        message: 'please login first',
+        type: 'error',
+      })
+    } else {
+      createBlog(newBlog, localStorage.token)
+        .then((res: any) => {
+          if (res.result._id) {
+            //   this.getBlogInfo()
+            this.$router.push(`/content/${res.result._id}`)
+          }
+        })
+        .catch(() => {
+          this.$message({
+            message: 'Can not create blog',
+            type: 'error',
+          })
+        })
+    }
+  }
+
+  public mounted() {
     if (localStorage.user_name && localStorage.role && localStorage.token) {
       verifyToken(localStorage.user_name, localStorage.token).then((res: any) => {
         if (!res.invalid) {

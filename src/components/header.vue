@@ -29,6 +29,12 @@
           </el-dropdown-item>
           <el-dropdown-item
             v-if="isLogin"
+            command="write_blog"
+          >
+            {{this.$t('message.login.write_blog')}}
+          </el-dropdown-item>
+          <el-dropdown-item
+            v-if="isLogin"
             command="logout"
           >
             logout
@@ -57,6 +63,10 @@ export default class Header extends Vue {
     switch (cm) {
       case 'login':
         this.$emit('showModal', true)
+        break
+      case 'write_blog':
+        this.$emit('onShowCreateModal', true)
+        break
       case 'logout':
         this.onLogout()
         break
@@ -83,9 +93,6 @@ export default class Header extends Vue {
 
   public goHome() {
     this.$router.push('/')
-  }
-  public mounted() {
-    console.log(this.userInfo)
   }
 }
 </script>

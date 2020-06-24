@@ -25,7 +25,7 @@ const en = {
       modalTitle: 'Page Views',
     },
     login: {
-      headerBtn: 'Login',
+      headerBtn_login: 'Login',
       headerBtn_logout: 'Logout',
       modalTitle: 'Login',
       modalEmailLabel: 'Email',
@@ -34,6 +34,7 @@ const en = {
       modalConfirm: 'confirm',
       modalEmailInvalid: 'Plese enter your email account',
       modalPwdInvalid: 'Please enter your password',
+      write_blog: 'Write Blog',
     },
     blogs: {
       category: 'category',

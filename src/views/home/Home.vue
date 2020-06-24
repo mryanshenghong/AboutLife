@@ -57,7 +57,7 @@ export default class Home extends Vue {
       media: string,
     }
   @homeModule.Action('changIntroduction') public getBlogsAndInfo!: (navName: string) => void
-  public created () {
+  public created() {
     this.getBlogsAndInfo(this.intro.nav)
   }
 }

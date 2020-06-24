@@ -25,7 +25,7 @@ const cn = {
       modalTitle: '访问流量数据',
     },
     login: {
-      headerBtn: '登录',
+      headerBtn_login: '登录',
       headerBtn_logout: '退出',
       modalTitle: '登录',
       modalEmailLabel: '邮箱',
@@ -34,6 +34,7 @@ const cn = {
       modalConfirm: '确认',
       modalEmailInvalid: '请输入邮箱账号',
       modalPwdInvalid: '请输入密码',
+      write_blog: '写文章',
     },
     blogs: {
       category: '种类',
