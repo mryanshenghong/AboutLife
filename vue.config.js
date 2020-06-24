@@ -34,7 +34,15 @@ module.exports = {
   parallel: require('os').cpus().length > 1,
   // PWA 插件相关配置
   // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
-  pwa: {},
+  pwa: {
+    iconPaths: {
+      favicon32: 'favicon.ico',
+      favicon16: 'favicon.ico',
+      appleTouchIcon: 'favicon.ico',
+      maskIcon: 'favicon.ico',
+      msTileImage: 'favicon.ico',
+    },
+  },
   css: {
     // 是否使用css分离插件 ExtractTextPlugin dev环境下如果开启的话就不会热更新样式
     // extract: true,
