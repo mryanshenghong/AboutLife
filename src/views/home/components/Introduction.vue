@@ -68,11 +68,13 @@ export default class Introduction extends IntroProps {
       margin-bottom: 30px;
     }
     .intro-img {
-      max-width: 500px;
+      width: 100%;
+      height: auto;
       padding-left: 10px;
     }
     .intro-video {
-      max-width: 500px;
+      width: 100%;
+      height: auto;
       padding-left: 10px;
     }
   }
