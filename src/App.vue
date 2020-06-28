@@ -60,11 +60,13 @@ export default class App extends Vue {
       createBlog(newBlog, localStorage.token)
         .then((res: any) => {
           if (res.result._id) {
-            if (res.mediaType === 'blog') {
+            if (res.result.mediaType === 'blog') {
               this.$router.push(`/content/${res.result._id}`)
+              return
             }
             if (res.result.cat === this.intro.nav) {
               this.updateBlogs(res.result)
+              return
             }
           }
         })
