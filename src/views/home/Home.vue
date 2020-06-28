@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-nav">
-      <h1 class="home-title">{{ intro.title }}</h1>
+      <h1 v-if="!isSm" class="home-title">{{ intro.title }}</h1>
       <div class="blog-navs">
         <p class="blog-nav"><a @click="getBlogsAndInfo('Anything')">Anything</a></p>
         <p class="blog-nav"><a @click="getBlogsAndInfo('Music')">Music</a></p>
@@ -9,26 +9,10 @@
         <p class="blog-nav"><a @click="getBlogsAndInfo('Bambi')">Bambi</a></p>
       </div>
     </div>
-    <el-col
-      :xs="24"
-      :sm="24"
-      :md="12"
-      :lg="12"
-      :xl="12"
-    >
-      <Introduction
-        :content='intro.content'
-        :media="intro.media"
-        :media_type="intro.media_type"
-      />
+    <el-col v-if="!isSm" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+      <Introduction :content="intro.content" :media="intro.media" :media_type="intro.media_type" />
     </el-col>
-    <el-col
-      :xs="24"
-      :sm="24"
-      :md="12"
-      :lg="12"
-      :xl="12"
-    >
+    <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
       <Blogs />
     </el-col>
   </div>
@@ -48,23 +32,39 @@ const homeModule = namespace('MODULE_HOME')
   components: { Introduction, Blogs },
 })
 export default class Home extends Vue {
-  @homeModule.Getter('getIntroduction') public intro!:
-    {
-      nav: string,
-      title: string,
-      content: string,
-      media_type: string,
-      media: string,
-    }
+  public isSm: boolean = false
+  @homeModule.Getter('getIntroduction') public intro!: {
+    nav: string
+    title: string
+    content: string
+    media_type: string
+    media: string
+  }
   @homeModule.Action('changIntroduction') public getBlogsAndInfo!: (navName: string) => void
   public created() {
+    window.addEventListener('resize', this.handleResize)
     this.getBlogsAndInfo(this.intro.nav)
+  }
+
+  public handleResize() {
+    let clientWidth = document.documentElement.clientWidth
+    if (clientWidth < 768) {
+      this.isSm = true
+    } else {
+      this.isSm = false
+    }
+  }
+
+  public mounted() {
+    this.$nextTick(() => {
+      this.handleResize()
+    })
   }
 }
 </script>
 <style scoped lang="scss">
 .home {
-  height: calc(100vh - 58px);
+  height: calc(100vh - 108px);
   margin-top: 30px;
   font-family: 'main-font';
   .home-nav {

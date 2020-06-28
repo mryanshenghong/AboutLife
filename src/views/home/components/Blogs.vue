@@ -1,9 +1,6 @@
 <template>
   <div class="blogs-wrapper">
-    <vuescroll
-      ref="vs"
-      :ops="scrollOptions"
-    >
+    <vuescroll ref="vs" :ops="scrollOptions">
       <div class="blog-list">
         <CardView
           v-for="(blog, index) in intro.blogs"
@@ -12,6 +9,8 @@
           :cat="blog.cat"
           :id="blog.id"
           :key="blog.id"
+          :mediaType="blog.mediaType"
+          :mediaSources="blog.mediaSources"
           @select="viewContent"
         />
       </div>
@@ -26,7 +25,7 @@ import { namespace } from 'vuex-class'
 import vuescroll from 'vuescroll'
 import CardView from '@/components/CardView.vue'
 import { Blog } from '@/store/home'
-import VueRouter from 'vue-router'
+
 const homeModule = namespace('MODULE_HOME')
 
 @Component({
@@ -39,21 +38,21 @@ export default class Blogs extends Vue {
   public scrollOptions: object = {
     vuescroll: {
       mode: 'native',
-      wheelScrollDuration: 1000,
+      wheelScrollDuration: 100,
       detectResize: true,
     },
     scrollPanel: {
-      easing: 'easeInOutQuart',
+      speed: 300,
     },
     bar: {
       size: 0,
     },
   }
-  public created (): void {
+  public created(): void {
     const vs = this.$refs.vs as vuescroll
   }
 
-  public viewContent (id: string) {
+  public viewContent(id: string) {
     this.$router.push(`/content/${id}`)
   }
 }
@@ -61,8 +60,7 @@ export default class Blogs extends Vue {
 
 <style lang="scss" scoped>
 .blogs-wrapper {
-  //   overflow-y: scroll !important;
-  height: calc(100vh - 158px) !important;
+  height: calc(100vh - 176px) !important;
   padding-top: 30px;
   .blog-list {
     padding-left: 20px;

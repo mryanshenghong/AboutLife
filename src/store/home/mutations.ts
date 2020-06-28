@@ -16,4 +16,12 @@ export const HomeMutation: MutationTree<HomeState> = {
       blogs,
     })
   },
+  updateBlogs(state: HomeState, blog: any) {
+    const blogs = state.blogs
+    blogs.push(blog)
+    Object.assign(state, {
+      ...state,
+      blogs,
+    })
+  },
 }

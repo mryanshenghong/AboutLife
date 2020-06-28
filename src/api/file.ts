@@ -16,3 +16,22 @@ export const uploadImg = (imgFile: any, token: string) => {
       })
   })
 }
+
+export const uploadFiles = (files: any, token: string) => {
+  return new Promise((resolve, reject) => {
+    const formdata = new FormData()
+    files.forEach((file: any) => {
+      formdata.append('data', file)
+    })
+    axios
+      .post(`${process.env.VUE_APP_URL}/myWeb/uploadFiles`, formdata, {
+        headers: { authorization: 'Bearer ' + token, 'Content-Type': 'multipart/form-data' },
+      })
+      .then((res) => {
+        resolve(res.data.result)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}

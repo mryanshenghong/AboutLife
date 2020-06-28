@@ -65,6 +65,69 @@
           ></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item
+        label="媒体类型"
+        prop="media_type"
+      >
+        <el-select
+          @change="onMediaSelet"
+          filterable
+          v-model="form.media_type"
+          placeholder="选择博客媒体类型"
+        >
+          <el-option
+            key="1"
+            label="文章"
+            value="blog"
+          ></el-option>
+          <el-option
+            key="2"
+            label="图片"
+            value="image"
+          ></el-option>
+          <el-option
+            key="3"
+            label="音乐"
+            value="music"
+          ></el-option>
+          <el-option
+            key="4"
+            label="视频"
+            value="vedio"
+          ></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        label="媒体文件"
+        prop="mediaSources"
+        style="margin-left: 10px;display:block"
+      >
+        <el-button
+          type="primary"
+          @click="openFileInput"
+        >add</el-button>
+        <div style="display:block">
+          <el-tag
+            class="url"
+            size="mini"
+            type="success"
+            v-if="form.mediaSources.length"
+            v-for="(url,index) in form.mediaSources"
+            :key="index"
+            :closable="true"
+            @close="removeFile(url)"
+          >{{url}}</el-tag>
+        </div>
+        <input
+          id="fileInput"
+          type="file"
+          @change="fileChange"
+          v-show="false"
+          multiple="multiple"
+          accept="image/jpg,image/jpeg, image/png, video/mp4, audio/*"
+        >
+        </input>
+      </el-form-item>
     </el-form>
     <div
       slot="footer"
@@ -85,6 +148,7 @@
 
 <script>
 import { getBlogCats } from '@/api/blog'
+import { uploadFiles } from '@/api/file'
 export default {
   props: {
     showCreateModal: {
@@ -98,12 +162,15 @@ export default {
         title: '',
         tag: '',
         cat: '',
+        media_type: '',
+        mediaSources: []
       },
       tags: [],
       cats: [],
       formRules: {
         title: [{ required: true, message: '请输入主题', trigger: 'change' }],
         cat: [{ required: true, message: '请选择种类', trigger: 'change' }],
+        media_type: [{ required: true, message: '请选择媒体类型', trigger: 'change' }],
       },
     }
   },
@@ -116,18 +183,19 @@ export default {
         title: this.form.title,
         tags: this.tags,
         cat: this.form.cat,
+        mediaType: this.form.media_type,
+        mediaSources: this.form.mediaSources,
         isTech: false,
       }
       this.$refs.blogForm.validate((valid) => {
         if (valid) {
           this.$emit('onCreateBlog', newBlog)
         } else {
-          return false
+          throw new Error('invalid');
         }
       })
       this.$refs.blogForm.resetFields()
       this.tags = []
-      this.cats = []
     },
     addTag () {
       if (this.form.tag) {
@@ -138,6 +206,25 @@ export default {
     onCatSelect (val) {
       this.form.cat = val
     },
+    onMediaSelet (val) {
+      this.form.media_type = val;
+    },
+
+    fileChange (e) {
+      uploadFiles(e.target.files, localStorage.token).then((res) => {
+        this.form.mediaSources.push(...res.fileUrls)
+      }).catch((err) => {
+        this.$message.error('Cannot upload files' + err.toString());
+      })
+    },
+    openFileInput () {
+      document.getElementById('fileInput').click()
+    },
+    removeFile (url) {
+      const index = this.form.mediaSources.indexOf(url);
+      this.form.mediaSources.splice(index, 1)
+    }
+
   },
   mounted () {
     this.$nextTick(() => {
@@ -154,6 +241,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#fileInput {
+  width: 0;
+  height: 0;
+}
+.url {
+  margin: 0 5px;
+}
 .tagInput {
   display: flex;
   justify-content: space-between;

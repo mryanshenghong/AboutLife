@@ -74,6 +74,10 @@ export default class Header extends Vue {
     }
   }
 
+  public goHome() {
+    this.$router.push('/')
+  }
+
   private onLogout() {
     userLogout(this.userInfo.email)
       .then((res: any) => {
@@ -89,10 +93,6 @@ export default class Header extends Vue {
           type: 'error',
         })
       })
-  }
-
-  public goHome() {
-    this.$router.push('/')
   }
 }
 </script>

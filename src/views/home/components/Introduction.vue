@@ -1,30 +1,13 @@
 <template>
   <div id="intro-wrapper">
-    <el-col :span='24'>
+    <el-col :span="24">
       <div class="intro-content">
         <div class="intro-detail">
-          <p
-            class="intro-sentence"
-            v-for="(sentence,index) in content"
-          >{{sentence}}</p>
+          <p class="intro-sentence" v-for="(sentence, index) in content">{{ sentence }}</p>
         </div>
-        <transition
-          name="blur"
-          mode="out-in"
-        >
-          <img
-            v-if="media_type==='img'"
-            class="intro-img"
-            :src="media"
-            alt=""
-            :key="media"
-          />
-          <video
-            v-if="media_type==='video'"
-            class="intro-video"
-            :src="media"
-            controls
-          />
+        <transition name="blur" mode="out-in">
+          <img v-if="media_type === 'img'" class="intro-img" :src="media" alt="" :key="media" />
+          <video v-if="media_type === 'video'" class="intro-video" :src="media" controls />
         </transition>
       </div>
     </el-col>
@@ -38,26 +21,24 @@ const IntroProps = Vue.extend({
   props: {
     content: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     media_type: {
       type: String,
-      default: ''
+      default: '',
     },
     media: {
       type: String,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 })
-export default class Introduction extends IntroProps {
-
-}
+export default class Introduction extends IntroProps {}
 </script>
 <style lang="scss" scoped>
 #intro-wrapper {
   font-weight: 500;
-  height: calc(100vh - 158px) !important;
+  height: calc(100vh - 146px) !important;
   .intro-content {
     .intro-detail {
       margin-top: 20px;
@@ -68,12 +49,14 @@ export default class Introduction extends IntroProps {
       margin-bottom: 30px;
     }
     .intro-img {
-      width: 100%;
+      //   width: 100%;
+      max-width: 400px;
       height: auto;
       padding-left: 10px;
     }
     .intro-video {
-      width: 100%;
+      //   width: 100%;
+      max-width: 400px;
       height: auto;
       padding-left: 10px;
     }
