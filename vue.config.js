@@ -75,6 +75,16 @@ module.exports = {
             priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
             test: /[\\/]node_modules[\\/]vuescroll[\\/]/,
           },
+          vueVideoPlayer: {
+            name: 'chunk-vuevideoplater',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]vue-video-player[\\/]/,
+          },
+          videojs: {
+            name: 'chunk-videojs',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]video.js[\\/]/,
+          },
           commons: {
             name: 'chunk-commons',
             test: resolve('src/components'), // 可自定义拓展你的规则
