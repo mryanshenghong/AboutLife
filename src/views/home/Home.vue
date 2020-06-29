@@ -47,7 +47,7 @@ export default class Home extends Vue {
   }
 
   public handleResize() {
-    let clientWidth = document.documentElement.clientWidth
+    const clientWidth = document.documentElement.clientWidth
     if (clientWidth < 768) {
       this.isSm = true
     } else {
