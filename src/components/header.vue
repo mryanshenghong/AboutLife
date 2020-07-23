@@ -1,44 +1,20 @@
 <template>
   <div class="main-header-container">
-    <div
-      class="header-left"
-      @click="goHome"
-    >
+    <div class="header-left" @click="goHome">
       <h2 class="main-font first-letter">A</h2>
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-dropdown
-        szie="mini"
-        @command="onCommandChange"
-        trigger="click"
-      >
-        <el-avatar size="medium">user</el-avatar>
+      <el-dropdown szie="mini" @command="onCommandChange" trigger="click">
+        <el-avatar size="medium">{{userInfo.user_name.charAt(0).toUpperCase()}}</el-avatar>
         <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item v-if="!isLogin" command="login">login</el-dropdown-item>
+          <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
           <el-dropdown-item
-            v-if="!isLogin"
-            command="login"
-          >
-            login
-          </el-dropdown-item>
-          <el-dropdown-item
-            v-if="isLogin"
-            command="profile"
-          >
-            profile
-          </el-dropdown-item>
-          <el-dropdown-item
-            v-if="isLogin"
+            v-if="isLogin && userInfo.role === 0"
             command="write_blog"
-          >
-            {{this.$t('message.login.write_blog')}}
-          </el-dropdown-item>
-          <el-dropdown-item
-            v-if="isLogin"
-            command="logout"
-          >
-            logout
-          </el-dropdown-item>
+          >{{this.$t('message.login.write_blog')}}</el-dropdown-item>
+          <el-dropdown-item v-if="isLogin" command="logout">logout</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>

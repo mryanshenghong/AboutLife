@@ -15,6 +15,13 @@
     "trailing-comma": false,
     "semicolon": [false, "never"],
     "space-before-function-paren": false,
-    "variable-name": [true, "allow-snake-case", "allow-pascal-case"]
+    "variable-name": [true, "allow-snake-case", "allow-pascal-case"],
+    "max-line-length": [
+      true,
+      {
+        "limit": 160,
+        "ignore-pattern": "^import [^,]+ from |^export | implements"
+      }
+    ]
   }
 }

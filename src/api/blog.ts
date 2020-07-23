@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const getBlogsBasicInfo = (cat: string) => {
   return new Promise((resolve, reject) => {
@@ -10,13 +10,13 @@ export const getBlogsBasicInfo = (cat: string) => {
         },
       })
       .then((res) => {
-        resolve(res)
+        resolve(res);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};
 
 export const getBlogCats = (token: string) => {
   return new Promise((resolve, reject) => {
@@ -31,13 +31,13 @@ export const getBlogCats = (token: string) => {
         },
       })
       .then((res) => {
-        resolve(res)
+        resolve(res);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};
 
 export const getBlog = (id: string) => {
   return new Promise((resolve, reject) => {
@@ -48,13 +48,13 @@ export const getBlog = (id: string) => {
         },
       })
       .then((res) => {
-        resolve(res)
+        resolve(res);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};
 
 export const saveBlog = (blogInfo: any, token: string) => {
   return new Promise((resolve, reject) => {
@@ -66,13 +66,13 @@ export const saveBlog = (blogInfo: any, token: string) => {
         },
       })
       .then((res) => {
-        resolve(res)
+        resolve(res);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};
 
 export const createBlog = (newBlog: any, token: string) => {
   return new Promise((resolve, reject) => {
@@ -84,10 +84,10 @@ export const createBlog = (newBlog: any, token: string) => {
         },
       })
       .then((res) => {
-        resolve(res.data)
+        resolve(res.data);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};

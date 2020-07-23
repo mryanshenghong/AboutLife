@@ -18,6 +18,21 @@ export const login = (email: string, pwd: string) => {
   })
 }
 
+export const signup = (user: { user_name: string; user_pwd: string; email: string }) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${process.env.VUE_APP_URL}/myWeb/user/signup`, {
+        data: { ...user },
+      })
+      .then((res) => {
+        resolve(res.data)
+      })
+      .catch((err) => {
+        reject(err)
+      })
+  })
+}
+
 export const verifyToken = (user_name: string, token: string) => {
   return new Promise((resolve, reject) => {
     axios

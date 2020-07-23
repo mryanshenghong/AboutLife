@@ -2,8 +2,14 @@
   <el-card class="box-card">
     <div v-if="mediaType === 'blog'" class="media_blog">
       <div>
-        <h3 @click="select(id)" class="title">{{ title }}<i class="el-icon-right"></i></h3>
-        <div class="insight"><i class="el-icon-chat-line-round">&nbsp;0</i> <i class="el-icon-view">&nbsp; 0</i></div>
+        <h3 @click="select(id)" class="title">
+          {{ title }}
+          <i class="el-icon-right"></i>
+        </h3>
+        <div class="insight">
+          <i class="el-icon-chat-line-round">&nbsp;0</i>
+          <i class="el-icon-view">&nbsp; 0</i>
+        </div>
       </div>
       <span class="time">
         <el-tag type="info" size="small">{{ formatTime(time) }}</el-tag>
@@ -12,7 +18,7 @@
     <div class="media_multi" v-else>
       <div class="des-box">
         <h3 class="title">{{ title }}</h3>
-        <el-tag size="mini" type="info">{{ formatTime(time) }}</el-tag>
+        <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
       </div>
       <div class="media_box">
         <videoPlayer
@@ -22,16 +28,25 @@
           :options="playerOptions"
         />
       </div>
+      <div class="comment_box">
+        <el-button type="text" size="small" @click="toggleDrawer(true)">查看评论</el-button>
+        <Drawer :isDrawerShow="isDrawerShow" @toggleDrawer="toggleDrawer">
+          <Comment :blogId="id" @toggleDrawer="toggleDrawer" />
+        </Drawer>
+      </div>
     </div>
   </el-card>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { format } from '../utils/formatTime'
-import Component from 'vue-class-component'
-import { videoPlayer } from 'vue-video-player'
-import 'video.js/dist/video-js.css'
+import Vue from 'vue';
+import { format } from '../utils/formatTime';
+import Component from 'vue-class-component';
+import { videoPlayer } from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+
+const Drawer = () => import('./Drawer.vue');
+const Comment = () => import('./comments/Comments.vue');
 
 @Component({
   name: 'CardView',
@@ -41,10 +56,11 @@ import 'video.js/dist/video-js.css'
     id: String,
     cat: String,
     mediaType: String,
-    mediaSources: Array,
+    mediaSources: Array
   },
-  components: { videoPlayer },
+  components: { videoPlayer, Drawer, Comment }
 })
+
 export default class CardView extends Vue {
   public playerOptions: any = {
     playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
@@ -62,28 +78,34 @@ export default class CardView extends Vue {
       timeDivider: true, // 当前时间和持续时间的分隔符
       durationDisplay: true, // 显示持续时间
       remainingTimeDisplay: false, // 是否显示剩余时间功能
-      fullscreenToggle: true, // 是否显示全屏按钮
-    },
-  }
+      fullscreenToggle: true // 是否显示全屏按钮
+    }
+  };
+
+  public isDrawerShow: boolean = false;
 
   public select(id: string): void {
-    this.$emit('select', id)
+    this.$emit('select', id);
   }
 
   public formatTime(time: string) {
-    return format(time)
+    return format(time);
+  }
+
+  public toggleDrawer(isDrawerShow: boolean) {
+    this.isDrawerShow = isDrawerShow
   }
 
   public mounted() {
     this.$nextTick(() => {
-      const sources = this.$props.mediaSources
+      const sources = this.$props.mediaSources;
       this.playerOptions.sources = sources.map((source: string) => {
         return {
           type: 'video/mp4',
-          src: `${process.env.VUE_APP_BASE}/static/` + source,
-        }
-      })
-    })
+          src: `${process.env.VUE_APP_BASE}/static/` + source
+        };
+      });
+    });
   }
 }
 </script>
@@ -132,8 +154,12 @@ export default class CardView extends Vue {
     }
 
     .media_box {
-      padding: 20px;
       border-radius: 10px;
+    }
+    .comment_box {
+      .el-button {
+        color: #909399;
+      }
     }
   }
 }
