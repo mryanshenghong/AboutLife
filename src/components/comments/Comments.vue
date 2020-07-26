@@ -15,6 +15,8 @@
       :comment="comment"
       :visibleNestedCommentBox="visibleNestedCommentBox"
       :showNestedCommentBox="() => showNestedCommentBox(index.toString())"
+      :isNested="false"
+      :getComments="() => getComments()"
     >
       <div class="childComment" v-if="comment.comments.length >0">
         <CommentItem
@@ -24,6 +26,8 @@
           :comment="childComment"
           :visibleNestedCommentBox="visibleNestedCommentBox"
           :showNestedCommentBox="() => showNestedCommentBox(`${index}-${subindex}`)"
+          :isNested="true"
+          :getComments="() => getComments()"
         />
       </div>
     </CommentItem>
@@ -51,6 +55,10 @@ export default class Comment extends Vue {
   public commentInput: string = '';
   public comments: any[] = []
   public showNestedCommentBox(index: string): void {
+    if (index === this.visibleNestedCommentBox) {
+      this.visibleNestedCommentBox = null;
+      return;
+    }
     this.visibleNestedCommentBox = index;
   }
 
@@ -66,8 +74,12 @@ export default class Comment extends Vue {
       repliedTo: null
     }
     const token = localStorage.getItem('token');
-    newComment(nComment, token!).then(async (res) => await this.getComments()).catch(err => this.$message.error('can not comment'))
+    newComment(nComment, token!).then(async (res) => await this.getComments()).catch((err) => this.$message.error('can not comment'))
     this.commentInput = ''
+  }
+
+  public async mounted() {
+    await this.getComments()
   }
 
   private async getComments() {
@@ -80,9 +92,7 @@ export default class Comment extends Vue {
     }
   }
 
-  public async mounted() {
-    await this.getComments()
-  }
+
 }
 </script>
 <style lang="scss" scoped>

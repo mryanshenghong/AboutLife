@@ -50,8 +50,11 @@ import { newComment, IComment } from '@/api/comments';
   props: {
     idx: String,
     comment: Object,
+    visibleNestedCommentBox: String,
+    isNested: Boolean,
+
     showNestedCommentBox: Function,
-    visibleNestedCommentBox: String
+    getComments: Function,
   }
 })
 export default class CommentItem extends Vue {
@@ -61,12 +64,14 @@ export default class CommentItem extends Vue {
     const comment = this.$props.comment;
     const nComment: IComment = {
       blogId: comment.blogId,
-      parentId: comment._id,
+      parentId: this.$props.isNested ? comment.parentId : comment._id,
       repliedTo: comment.commentedBy,
       content: this.inputComment
     }
     const token = localStorage.getItem('token');
-    const res = await newComment(nComment, token!).then(res => res).catch(err => err)
+    await newComment(nComment, token!).then(async () => this.$props.getComments()).catch((err) => err)
+    this.inputComment = ''
+    this.$props.showNestedCommentBox()
   }
 
   private format(time: string) {
