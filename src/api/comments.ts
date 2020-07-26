@@ -10,14 +10,10 @@ export interface IComment {
   parentId: string;
 }
 
-export const queryComments = (blogId: string, token: string) => {
+export const queryComments = (blogId: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/comment`, {
-        headers: {
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
-        },
+      .get(`${process.env.VUE_APP_URL}/myWeb/comments`, {
         params: { blogId },
       })
       .then((res) => {

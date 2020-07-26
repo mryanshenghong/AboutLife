@@ -83,8 +83,7 @@ export default class Comment extends Vue {
   }
 
   private async getComments() {
-    const token = localStorage.getItem('token');
-    const res: any = await queryComments(this.$props.blogId, token!)
+    const res: any = await queryComments(this.$props.blogId)
     if (res.code === 200) {
       this.comments = res.result
     } else {
