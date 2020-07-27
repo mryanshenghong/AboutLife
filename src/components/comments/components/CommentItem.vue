@@ -130,6 +130,12 @@ export default class CommentItem extends Vue {
       justify-content: space-between;
       .input {
         margin-left: 33px;
+        & /deep/ .el-textarea__inner {
+          border-radius: 0px;
+          font-family: 'main-font' !important;
+          padding: 5px 5px;
+          border-radius: 3px !important;
+        }
       }
     }
   }

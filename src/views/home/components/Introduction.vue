@@ -6,7 +6,7 @@
           <p class="intro-sentence" v-for="(sentence, index) in content">{{ sentence }}</p>
         </div>
         <transition name="blur" mode="out-in">
-          <img v-if="media_type === 'img'" class="intro-img" :src="media" alt="" :key="media" />
+          <el-image v-if="media_type === 'img'" class="intro-img" :src="media" alt :key="media" />
           <video v-if="media_type === 'video'" class="intro-video" :src="media" controls />
         </transition>
       </div>
@@ -21,7 +21,7 @@ const IntroProps = Vue.extend({
   props: {
     content: {
       type: Array,
-      default: () => [],
+      default: (): any[] => [],
     },
     media_type: {
       type: String,
@@ -33,7 +33,7 @@ const IntroProps = Vue.extend({
     },
   },
 })
-export default class Introduction extends IntroProps {}
+export default class Introduction extends IntroProps { }
 </script>
 <style lang="scss" scoped>
 #intro-wrapper {

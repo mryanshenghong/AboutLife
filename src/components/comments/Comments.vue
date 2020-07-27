@@ -7,7 +7,6 @@
       <el-input size="medium" type="textarea" autosize class="input" v-model="commentInput" placeholder="comment" />
       <el-button size="small" style="margin:0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
     </div>
-    <div class="diviver"></div>
     <CommentItem
       v-for="(comment,index) in comments"
       :key="index.toString()"
@@ -106,10 +105,12 @@ export default class Comment extends Vue {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
+    margin-bottom: 10px;
     .input {
       flex: 1;
-      & /deep/ .el-input__inner {
-        border-radius: 0px !important;
+      & /deep/ .el-textarea__inner {
+        padding: 5px 5px;
+        border-radius: 3px !important;
       }
     }
   }
