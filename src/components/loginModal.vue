@@ -77,6 +77,24 @@ export default {
         this.canSubmit = false
       }
     },
+    'signupForm.email' (val) {
+      if (val.length > 0) {
+        if (this.signupForm.password.length > 0) {
+          this.canSubmit = true
+        }
+      } else {
+        this.canSubmit = false
+      }
+    },
+    'signupForm.password' (val) {
+      if (val.length > 0) {
+        if (this.signupForm.email.length > 0) {
+          this.canSubmit = true
+        }
+      } else {
+        this.canSubmit = false
+      }
+    },
   },
   data () {
     const $t = this.$t.bind(this)
@@ -208,6 +226,8 @@ export default {
       })
     },
     handleFormChange (tab) {
+      this.$refs.loginModal.resetFields();
+      this.$refs.signupModal.resetFields()
       this.formTab = tab.paneName
     },
     ...mapMutations({
