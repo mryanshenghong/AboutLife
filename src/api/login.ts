@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const login = (email: string, pwd: string) => {
   return new Promise((resolve, reject) => {
@@ -10,13 +10,28 @@ export const login = (email: string, pwd: string) => {
         },
       })
       .then((res) => {
-        resolve(res.data)
+        resolve(res.data);
       })
       .catch((err) => {
-        reject(err)
+        reject(err);
+      });
+  });
+};
+
+export const activateAccount = (id: string) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${process.env.VUE_APP_URL}/myWeb/user/activate`, {
+        data: { id },
       })
-  })
-}
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 export const signup = (user: { user_name: string; user_pwd: string; email: string }) => {
   return new Promise((resolve, reject) => {
@@ -25,13 +40,13 @@ export const signup = (user: { user_name: string; user_pwd: string; email: strin
         data: { ...user },
       })
       .then((res) => {
-        resolve(res.data)
+        resolve(res.data);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};
 
 export const verifyToken = (user_name: string, token: string) => {
   return new Promise((resolve, reject) => {
@@ -44,14 +59,14 @@ export const verifyToken = (user_name: string, token: string) => {
       })
       .then((res) => {
         if (res.data.code === 200) {
-          resolve(res.data.result)
+          resolve(res.data.result);
         }
       })
       .catch(() => {
-        reject({ invalid: false })
-      })
-  })
-}
+        reject({ invalid: false });
+      });
+  });
+};
 
 export const logout = (email: string) => {
   return new Promise((resolve, reject) => {
@@ -62,10 +77,10 @@ export const logout = (email: string) => {
         },
       })
       .then((res) => {
-        resolve(res)
+        resolve(res);
       })
       .catch((err) => {
-        reject(err)
-      })
-  })
-}
+        reject(err);
+      });
+  });
+};

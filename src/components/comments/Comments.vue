@@ -109,6 +109,7 @@ export default class Comment extends Vue {
     .input {
       flex: 1;
       & /deep/ .el-textarea__inner {
+        font-family: 'main-font' !important;
         padding: 5px 5px;
         border-radius: 3px !important;
       }

@@ -149,10 +149,9 @@ export default {
               message: 'Login successfully',
               type: 'success',
             })
-            this.$socket.connect()
           } else {
             this.$message({
-              message: 'Could not login: email or password wrong',
+              message: res.msg,
               type: 'error',
             })
           }
@@ -177,17 +176,19 @@ export default {
           }
           signup(newUser).then((res) => {
             if (res.code === 200) {
-              localStorage.setItem('user_name', res.result.user_name)
-              localStorage.setItem('token', res.result.token)
-              localStorage.setItem('role', res.result.role)
-              this.closeModal()
-              this.setLogin(true)
-              this.setUseInfo(res.result)
               this.$message({
                 message: 'Signup successfully',
                 type: 'success',
               })
-              this.$socket.connect()
+              this.$router.push({
+                name: 'Staging',
+                params: {
+                  name: res.result.user_name,
+                  email: res.result.email
+                }
+              }
+              )
+              this.closeModal()
             } else {
               this.$message({
                 message: 'Could not signup',
