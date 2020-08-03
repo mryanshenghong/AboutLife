@@ -184,7 +184,7 @@ export default {
       this.formTab === 'login' ? this.submitLogin() : this.submitSignUp()
     },
     submitSignUp () {
-      this.$refs['signupModal'].validate((valid) => {
+      this.$refs.signupModal.validate((valid) => {
         if (valid) {
           this.submiting = true;
           const newUser = {

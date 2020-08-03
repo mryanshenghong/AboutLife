@@ -22,7 +22,7 @@ export default class Active extends Vue {
   private activing: boolean = true;
   private valid: boolean = false;
   public async activateAccoutn() {
-    const res: any = await activateAccount(this.$route.params.id).catch(err => err);
+    const res: any = await activateAccount(this.$route.params.id).catch((err) => err);
     this.activing = false;
     if (res instanceof Error) {
       this.status = '网络错误, 请稍后再试.';
