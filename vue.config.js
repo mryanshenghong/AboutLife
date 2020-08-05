@@ -1,14 +1,14 @@
-const webpack = require('webpack')
-const path = require('path')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 function resolve(dir) {
-  return path.join(__dirname, './', dir)
+  return path.join(__dirname, './', dir);
 }
 
-let myPlugins = []
+let myPlugins = [];
 //这个打开后导致 moment找不到 locale.js
-myPlugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/))
+myPlugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
 if (process.env.NODE_ENV === 'production') {
   myPlugins.push(
     new CompressionWebpackPlugin({
@@ -19,11 +19,17 @@ if (process.env.NODE_ENV === 'production') {
       minRatio: 0.8,
       deleteOriginalAssets: false,
     })
-  )
+  );
 }
-const sourceMap = process.env.NODE_ENV === 'development'
+const sourceMap = process.env.NODE_ENV === 'development';
 
 module.exports = {
+  chainWebpack: (config) => {
+    config.plugin('html').tap((args) => {
+      args[0].title = 'About Life';
+      return args;
+    });
+  },
   publicPath: '/', //输出的根路径  默认是/ 如果你的网站是app.com/vue 这更改此配置项
   outputDir: 'dist', //构建输出目录
   assetsDir: 'assets', //静态资源目录(js,css,img,fonts)
@@ -100,4 +106,4 @@ module.exports = {
     open: true,
     port: 8081,
   },
-}
+};
