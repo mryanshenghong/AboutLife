@@ -31,7 +31,7 @@
           <el-option key="1" label="文章" value="blog" />
           <el-option key="2" label="图片" value="image" />
           <el-option key="3" label="音乐" value="music" />
-          <el-option key="4" label="视频" value="vedio" />
+          <el-option key="4" label="视频" value="video" />
         </el-select>
       </el-form-item>
       <el-form-item label="媒体文件" prop="mediaSources" style="margin-left: 10px;display:block">
