@@ -22,11 +22,15 @@
       </div>
       <div class="media_box">
         <videoPlayer
+          v-if="mediaType === 'video'"
           class="video-player vjs-custom-skin"
           ref="videoPlayer"
           :playsinline="true"
           :options="playerOptions"
         />
+        <div v-if="mediaType==='image'" class="img-container">
+          <img :src="`${resUrl}/${mediaSources[0]}`" alt />
+        </div>
       </div>
       <div class="comment_box">
         <el-button type="text" size="small" @click="toggleDrawer(true)">查看评论</el-button>
@@ -81,6 +85,8 @@ export default class CardView extends Vue {
       fullscreenToggle: true // 是否显示全屏按钮
     }
   };
+
+  public resUrl: string = process.env.NODE_ENV === 'development' ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
 
   public isDrawerShow: boolean = false;
 
@@ -151,6 +157,11 @@ export default class CardView extends Vue {
         font-size: $blog-title-size;
         margin-bottom: 10px;
       }
+    }
+
+    .img-container img {
+      max-width: 200px;
+      height: auto;
     }
 
     .media_box {
