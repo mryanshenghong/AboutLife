@@ -64,7 +64,7 @@ export default class CommentItem extends Vue {
     const comment = this.$props.comment;
     const nComment: IComment = {
       blogId: comment.blogId,
-      parentId: this.$props.isNested ? comment.parentId : comment._id,
+      parentId: this.$props.isNested ? comment.parentId : comment.id,
       repliedTo: comment.commentedBy,
       content: this.inputComment
     }

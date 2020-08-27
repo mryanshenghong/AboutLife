@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-loading="!hasContent"
-    class="content-wrapper"
-  >
+  <div v-loading="!hasContent" class="content-wrapper">
     <div class="blog-title">
       <h1>{{title}}</h1>
     </div>
@@ -19,10 +16,7 @@
           :key="index"
           class="tag"
         >{{ tag }}</el-tag>
-        <div
-          class="edit-tag-box"
-          v-if="canEdit"
-        >
+        <div class="edit-tag-box" v-if="canEdit">
           <el-input
             class="new-tag-input"
             v-if="inputVisible"
@@ -31,24 +25,12 @@
             size="mini"
             @keyup.enter.native="handleInputConfirm"
             @blur="handleInputConfirm"
-          >
-          </el-input>
-          <el-button
-            v-else
-            class="button-new-tag"
-            size="mini"
-            @click="showInput"
-          >+ New Tag</el-button>
+          ></el-input>
+          <el-button v-else class="button-new-tag" size="mini" @click="showInput">+ New Tag</el-button>
         </div>
       </div>
       <div v-if="userInfo.role === 0">
-        <el-button
-          @click="toggleEdit"
-          class="edit-btn"
-          size="mini"
-        >
-          {{ $t('message.content.edit') }}
-        </el-button>
+        <el-button @click="toggleEdit" class="edit-btn" size="mini">{{ $t('message.content.edit') }}</el-button>
       </div>
     </div>
     <Markdown
@@ -59,13 +41,17 @@
       @saveContent="saveContent"
       :content="content"
     ></Markdown>
+    <div class="comments">
+      <h2>全部评论</h2>
+      <Comment :blogId="this.$route.params.id" />
+    </div>
   </div>
 </template>
 
 <script>
 const markdown = (resolve) => require.ensure([], async () => await resolve(require('../../components/MarkDown.vue')), 'MarkDown')
 // import Markdown from '@/components/MarkDown'
-
+const Comment = (resolve) => require.ensure([], async () => await resolve(require('../../components/comments/Comments.vue')), 'Comment')
 import { getBlog, saveBlog } from '@/api/blog'
 import { mapGetters } from 'vuex'
 export default {
@@ -87,6 +73,7 @@ export default {
   },
   components: {
     Markdown: markdown,
+    Comment,
   },
   computed: {
     ...mapGetters(['userInfo']),
@@ -205,6 +192,16 @@ export default {
     .tag {
       display: inline-block;
       margin: 0 10px;
+    }
+  }
+  .comments {
+    margin-top: 20px;
+    padding: 10px 10px 1px 10px;
+    background-color: white;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: bold;
     }
   }
 }

@@ -5,10 +5,10 @@
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-dropdown szie="mini" @command="onCommandChange" trigger="click">
+      <el-button class="login-btn" type="text" @click="onCommandChange('login')" v-if="!isLogin">Login</el-button>
+      <el-dropdown v-if="isLogin" szie="mini" @command="onCommandChange" trigger="click">
         <el-avatar size="medium">{{userInfo.user_name.charAt(0).toUpperCase()}}</el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="!isLogin" command="login">login</el-dropdown-item>
           <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
           <el-dropdown-item
             v-if="isLogin && userInfo.role === 0"
@@ -103,7 +103,8 @@ export default class Header extends Vue {
     justify-content: space-between;
     align-items: center;
     .login-btn {
-      margin-right: 10px;
+      color: #303133;
+      font-weight: bold;
     }
     .el-avatar {
       color: #fff;

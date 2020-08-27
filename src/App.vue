@@ -39,6 +39,7 @@ export default class App extends Vue {
   @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void
   @Mutation('SET_USERINFO') public setUseInfo!: (res: any) => void
   @HOME_MODULE.Mutation('updateBlogs') public updateBlogs!: (data: any) => void
+
   public modalShow: boolean = false
   public isCreateModalShow: boolean = false
   public showModal(show: boolean) {

@@ -1,9 +1,9 @@
 <template>
   <div class="comment-container">
-    <div class="comment-header">
+    <div v-if="!this.$route.params.id" class="comment-header">
       <el-button type="text" class="link-btn" icon="el-icon-back" @click="onDrawerClose"></el-button>
     </div>
-    <div class="comment-input-wrapper">
+    <div :class="isInDrawer ? `comment-input-wrapper` : `comment-input-wrapper notPadding`">
       <el-input size="medium" type="textarea" autosize class="input" v-model="commentInput" placeholder="comment" />
       <el-button size="small" style="margin:0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
     </div>
@@ -52,7 +52,8 @@ import { queryComments, newComment, IComment } from '@/api/comments';
 export default class Comment extends Vue {
   public visibleNestedCommentBox: string | null = null;
   public commentInput: string = '';
-  public comments: any[] = []
+  public comments: any[] = [];
+  private isInDrawer: boolean = false;
   public showNestedCommentBox(index: string): void {
     if (index === this.visibleNestedCommentBox) {
       this.visibleNestedCommentBox = null;
@@ -79,17 +80,18 @@ export default class Comment extends Vue {
 
   public async mounted() {
     await this.getComments()
+    this.isInDrawer = this.$route.params.id ? false : true;
   }
 
   private async getComments() {
-    const res: any = await queryComments(this.$props.blogId)
+    const res: any = await queryComments(this.$props.blogId).then((data) => data).catch((err) => err);
+
     if (res.code === 200) {
       this.comments = res.result
     } else {
       this.$message.error('Can not get comments');
     }
   }
-
 
 }
 </script>
@@ -113,6 +115,9 @@ export default class Comment extends Vue {
         padding: 5px 5px;
         border-radius: 3px !important;
       }
+    }
+    &.notPadding {
+      padding: 0 0;
     }
   }
 
