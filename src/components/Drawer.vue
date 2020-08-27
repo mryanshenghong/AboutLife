@@ -5,6 +5,7 @@
     :withHeader="false"
     :visible="isDrawerShow"
     @close="onDrawerClose"
+    size="375"
   >
     <slot></slot>
   </el-drawer>
@@ -28,5 +29,6 @@ export default class Drawer extends Vue {
 <style lang="scss" scoped>
 /deep/ .el-drawer__body {
   overflow: scroll;
+  width: 375px;
 }
 </style>
