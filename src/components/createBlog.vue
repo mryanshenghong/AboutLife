@@ -35,7 +35,8 @@
         </el-select>
       </el-form-item>
       <el-form-item label="媒体文件" prop="mediaSources" style="margin-left: 10px;display:block">
-        <el-button type="primary" @click="openFileInput">add</el-button>
+        <el-button type="primary" :disabled="onUpload" @click="openFileInput">add</el-button>
+        <i class="el-icon-loading spin" v-if="onUpload"></i>
         <div style="display:block">
           <el-tag
             class="url"
@@ -92,7 +93,8 @@ export default {
         media_type: [
           { required: true, message: '请选择媒体类型', trigger: 'change' }
         ]
-      }
+      },
+      onUpload: false
     };
   },
   methods: {
@@ -132,11 +134,14 @@ export default {
     },
 
     fileChange (e) {
+      this.onUpload = true
       uploadFiles(e.target.files, localStorage.token)
         .then((res) => {
           this.form.mediaSources.push(...res.fileUrls);
+          this.onUpload = false;
         })
         .catch((err) => {
+          this.onUpload = false;
           this.$message.error('Cannot upload files' + err.toString());
         });
     },
@@ -179,5 +184,8 @@ export default {
 }
 .tagsBox {
   margin: 5px 0;
+}
+.spin {
+  margin-left: 10px;
 }
 </style>
