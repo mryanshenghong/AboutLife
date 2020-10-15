@@ -28,6 +28,7 @@
           :playsinline="true"
           :options="playerOptions"
         />
+        <audio :src="`${resUrl}/${mediaSources[0]}`" v-if="mediaType ==='music'" controls></audio>
         <div v-if="mediaType==='image'" class="img-container">
           <img :src="`${resUrl}/${mediaSources[0]}`" alt />
         </div>
