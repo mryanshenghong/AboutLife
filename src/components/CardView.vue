@@ -18,7 +18,9 @@
     <div class="media_multi" v-else>
       <div class="des-box">
         <h3 class="title">{{ title }}</h3>
-        <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
+        <el-tag class="tag" size="mini" type="info">{{
+          formatTime(time)
+        }}</el-tag>
       </div>
       <div class="media_box">
         <videoPlayer
@@ -28,13 +30,20 @@
           :playsinline="true"
           :options="playerOptions"
         />
-        <audio :src="`${resUrl}/${mediaSources[0]}`" v-if="mediaType ==='music'" controls></audio>
-        <div v-if="mediaType==='image'" class="img-container">
+        <audio
+          :src="`${resUrl}/${mediaSources[0]}`"
+          v-if="mediaType === 'music'"
+          controls
+          controlsList="nodownload"
+        ></audio>
+        <div v-if="mediaType === 'image'" class="img-container">
           <img :src="`${resUrl}/${mediaSources[0]}`" alt />
         </div>
       </div>
       <div class="comment_box">
-        <el-button type="text" size="small" @click="toggleDrawer(true)">查看评论</el-button>
+        <el-button type="text" size="small" @click="toggleDrawer(true)"
+          >查看评论</el-button
+        >
         <Drawer :isDrawerShow="isDrawerShow" @toggleDrawer="toggleDrawer">
           <Comment :blogId="id" @toggleDrawer="toggleDrawer" />
         </Drawer>
