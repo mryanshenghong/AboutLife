@@ -8,7 +8,13 @@
     :lock-scroll="true"
     :modal-append-to-body="false"
   >
-    <el-form ref="blogForm" :model="form" :inline="true" size="mini" :rules="formRules">
+    <el-form
+      ref="blogForm"
+      :model="form"
+      :inline="true"
+      size="mini"
+      :rules="formRules"
+    >
       <el-form-item label="博客主题" prop="title">
         <el-input v-model="form.title" autocomplete="off"></el-input>
       </el-form-item>
@@ -18,37 +24,79 @@
           <el-button class="addTagBtn" @click="addTag">添加</el-button>
         </div>
         <div class="tagsBox">
-          <el-tag size="mini" v-for="(value, index) in tags" :key="index">{{ value }}</el-tag>
+          <el-tag size="mini" v-for="(value, index) in tags" :key="index">{{
+            value
+          }}</el-tag>
         </div>
       </el-form-item>
       <el-form-item label="博客种类" prop="cat">
-        <el-select @change="onCatSelect" filterable allow-create v-model="form.cat" placeholder="请选一个博客种类">
-          <el-option v-for="(value, index) in cats" :key="index" :label="value" :value="value"></el-option>
+        <el-select
+          @change="onCatSelect"
+          filterable
+          allow-create
+          v-model="form.cat"
+          placeholder="请选一个博客种类"
+        >
+          <el-option
+            v-for="(value, index) in cats"
+            :key="index"
+            :label="value"
+            :value="value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="媒体类型" prop="media_type">
-        <el-select @change="onMediaSelet" filterable v-model="form.media_type" placeholder="选择博客媒体类型">
+        <el-select
+          @change="onMediaSelet"
+          filterable
+          v-model="form.media_type"
+          placeholder="选择博客媒体类型"
+        >
           <el-option key="1" label="文章" value="blog" />
           <el-option key="2" label="图片" value="image" />
           <el-option key="3" label="音乐" value="music" />
           <el-option key="4" label="视频" value="video" />
         </el-select>
       </el-form-item>
-      <el-form-item label="媒体文件" prop="mediaSources" style="margin-left: 10px;display:block">
-        <el-button type="primary" :disabled="onUpload" @click="openFileInput">add</el-button>
+      <el-form-item
+        label="媒体文件"
+        prop="mediaSources"
+        style="margin-left: 10px; display: block"
+      >
+        <el-button type="primary" :disabled="onUpload" @click="openFileInput"
+          >add</el-button
+        >
+        <el-button type="primary" :disabled="onUpload" @click="openCloudFiles"
+          >Add from Cloud</el-button
+        >
         <i class="el-icon-loading spin" v-if="onUpload"></i>
-        <div style="display:block">
+        <div style="display: block">
           <el-tag
             class="url"
             size="mini"
             type="success"
             v-if="form.mediaSources.length"
-            v-for="(url,index) in form.mediaSources"
+            v-for="(url, index) in form.mediaSources"
             :key="index"
             :closable="true"
             @close="removeFile(url)"
-          >{{url}}</el-tag>
+            >{{ url }}</el-tag
+          >
         </div>
+        <el-select
+          style="margin-top: 10px"
+          v-if="cloudFiles.length"
+          @change="onCloudFileSelect"
+          filterable
+          placeholder="选择Cloud files"
+        >
+          <el-option
+            v-for="(file, index) in cloudFiles"
+            :key="index"
+            :label="file"
+            :value="file"
+          />
+        </el-select>
         <input
           id="fileInput"
           type="file"
@@ -61,14 +109,16 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="mini" @click="onCloseModal">取 消</el-button>
-      <el-button size="mini" type="primary" @click="onCreateBlog">确 定</el-button>
+      <el-button size="mini" type="primary" @click="onCreateBlog"
+        >确 定</el-button
+      >
     </div>
   </el-dialog>
 </template>
 
 <script>
 import { getBlogCats } from '@/api/blog';
-import { uploadFiles } from '@/api/file';
+import { uploadFiles, getCloudFiles } from '@/api/file';
 export default {
   props: {
     showCreateModal: {
@@ -94,6 +144,7 @@ export default {
           { required: true, message: '请选择媒体类型', trigger: 'change' }
         ]
       },
+      cloudFiles: [],
       onUpload: false
     };
   },
@@ -132,7 +183,9 @@ export default {
     onMediaSelet (val) {
       this.form.media_type = val;
     },
-
+    onCloudFileSelect (val) {
+      this.form.mediaSources.push(val)
+    },
     fileChange (e) {
       this.onUpload = true
       uploadFiles(e.target.files, localStorage.token)
@@ -147,6 +200,12 @@ export default {
     },
     openFileInput () {
       document.getElementById('fileInput').click();
+    },
+    async openCloudFiles () {
+      const resp = await getCloudFiles(localStorage.token);
+      if (resp && resp.files.length) {
+        this.cloudFiles = resp.files;
+      }
     },
     removeFile (url) {
       const index = this.form.mediaSources.indexOf(url);

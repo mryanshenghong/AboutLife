@@ -118,7 +118,7 @@ export default class CardView extends Vue {
       this.playerOptions.sources = sources.map((source: string) => {
         return {
           type: 'video/mp4',
-          src: `${process.env.VUE_APP_BASE}/static/` + source
+          src: `${this.resUrl}/` + source
         };
       });
     });
