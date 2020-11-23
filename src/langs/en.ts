@@ -1,4 +1,4 @@
-import enLocale from 'element-ui/lib/locale/lang/en'
+import enLocale from 'element-ui/lib/locale/lang/en';
 
 const en = {
   message: {
@@ -35,6 +35,7 @@ const en = {
       modalEmailInvalid: 'Plese enter your email account',
       modalPwdInvalid: 'Please enter your password',
       write_blog: 'Write Blog',
+      media_sys: 'Media',
     },
     blogs: {
       category: 'category',
@@ -48,5 +49,5 @@ const en = {
     building: 'building',
   },
   ...enLocale,
-}
-export default en
+};
+export default en;

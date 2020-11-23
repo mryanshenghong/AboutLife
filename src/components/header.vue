@@ -5,16 +5,39 @@
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-button class="login-btn" type="text" @click="onCommandChange('login')" v-if="!isLogin">Login</el-button>
-      <el-dropdown v-if="isLogin" szie="mini" @command="onCommandChange" trigger="click">
-        <el-avatar size="medium">{{userInfo.user_name.charAt(0).toUpperCase()}}</el-avatar>
+      <el-button
+        class="login-btn"
+        type="text"
+        @click="onCommandChange('login')"
+        v-if="!isLogin"
+        >Login</el-button
+      >
+      <el-dropdown
+        v-if="isLogin"
+        szie="mini"
+        @command="onCommandChange"
+        trigger="click"
+      >
+        <el-avatar size="medium">{{
+          userInfo.user_name.charAt(0).toUpperCase()
+        }}</el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
+          <el-dropdown-item v-if="isLogin" command="profile"
+            >profile</el-dropdown-item
+          >
           <el-dropdown-item
             v-if="isLogin && userInfo.role === 0"
             command="write_blog"
-          >{{this.$t('message.login.write_blog')}}</el-dropdown-item>
-          <el-dropdown-item v-if="isLogin" command="logout">logout</el-dropdown-item>
+            >{{ this.$t('message.login.write_blog') }}</el-dropdown-item
+          >
+          <el-dropdown-item
+            v-if="isLogin && userInfo.role === 0"
+            command="media_sys"
+            >{{ this.$t('message.login.media_sys') }}</el-dropdown-item
+          >
+          <el-dropdown-item v-if="isLogin" command="logout"
+            >logout</el-dropdown-item
+          >
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -45,6 +68,9 @@ export default class Header extends Vue {
         break
       case 'logout':
         this.onLogout()
+        break
+      case 'media_sys':
+        this.$router.push('/media')
         break
       default:
     }

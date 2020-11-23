@@ -50,3 +50,34 @@ export const getCloudFiles = (token: string) => {
       });
   });
 };
+
+export const getCloudFilesDetail = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${process.env.VUE_APP_URL}/myWeb/filesDetail`, {
+        headers: { authorization: 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data' },
+      })
+      .then((res) => {
+        resolve(res.data.result);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const deleteFile = (fileName: string) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${process.env.VUE_APP_URL}/myWeb/file`, {
+        params: { fileName },
+        headers: { authorization: 'Bearer ' + localStorage.token, 'Content-Type': 'multipart/form-data' },
+      })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

@@ -1,4 +1,4 @@
-import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
 
 const cn = {
   message: {
@@ -35,6 +35,7 @@ const cn = {
       modalEmailInvalid: '请输入邮箱账号',
       modalPwdInvalid: '请输入密码',
       write_blog: '写文章',
+      media_sys: '媒体管理',
     },
     blogs: {
       category: '种类',
@@ -48,6 +49,6 @@ const cn = {
     building: '开发中',
   },
   ...zhLocale,
-}
+};
 
-export default cn
+export default cn;

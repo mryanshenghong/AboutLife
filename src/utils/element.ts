@@ -30,6 +30,8 @@ import {
   Tabs,
   TabPane,
   Drawer,
+  Table,
+  TableColumn,
 } from 'element-ui';
 Vue.use(Carousel);
 Vue.use(CarouselItem);
@@ -60,6 +62,8 @@ Vue.use(Input);
 Vue.use(Tabs);
 Vue.use(TabPane);
 Vue.use(Drawer);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$message = Message;
