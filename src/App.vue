@@ -6,95 +6,92 @@
         <router-view />
         <!-- <mainFooter /> -->
         <Login :show="modalShow" @closeModal="showModal" />
-        <CreateModal
-          v-if="isLogin"
-          :showCreateModal="isCreateModalShow"
-          @onCloseCreateModal="showCreateModal"
-          @onCreateBlog="createBlog"
-        />
+        <CreateModal v-if="isLogin" :showCreateModal="isCreateModalShow" @onCloseCreateModal="showCreateModal" @onCreateBlog="createBlog" />
       </el-main>
     </el-container>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import mainHeader from '@/components/header.vue'
-import mainFooter from '@/components/footer.vue'
-import { Mutation, State, Getter, namespace } from 'vuex-class'
-const Login = () => import('./components/loginModal.vue')
-const CreateModal = () => import('./components/createBlog.vue')
-const HOME_MODULE = namespace('MODULE_HOME')
+import Vue from "vue";
+import Component from "vue-class-component";
+import mainHeader from "@/components/header.vue";
+import mainFooter from "@/components/footer.vue";
+import { Mutation, State, Getter, namespace } from "vuex-class";
+const Login = () => import("./components/loginModal.vue");
+const CreateModal = () => import("./components/createBlog.vue");
+const HOME_MODULE = namespace("MODULE_HOME");
 
-import { verifyToken } from './api/login'
-import { createBlog } from '@/api/blog'
+import { verifyToken } from "./api/login";
+import { createBlog } from "@/api/blog";
 @Component({
-  name: 'App',
+  name: "App",
   components: { mainHeader, mainFooter, Login, CreateModal },
 })
 export default class App extends Vue {
-  @State('isLogin') public isLogin!: boolean
-  @HOME_MODULE.Getter('getIntroduction') public intro: any
-  @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void
-  @Mutation('SET_USERINFO') public setUseInfo!: (res: any) => void
-  @HOME_MODULE.Mutation('updateBlogs') public updateBlogs!: (data: any) => void
+  @State("isLogin") public isLogin!: boolean;
+  @HOME_MODULE.Getter("getIntroduction") public intro: any;
+  @Mutation("SET_LOGIN") public setLogin!: (isLogin: boolean) => void;
+  @Mutation("SET_USERINFO") public setUseInfo!: (res: any) => void;
+  @HOME_MODULE.Mutation("updateBlogs") public updateBlogs!: (data: any) => void;
 
-  public modalShow: boolean = false
-  public isCreateModalShow: boolean = false
+  public modalShow: boolean = false;
+  public isCreateModalShow: boolean = false;
   public showModal(show: boolean) {
-    this.modalShow = show
+    this.modalShow = show;
   }
 
   public showCreateModal(show: boolean) {
-    this.isCreateModalShow = show
+    this.isCreateModalShow = show;
   }
 
   public createBlog(newBlog: any) {
-    this.showCreateModal(false)
+    this.showCreateModal(false);
     if (!localStorage.token) {
       this.$message({
-        message: 'please login first',
-        type: 'error',
-      })
+        message: "please login first",
+        type: "error",
+      });
     } else {
       createBlog(newBlog, localStorage.token)
         .then((res: any) => {
           if (res.result._id) {
-            if (res.result.mediaType === 'blog') {
-              this.$router.push(`/content/${res.result._id}`)
-              return
+            if (res.result.mediaType === "blog") {
+              this.$router.push(`/content/${res.result._id}`);
+              return;
             }
             if (res.result.cat === this.intro.nav) {
-              this.updateBlogs(res.result)
-              return
+              this.updateBlogs(res.result);
+              return;
             }
           }
         })
         .catch(() => {
           this.$message({
-            message: 'Can not create blog',
-            type: 'error',
-          })
-        })
+            message: "Can not create blog",
+            type: "error",
+          });
+        });
     }
   }
 
   public mounted() {
     if (localStorage.user_name && localStorage.role && localStorage.token) {
-      verifyToken(localStorage.user_name, localStorage.token).then((res: any) => {
-        if (!res.invalid) {
-          this.setLogin(true)
-          this.setUseInfo(res)
-        }
-      })
+      verifyToken(localStorage.user_name, localStorage.token)
+        .then((res: any) => {
+          this.setLogin(true);
+          this.setUseInfo(res);
+        })
+        .catch(() => {
+          localStorage.clear();
+        });
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import './styles/consts.scss';
+@import "./styles/consts.scss";
 
 #app {
   background: $theme-color;
