@@ -1,14 +1,23 @@
 <template>
   <div class="comment-container">
-    <div v-if="!this.$route.params.id" class="comment-header">
-      <el-button type="text" class="link-btn" icon="el-icon-back" @click="onDrawerClose"></el-button>
-    </div>
-    <div :class="isInDrawer ? `comment-input-wrapper` : `comment-input-wrapper notPadding`">
-      <el-input size="medium" type="textarea" autosize class="input" v-model="commentInput" placeholder="comment" />
-      <el-button size="small" style="margin:0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
+    <div class="comment-input-wrapper notPadding">
+      <el-input
+        size="medium"
+        type="textarea"
+        autosize
+        class="input"
+        v-model="commentInput"
+        placeholder="comment"
+      />
+      <el-button
+        size="small"
+        style="margin: 0 10px; max-height: 33px"
+        @click="writeComment"
+        >Comment</el-button
+      >
     </div>
     <CommentItem
-      v-for="(comment,index) in comments"
+      v-for="(comment, index) in comments"
       :key="index.toString()"
       :idx="index.toString()"
       :comment="comment"
@@ -17,14 +26,16 @@
       :isNested="false"
       :getComments="() => getComments()"
     >
-      <div class="childComment" v-if="comment.comments.length >0">
+      <div class="childComment" v-if="comment.comments.length > 0">
         <CommentItem
-          v-for="(childComment,subindex) in comment.comments"
-          :key="subindex+'-'+index"
-          :idx="index+'-'+subindex"
+          v-for="(childComment, subindex) in comment.comments"
+          :key="subindex + '-' + index"
+          :idx="index + '-' + subindex"
           :comment="childComment"
           :visibleNestedCommentBox="visibleNestedCommentBox"
-          :showNestedCommentBox="() => showNestedCommentBox(`${index}-${subindex}`)"
+          :showNestedCommentBox="
+            () => showNestedCommentBox(`${index}-${subindex}`)
+          "
           :isNested="true"
           :getComments="() => getComments()"
         />
@@ -53,17 +64,12 @@ export default class Comment extends Vue {
   public visibleNestedCommentBox: string | null = null;
   public commentInput: string = '';
   public comments: any[] = [];
-  private isInDrawer: boolean = false;
   public showNestedCommentBox(index: string): void {
     if (index === this.visibleNestedCommentBox) {
       this.visibleNestedCommentBox = null;
       return;
     }
     this.visibleNestedCommentBox = index;
-  }
-
-  public onDrawerClose(): void {
-    this.$emit('toggleDrawer', false)
   }
 
   public writeComment() {
@@ -78,10 +84,7 @@ export default class Comment extends Vue {
     this.commentInput = ''
   }
 
-  public async mounted() {
-    await this.getComments()
-    this.isInDrawer = this.$route.params.id ? false : true;
-  }
+  public async mounted() { await this.getComments() }
 
   private async getComments() {
     const res: any = await queryComments(this.$props.blogId).then((data) => data).catch((err) => err);
@@ -111,7 +114,7 @@ export default class Comment extends Vue {
     .input {
       flex: 1;
       & /deep/ .el-textarea__inner {
-        font-family: 'main-font' !important;
+        font-family: "main-font" !important;
         padding: 5px 5px;
         border-radius: 3px !important;
       }

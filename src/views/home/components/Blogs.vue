@@ -11,7 +11,6 @@
           :key="blog.id"
           :mediaType="blog.mediaType"
           :mediaSources="blog.mediaSources"
-          @select="viewContent"
         />
       </div>
     </vuescroll>
@@ -20,11 +19,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import Component from 'vue-class-component'
-import { namespace } from 'vuex-class'
-import vuescroll from 'vuescroll'
-import CardView from '@/components/CardView.vue'
-import { Blog } from '@/store/home'
+import Component from "vue-class-component"
+import { namespace } from "vuex-class"
+import vuescroll from "vuescroll"
+import CardView from "@/components/CardView.vue"
+import { Blog } from "@/store/home"
 
 const homeModule = namespace('MODULE_HOME')
 
@@ -32,12 +31,12 @@ const homeModule = namespace('MODULE_HOME')
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
-  @homeModule.Getter('getIntroduction') public intro!: {
+  @homeModule.Getter("getIntroduction") public intro!: {
     blogs: Blog[]
   }
   public scrollOptions: object = {
     vuescroll: {
-      mode: 'native',
+      mode: "native",
       wheelScrollDuration: 100,
       detectResize: true,
     },
@@ -50,10 +49,6 @@ export default class Blogs extends Vue {
   }
   public created(): void {
     const vs = this.$refs.vs as vuescroll
-  }
-
-  public viewContent(id: string) {
-    this.$router.push(`/content/${id}`)
   }
 }
 </script>

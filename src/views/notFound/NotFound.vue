@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { activateAccount } from '../../api/login'
+import Vue from "vue";
+import Component from "vue-class-component";
+import { activateAccount } from "../../api/login";
 @Component({
-  name: 'NotFound',
+  name: "NotFound",
 })
 export default class NotFound extends Vue {
 

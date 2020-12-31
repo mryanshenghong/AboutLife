@@ -65,8 +65,8 @@ export default class Media extends Vue {
     const resp: Error | any = await getCloudFilesDetail().catch(err => <Error>err);
     if (resp instanceof Error) {
       this.$message({
-        type: 'error',
-        message: 'Can not find cloud files'
+        type: "error",
+        message: "Can not find cloud files"
       })
     } else {
       this.mediaData = resp.mediaFiles

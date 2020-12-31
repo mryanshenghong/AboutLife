@@ -1,8 +1,8 @@
 <template>
   <div class="staging">
-    <div class="title">Hi, {{name}}:</div>
+    <div class="title">Hi, {{ name }}:</div>
     <div class="content">
-      <p>感谢你注册About Life! 我们发送了激活邮件到你的邮箱: {{email}}.</p>
+      <p>感谢你注册About Life! 我们发送了激活邮件到你的邮箱: {{ email }}.</p>
       <p>请前往你的邮箱激活账户, 激活账户就可以正常登陆About Life啦！</p>
     </div>
     <div class="footer">--- About Life</div>
@@ -10,10 +10,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
+import Vue from "vue";
+import Component from "vue-class-component";
 @Component({
-  name: 'Staging',
+  name: "Staging",
   props: {
     email: {
       type: String,
@@ -28,7 +28,7 @@ import Component from 'vue-class-component';
 export default class Staging extends Vue {
   public beforeMount() {
     if (!this.$props.name || !this.$props.email) {
-      this.$router.push('/')
+      this.$router.push("/")
     }
   }
 }
