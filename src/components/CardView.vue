@@ -7,7 +7,6 @@
       :cat="cat"
       :mediaType="mediaType"
       :mediaSources="mediaSources"
-      :modalMode="false"
     />
       <div v-if="mediaType !=='blog'" class="comment_box">
         <el-button type="text" size="small" @click="showComment"

@@ -11,20 +11,20 @@
           <i class="el-icon-view">&nbsp; 0</i>
         </div>
       </div>
-      <span v-if="!modalMode" class="time">
+      <span class="time">
         <el-tag type="info" size="small">{{ formatTime(time) }}</el-tag>
       </span>
     </div>
     <div class="media_multi" v-else>
       <div class="des-box">
         <h3 class="title">{{ title }}</h3>
-        <el-tag v-if="!modalMode" class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
+        <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
       </div>
       <div class="media_box">
         <videoPlayer v-if="mediaType === 'video'" class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions" />
         <audio :src="`${resUrl}/${mediaSources[0]}`" v-if="mediaType === 'music'" controls controlsList="nodownload"></audio>
-        <div v-if="mediaType === 'image'" :class="!modalMode ? 'img-container' : 'img-container-large'">
-          <img :src="`${resUrl}/${mediaSources[0]}`" alt />
+        <div v-if="mediaType === 'image'" class="img-container">
+          <el-image :src="`${resUrl}/${mediaSources[0]}`" :preview-src-list="[`${resUrl}/${mediaSources[0]}`]"></el-image>
         </div>
       </div>
     </div>
@@ -47,7 +47,6 @@ import "video.js/dist/video-js.css";
     cat: String,
     mediaType: String,
     mediaSources: Array,
-    modalMode: Boolean,
   },
   components: { videoPlayer },
 })
@@ -140,7 +139,7 @@ export default class CardView extends Vue {
     }
   }
 
-  .img-container img {
+  .img-container /deep/ .el-image {
     max-width: 200px;
     height: auto;
   }
