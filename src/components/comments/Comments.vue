@@ -1,20 +1,8 @@
 <template>
   <div class="comment-container">
     <div class="comment-input-wrapper notPadding">
-      <el-input
-        size="medium"
-        type="textarea"
-        autosize
-        class="input"
-        v-model="commentInput"
-        placeholder="comment"
-      />
-      <el-button
-        size="small"
-        style="margin: 0 10px; max-height: 33px"
-        @click="writeComment"
-        >Comment</el-button
-      >
+      <el-input size="medium" type="textarea" autosize class="input" v-model="commentInput" placeholder="comment" />
+      <el-button size="small" style="margin: 0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
     </div>
     <CommentItem
       v-for="(comment, index) in comments"
@@ -33,9 +21,7 @@
           :idx="index + '-' + subindex"
           :comment="childComment"
           :visibleNestedCommentBox="visibleNestedCommentBox"
-          :showNestedCommentBox="
-            () => showNestedCommentBox(`${index}-${subindex}`)
-          "
+          :showNestedCommentBox="() => showNestedCommentBox(`${index}-${subindex}`)"
           :isNested="true"
           :getComments="() => getComments()"
         />
@@ -45,24 +31,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import CommentItem from './components/CommentItem.vue';
+import Vue from "vue";
+import Component from "vue-class-component";
+import CommentItem from "./components/CommentItem.vue";
 
-import { queryComments, newComment, IComment } from '@/api/comments';
+import { queryComments, newComment, IComment } from "@/api/comments";
 
 @Component({
-  name: 'Comment',
+  name: "Comment",
   props: {
     blogId: {
-      type: String
-    }
+      type: String,
+    },
   },
-  components: { CommentItem }
+  components: { CommentItem },
 })
 export default class Comment extends Vue {
   public visibleNestedCommentBox: string | null = null;
-  public commentInput: string = '';
+  public commentInput: string = "";
   public comments: any[] = [];
   public showNestedCommentBox(index: string): void {
     if (index === this.visibleNestedCommentBox) {
@@ -76,26 +62,31 @@ export default class Comment extends Vue {
     const nComment: IComment = {
       content: this.commentInput,
       blogId: this.$props.blogId,
-      parentId: '',
-      repliedTo: null
-    }
-    const token = localStorage.getItem('token');
-    newComment(nComment, token!).then(async (res) => await this.getComments()).catch((err) => this.$message.error('can not comment'))
-    this.commentInput = ''
+      parentId: "",
+      repliedTo: null,
+    };
+    const token = localStorage.getItem("token");
+    newComment(nComment, token!)
+      .then(async (res) => await this.getComments())
+      .catch((err) => this.$message.error("can not comment"));
+    this.commentInput = "";
   }
 
-  public async mounted() { await this.getComments() }
+  public async mounted() {
+    await this.getComments();
+  }
 
   private async getComments() {
-    const res: any = await queryComments(this.$props.blogId).then((data) => data).catch((err) => err);
+    const res: any = await queryComments(this.$props.blogId)
+      .then((data) => data)
+      .catch((err) => err);
 
     if (res.code === 200) {
-      this.comments = res.result
+      this.comments = res.result;
     } else {
-      this.$message.error('Can not get comments');
+      this.$message.error("Can not get comments");
     }
   }
-
 }
 </script>
 <style lang="scss" scoped>

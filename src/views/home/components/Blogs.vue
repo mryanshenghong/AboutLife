@@ -18,22 +18,22 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from "vue-class-component"
-import { namespace } from "vuex-class"
-import vuescroll from "vuescroll"
-import CardView from "@/components/CardView.vue"
-import { Blog } from "@/store/home"
+import Vue from "vue";
+import Component from "vue-class-component";
+import { namespace } from "vuex-class";
+import vuescroll from "vuescroll";
+import CardView from "@/components/CardView.vue";
+import { Blog } from "@/store/home";
 
-const homeModule = namespace('MODULE_HOME')
+const homeModule = namespace("MODULE_HOME");
 
 @Component({
   components: { vuescroll, CardView },
 })
 export default class Blogs extends Vue {
   @homeModule.Getter("getIntroduction") public intro!: {
-    blogs: Blog[]
-  }
+    blogs: Blog[];
+  };
   public scrollOptions: object = {
     vuescroll: {
       mode: "native",
@@ -46,9 +46,9 @@ export default class Blogs extends Vue {
     bar: {
       size: 0,
     },
-  }
+  };
   public created(): void {
-    const vs = this.$refs.vs as vuescroll
+    const vs = this.$refs.vs as vuescroll;
   }
 }
 </script>

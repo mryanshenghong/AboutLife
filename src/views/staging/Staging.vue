@@ -17,18 +17,18 @@ import Component from "vue-class-component";
   props: {
     email: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
 })
 export default class Staging extends Vue {
   public beforeMount() {
     if (!this.$props.name || !this.$props.email) {
-      this.$router.push("/")
+      this.$router.push("/");
     }
   }
 }
