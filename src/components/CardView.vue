@@ -10,20 +10,13 @@
       :modalMode="false"
     />
       <div v-if="mediaType !=='blog'" class="comment_box">
-        <el-button type="text" size="small" @click="toggleModal(true)"
-          >查看评论</el-button
-        >
+        <el-button type="text" size="small" @click="showComment"
+          >查看评论</el-button>
       </div>
     </div>
-    <BlogModal  
-      :visible="isModalShow"     
-      :title="title"
-      :time="time"
-      :id="id"
-      :cat="cat"
-      :mediaType="mediaType"
-      :mediaSources="mediaSources"
-      @toggleModal="toggleModal"  />
+      <div v-if="displayComments" class="comment-box">
+          <Comment :blogId="id" />
+      </div>
   </el-card>
 </template>
 
@@ -33,7 +26,7 @@ import { format } from '../utils/formatTime';
 import Component from 'vue-class-component';
 import Blog from '../components/Blog.vue';
 
-const BlogModal = () => import('../components/comments/Modal.vue')
+const Comment = () => import('./comments/Comments.vue')
 
 @Component({
   name: 'CardView',
@@ -45,7 +38,7 @@ const BlogModal = () => import('../components/comments/Modal.vue')
     mediaType: String,
     mediaSources: Array
   },
-  components: { Blog, BlogModal }
+  components: { Blog,Comment }
 })
 
 export default class CardView extends Vue {
@@ -53,18 +46,14 @@ export default class CardView extends Vue {
 
   public resUrl: string = process.env.NODE_ENV === 'development' ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
 
-  public isModalShow: boolean = false;
-
-  //   public select(id: string): void {
-  //     this.$emit('select', id);
-  //   }
+  public displayComments:boolean = false;
 
   public formatTime(time: string) {
     return format(time);
   }
 
-  public toggleModal(isModalShow: boolean) {
-    this.isModalShow = isModalShow
+  public showComment() {
+      this.displayComments = !this.displayComments;
   }
 }
 </script>

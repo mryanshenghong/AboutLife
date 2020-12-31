@@ -28,9 +28,6 @@
         </div>
       </div>
     </div>
-    <div class="comment-box">
-      <Comment v-if="modalMode" :blogId="id" />
-    </div>
   </div>
 </template>
 
@@ -40,8 +37,6 @@ import { format } from "../utils/formatTime";
 import Component from "vue-class-component";
 import { videoPlayer } from "vue-video-player";
 import "video.js/dist/video-js.css";
-
-const Comment = () => import("../components/comments/Comments.vue");
 
 @Component({
   name: "CardView",
@@ -54,7 +49,7 @@ const Comment = () => import("../components/comments/Comments.vue");
     mediaSources: Array,
     modalMode: Boolean,
   },
-  components: { videoPlayer, Comment },
+  components: { videoPlayer },
 })
 export default class CardView extends Vue {
   public playerOptions: any = {
@@ -158,8 +153,5 @@ export default class CardView extends Vue {
   .media_box {
     border-radius: 10px;
   }
-}
-.comment-box {
-  margin-top: 10px;
 }
 </style>
