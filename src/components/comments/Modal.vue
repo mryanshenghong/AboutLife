@@ -74,4 +74,9 @@ export default class CommentModal extends Vue {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+/deep/ .el-dialog__body {
+  height: 600px !important;
+  overflow-y: scroll !important;
+}
+</style>
