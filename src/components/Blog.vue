@@ -23,7 +23,7 @@
       <div class="media_box">
         <videoPlayer v-if="mediaType === 'video'" class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions" />
         <audio :src="`${resUrl}/${mediaSources[0]}`" v-if="mediaType === 'music'" controls controlsList="nodownload"></audio>
-        <div v-if="mediaType === 'image'" :class="!modalMode ? 'img-container' : 'img-container large'">
+        <div v-if="mediaType === 'image'" :class="!modalMode ? 'img-container' : 'img-container-large'">
           <img :src="`${resUrl}/${mediaSources[0]}`" alt />
         </div>
       </div>
@@ -147,9 +147,11 @@ export default class CardView extends Vue {
 
   .img-container img {
     max-width: 200px;
-    .large {
-      width: 100%;
-    }
+    height: auto;
+  }
+
+  .img-container-large img {
+    width: 100% !important;
     height: auto;
   }
 
