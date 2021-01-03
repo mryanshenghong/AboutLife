@@ -11,38 +11,38 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { activateAccount } from '../../api/login'
+import Vue from "vue";
+import Component from "vue-class-component";
+import { activateAccount } from "../../api/login";
 @Component({
-  name: 'Active',
+  name: "Active",
 })
 export default class Active extends Vue {
-  private status: string = '激活中...';
+  private status: string = "激活中...";
   private activing: boolean = true;
   private valid: boolean = false;
   public async activateAccoutn() {
     const res: any = await activateAccount(this.$route.params.id).catch((err) => err);
     this.activing = false;
     if (res instanceof Error) {
-      this.status = '网络错误, 请稍后再试.';
+      this.status = "网络错误, 请稍后再试.";
       return;
     }
     if (!res || res.code === -1) {
       this.status = res.msg;
       return;
-    };
-    this.status = '激活成功!回到首页登陆';
+    }
+    this.status = "激活成功!回到首页登陆";
     this.activing = false;
     this.valid = true;
   }
   public beforeMount() {
     if (!this.$route.params.id) {
-      this.$router.push('/');
+      this.$router.push("/");
     }
   }
   public async mounted() {
-    await this.activateAccoutn()
+    await this.activateAccoutn();
   }
 }
 </script>

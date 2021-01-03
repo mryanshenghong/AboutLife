@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex, { StoreOptions } from 'vuex';
-import * as types from './mutationTypes';
-import * as getters from './getters';
-import { MODULE_HOME } from './home';
-import createLogger from 'vuex/dist/logger';
+import Vue from "vue";
+import Vuex, { StoreOptions } from "vuex";
+import * as types from "./mutationTypes";
+import * as getters from "./getters";
+import { MODULE_HOME } from "./home";
+import createLogger from "vuex/dist/logger";
 Vue.use(Vuex);
 
 export interface RootState {
@@ -25,31 +25,33 @@ export interface RootState {
     role: number | null;
   };
   isLogin: boolean;
+  currentMediaRef: any;
 }
 
 // 开发环境下使用，调试查看是否state是从mutation里面修改
-const debug = process.env.NODE_ENV !== 'production';
+const debug = process.env.NODE_ENV !== "production";
 
 const store: StoreOptions<RootState> = {
   state: {
     musicDisc: {
       musicData: {
-        title: '',
-        artist: '',
-        pic: '',
-        src: '',
+        title: "",
+        artist: "",
+        pic: "",
+        src: "",
       },
       commentData: {
-        content: '',
-        comment_nickname: '',
+        content: "",
+        comment_nickname: "",
       },
     },
     user: {
-      user_name: '',
-      email: '',
+      user_name: "",
+      email: "",
       role: null,
     },
     isLogin: false,
+    currentMediaRef: undefined,
   },
   mutations: {
     [types.SET_MUSICDISC](state, musicDisc) {
@@ -60,6 +62,9 @@ const store: StoreOptions<RootState> = {
     },
     [types.SET_USERINFO](state, user) {
       state.user = user;
+    },
+    [types.SET_CURRENT_MEDIA_REF](state, mediaRef) {
+      state.currentMediaRef = mediaRef;
     },
   },
   getters,

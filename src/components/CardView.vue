@@ -20,15 +20,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { format } from '../utils/formatTime';
-import Component from 'vue-class-component';
-import Blog from '../components/Blog.vue';
+import Vue from "vue";
+import { format } from "../utils/formatTime";
+import Component from "vue-class-component";
+import Blog from "../components/Blog.vue";
 
-const Comment = () => import('./comments/Comments.vue')
+const Comment = () => import("./comments/Comments.vue");
 
 @Component({
-  name: 'CardView',
+  name: "CardView",
   props: {
     title: String,
     time: String,
@@ -37,15 +37,15 @@ const Comment = () => import('./comments/Comments.vue')
     mediaType: String,
     mediaSources: Array
   },
-  components: { Blog,Comment }
+  components: { Blog, Comment }
 })
 
 export default class CardView extends Vue {
 
 
-  public resUrl: string = process.env.NODE_ENV === 'development' ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
+  public resUrl: string = process.env.NODE_ENV === "development" ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
 
-  public displayComments:boolean = false;
+  public displayComments: boolean = false;
 
   public formatTime(time: string) {
     return format(time);

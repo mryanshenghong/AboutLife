@@ -9,13 +9,13 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/webfont/cerepf/mainFont.css';
-@import '~@/styles/consts.scss';
-@import '~@/styles/font/iconfont.css';
+@import "~@/styles/webfont/cerepf/mainFont.css";
+@import "~@/styles/consts.scss";
+@import "~@/styles/font/iconfont.css";
 
 .footer {
   .footer-nav {

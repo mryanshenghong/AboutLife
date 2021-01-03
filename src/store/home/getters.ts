@@ -1,6 +1,6 @@
-import { GetterTree } from 'vuex'
-import { HomeState } from '.'
-import { RootState } from '..'
+import { GetterTree } from "vuex";
+import { HomeState } from ".";
+import { RootState } from "..";
 
 export const homeGetter: GetterTree<HomeState, RootState> = {
   getIntroduction(state): object {
@@ -11,6 +11,6 @@ export const homeGetter: GetterTree<HomeState, RootState> = {
       media_type: state.currentMedia,
       media: state.currentMediaSrc,
       blogs: state.blogs,
-    }
+    };
   },
-}
+};

@@ -39,14 +39,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import Component from 'vue-class-component';
-import { format } from '@/utils/formatTime';
+import Vue from "vue";
+import Component from "vue-class-component";
+import { format } from "@/utils/formatTime";
 
-import { newComment, IComment } from '@/api/comments';
+import { newComment, IComment } from "@/api/comments";
 
 @Component({
-  name: 'CommentItem',
+  name: "CommentItem",
   props: {
     idx: String,
     comment: Object,
@@ -58,7 +58,7 @@ import { newComment, IComment } from '@/api/comments';
   }
 })
 export default class CommentItem extends Vue {
-  public inputComment: string = '';
+  public inputComment: string = "";
 
   public async writeComment() {
     const comment = this.$props.comment;
@@ -67,15 +67,15 @@ export default class CommentItem extends Vue {
       parentId: this.$props.isNested ? comment.parentId : comment.id,
       repliedTo: comment.commentedBy,
       content: this.inputComment
-    }
-    const token = localStorage.getItem('token');
-    await newComment(nComment, token!).then(async () => this.$props.getComments()).catch((err) => err)
-    this.inputComment = ''
-    this.$props.showNestedCommentBox()
+    };
+    const token = localStorage.getItem("token");
+    await newComment(nComment, token!).then(async () => this.$props.getComments()).catch((err) => err);
+    this.inputComment = "";
+    this.$props.showNestedCommentBox();
   }
 
   private format(time: string) {
-    return format(time)
+    return format(time);
   }
 }
 </script>

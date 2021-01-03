@@ -20,45 +20,45 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { namespace } from 'vuex-class'
-import Introduction from './components/Introduction.vue'
-import Blogs from './components/Blogs.vue'
+import Vue from "vue";
+import Component from "vue-class-component";
+import { namespace } from "vuex-class";
+import Introduction from "./components/Introduction.vue";
+import Blogs from "./components/Blogs.vue";
 
-const homeModule = namespace('MODULE_HOME')
+const homeModule = namespace("MODULE_HOME");
 
 @Component({
   components: { Introduction, Blogs },
 })
 export default class Home extends Vue {
-  public isSm: boolean = false
-  @homeModule.Getter('getIntroduction') public intro!: {
-    nav: string
-    title: string
-    content: string
-    media_type: string
-    media: string
-  }
-  @homeModule.Action('changIntroduction') public getBlogsAndInfo!: (navName: string) => void
+  public isSm: boolean = false;
+  @homeModule.Getter("getIntroduction") public intro!: {
+    nav: string;
+    title: string;
+    content: string;
+    media_type: string;
+    media: string;
+  };
+  @homeModule.Action("changIntroduction") public getBlogsAndInfo!: (navName: string) => void;
   public created() {
-    window.addEventListener('resize', this.handleResize)
-    this.getBlogsAndInfo(this.intro.nav)
+    window.addEventListener("resize", this.handleResize);
+    this.getBlogsAndInfo(this.intro.nav);
   }
 
   public handleResize() {
-    const clientWidth = document.documentElement.clientWidth
+    const clientWidth = document.documentElement.clientWidth;
     if (clientWidth < 768) {
-      this.isSm = true
+      this.isSm = true;
     } else {
-      this.isSm = false
+      this.isSm = false;
     }
   }
 
   public mounted() {
     this.$nextTick(() => {
-      this.handleResize()
-    })
+      this.handleResize();
+    });
   }
 }
 </script>
@@ -66,7 +66,7 @@ export default class Home extends Vue {
 .home {
   height: calc(100vh - 108px);
   margin-top: 30px;
-  font-family: 'main-font';
+  font-family: "main-font";
   .home-nav {
     display: flex;
     justify-content: left;

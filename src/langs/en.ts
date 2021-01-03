@@ -1,52 +1,52 @@
-import enLocale from 'element-ui/lib/locale/lang/en';
+import enLocale from "element-ui/lib/locale/lang/en";
 
 const en = {
   message: {
-    name: 'Shenghong Yan',
+    name: "Shenghong Yan",
     langSwich: {
-      language: 'English',
-      cn: 'Chinese',
-      en: 'English',
+      language: "English",
+      cn: "Chinese",
+      en: "English",
     },
     home: {
-      downloadPDF: 'Download CV',
+      downloadPDF: "Download CV",
     },
     sideNav: {
-      home: 'Home',
-      portfolio: 'Portfolio',
-      experience: 'Experience',
-      skills: 'Skills',
-      blog: 'Tech Blogs',
+      home: "Home",
+      portfolio: "Portfolio",
+      experience: "Experience",
+      skills: "Skills",
+      blog: "Tech Blogs",
     },
     error: {
-      getMusicError: 'cannot get music info refresh page try again',
+      getMusicError: "cannot get music info refresh page try again",
     },
     visitor: {
-      modalTitle: 'Page Views',
+      modalTitle: "Page Views",
     },
     login: {
-      headerBtn_login: 'Login',
-      headerBtn_logout: 'Logout',
-      modalTitle: 'Login',
-      modalEmailLabel: 'Email',
-      modalPwdLabel: 'Password',
-      modalCancel: 'Cancel',
-      modalConfirm: 'confirm',
-      modalEmailInvalid: 'Plese enter your email account',
-      modalPwdInvalid: 'Please enter your password',
-      write_blog: 'Write Blog',
-      media_sys: 'Media',
+      headerBtn_login: "Login",
+      headerBtn_logout: "Logout",
+      modalTitle: "Login",
+      modalEmailLabel: "Email",
+      modalPwdLabel: "Password",
+      modalCancel: "Cancel",
+      modalConfirm: "confirm",
+      modalEmailInvalid: "Plese enter your email account",
+      modalPwdInvalid: "Please enter your password",
+      write_blog: "Write Blog",
+      media_sys: "Media",
     },
     blogs: {
-      category: 'category',
-      createdAt: 'created at',
-      tags: 'tags',
+      category: "category",
+      createdAt: "created at",
+      tags: "tags",
     },
     content: {
-      edit: 'Edit',
+      edit: "Edit",
     },
     // tag translation
-    building: 'building',
+    building: "building",
   },
   ...enLocale,
 };

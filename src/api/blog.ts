@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const getBlogsBasicInfo = (cat: string) => {
   return new Promise((resolve, reject) => {
@@ -23,8 +23,8 @@ export const getBlogCats = (token: string) => {
     axios
       .get(`${process.env.VUE_APP_URL}/myWeb/findBlogCats`, {
         headers: {
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         },
         params: {
           isTech: false,
@@ -61,8 +61,8 @@ export const saveBlog = (blogInfo: any, token: string) => {
     axios
       .post(`${process.env.VUE_APP_URL}/myWeb/updateBlog`, blogInfo, {
         headers: {
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
@@ -79,8 +79,8 @@ export const createBlog = (newBlog: any, token: string) => {
     axios
       .post(`${process.env.VUE_APP_URL}/myWeb/newBlog`, newBlog, {
         headers: {
-          authorization: 'Bearer ' + token,
-          'Content-Type': 'application/json',
+          authorization: "Bearer " + token,
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {

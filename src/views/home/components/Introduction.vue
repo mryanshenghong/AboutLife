@@ -15,8 +15,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import Vue from "vue";
+import Component from "vue-class-component";
 const IntroProps = Vue.extend({
   props: {
     content: {
@@ -25,14 +25,14 @@ const IntroProps = Vue.extend({
     },
     media_type: {
       type: String,
-      default: '',
+      default: "",
     },
     media: {
       type: String,
-      default: '',
+      default: "",
     },
   },
-})
+});
 export default class Introduction extends IntroProps { }
 </script>
 <style lang="scss" scoped>

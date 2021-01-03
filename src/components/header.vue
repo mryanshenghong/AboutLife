@@ -45,56 +45,56 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { namespace, State, Mutation } from 'vuex-class'
-import { logout as userLogout } from '@/api/login';
+import Vue from "vue";
+import Component from "vue-class-component";
+import { namespace, State, Mutation } from "vuex-class";
+import { logout as userLogout } from "@/api/login";
 
-const rootStore = namespace('root')
+const rootStore = namespace("root");
 
 @Component({})
 export default class Header extends Vue {
-  @State('isLogin') public isLogin!: boolean
-  @State('user') public userInfo: any
-  @Mutation('SET_USERINFO') public setUserInfo!: (user: { user_name: string, email: string, role: null }) => void;
-  @Mutation('SET_LOGIN') public setLogin!: (isLogin: boolean) => void;
+  @State("isLogin") public isLogin!: boolean;
+  @State("user") public userInfo: any;
+  @Mutation("SET_USERINFO") public setUserInfo!: (user: { user_name: string, email: string, role: null }) => void;
+  @Mutation("SET_LOGIN") public setLogin!: (isLogin: boolean) => void;
   public onCommandChange(cm: string) {
     switch (cm) {
-      case 'login':
-        this.$emit('showModal', true)
-        break
-      case 'write_blog':
-        this.$emit('onShowCreateModal', true)
-        break
-      case 'logout':
-        this.onLogout()
-        break
-      case 'media_sys':
-        this.$router.push('/media')
-        break
+      case "login":
+        this.$emit("showModal", true);
+        break;
+      case "write_blog":
+        this.$emit("onShowCreateModal", true);
+        break;
+      case "logout":
+        this.onLogout();
+        break;
+      case "media_sys":
+        this.$router.push("/media");
+        break;
       default:
     }
   }
 
   public goHome() {
-    this.$router.push('/')
+    this.$router.push("/");
   }
 
   private onLogout() {
     userLogout(this.userInfo.email)
       .then((res: any) => {
         if (res.data.code === 200) {
-          this.setUserInfo({ user_name: '', email: '', role: null })
-          this.setLogin(false)
-          localStorage.clear()
+          this.setUserInfo({ user_name: "", email: "", role: null });
+          this.setLogin(false);
+          localStorage.clear();
         }
       })
       .catch(() => {
         this.$message({
-          message: 'Can not logout',
-          type: 'error',
-        })
-      })
+          message: "Can not logout",
+          type: "error",
+        });
+      });
   }
 }
 </script>

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from "vue";
 import {
   Aside,
   Main,
@@ -32,7 +32,7 @@ import {
   Drawer,
   Table,
   TableColumn,
-} from 'element-ui';
+} from "element-ui";
 Vue.use(Carousel);
 Vue.use(CarouselItem);
 Vue.use(Button);

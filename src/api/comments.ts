@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export interface IComment {
   repliedTo: {
@@ -35,8 +35,8 @@ export const newComment = (comment: IComment, token: string) => {
         },
         {
           headers: {
-            authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json',
+            authorization: "Bearer " + token,
+            "Content-Type": "application/json",
           },
         }
       )

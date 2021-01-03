@@ -1,10 +1,10 @@
-import VueRouter, { Route } from 'vue-router'
-import { ElMessage } from 'element-ui/types/message'
+import VueRouter, { Route } from "vue-router";
+import { ElMessage } from "element-ui/types/message";
 
-declare module 'vue/types/vue' {
+declare module "vue/types/vue" {
   interface Vue {
-    $router: VueRouter
-    $route: Route
-    $message: ElMessage
+    $router: VueRouter;
+    $route: Route;
+    $message: ElMessage;
   }
 }

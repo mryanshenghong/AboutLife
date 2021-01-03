@@ -45,7 +45,7 @@ export default class Media extends Vue {
   public mediaData = [];
   public resUrl: string = process.env.NODE_ENV === "development" ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
   public async getMediaData() {
-    const resp: Error | any = await getCloudFilesDetail().catch((err) => <Error>err);
+    const resp: Error | any = await getCloudFilesDetail().catch((err) => err as Error);
     if (resp instanceof Error) {
       this.$message({
         type: "error",
@@ -61,7 +61,7 @@ export default class Media extends Vue {
   }
 
   public async deleteFile(fileName: string) {
-    const resp: Error | any = await deleteFile(fileName).catch((err) => <Error>err);
+    const resp: Error | any = await deleteFile(fileName).catch((err) => err as Error);
     if (!(resp instanceof Error) && resp.code === 200) {
       await this.getMediaData();
     } else {

@@ -1,7 +1,7 @@
 <template>
   <div v-loading="!hasContent" class="content-wrapper">
     <div class="blog-title">
-      <h1>{{title}}</h1>
+      <h1>{{ title }}</h1>
     </div>
     <div class="content-header">
       <div>
@@ -15,7 +15,8 @@
           v-for="(tag, index) in tags"
           :key="index"
           class="tag"
-        >{{ tag }}</el-tag>
+          >{{ tag }}</el-tag
+        >
         <div class="edit-tag-box" v-if="canEdit">
           <el-input
             class="new-tag-input"
@@ -30,7 +31,7 @@
         </div>
       </div>
       <div v-if="userInfo.role === 0">
-        <el-button @click="toggleEdit" class="edit-btn" size="mini">{{ $t('message.content.edit') }}</el-button>
+        <el-button @click="toggleEdit" class="edit-btn" size="mini">{{ $t("message.content.edit") }}</el-button>
       </div>
     </div>
     <Markdown
@@ -49,39 +50,39 @@
 </template>
 
 <script>
-const markdown = (resolve) => require.ensure([], async () => await resolve(require('../../components/MarkDown.vue')), 'MarkDown')
+const markdown = (resolve) => require.ensure([], async () => await resolve(require("../../components/MarkDown.vue")), "MarkDown");
 // import Markdown from '@/components/MarkDown'
-const Comment = (resolve) => require.ensure([], async () => await resolve(require('../../components/comments/Comments.vue')), 'Comment')
-import { getBlog, saveBlog } from '@/api/blog'
-import { mapGetters } from 'vuex'
+const Comment = (resolve) => require.ensure([], async () => await resolve(require("../../components/comments/Comments.vue")), "Comment");
+import { getBlog, saveBlog } from "@/api/blog";
+import { mapGetters } from "vuex";
 export default {
-  name: 'blogContent',
-  data () {
+  name: "blogContent",
+  data() {
     return {
-      title: '',
-      content: '',
+      title: "",
+      content: "",
       tags: [],
-      allInfo: '',
+      allInfo: "",
       hasContent: false,
       loading: false,
       canEdit: false,
       showToolBars: false,
       isSubField: false,
       inputVisible: false,
-      inputValue: '',
-    }
+      inputValue: "",
+    };
   },
   components: {
     Markdown: markdown,
     Comment,
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(["userInfo"]),
   },
   methods: {
-    saveContent (content) {
-      const { id } = this.$route.params
-      const { token } = localStorage
+    saveContent(content) {
+      const { id } = this.$route.params;
+      const { token } = localStorage;
       if (id && token) {
         saveBlog(
           {
@@ -93,78 +94,78 @@ export default {
           .then((res) => {
             // 写逻辑 判断成功保存没有
             if (res.data.code === 200) {
-              this.getBlog()
+              this.getBlog();
               this.$message({
-                message: 'save successfully!',
-                type: 'success',
-              })
+                message: "save successfully!",
+                type: "success",
+              });
             } else {
               this.$message({
-                message: 'save failed',
-                type: 'error',
-              })
+                message: "save failed",
+                type: "error",
+              });
             }
           })
           .catch((err) => {
             this.$message({
-              message: 'Can not save blog',
-              type: 'error',
-            })
-          })
+              message: "Can not save blog",
+              type: "error",
+            });
+          });
       } else {
         this.$message({
-          message: 'No blog id',
-          type: 'error',
-        })
+          message: "No blog id",
+          type: "error",
+        });
       }
     },
-    toggleEdit () {
-      this.canEdit = !this.canEdit
-      this.showToolBars = !this.showToolBars
-      this.isSubField = !this.isSubField
+    toggleEdit() {
+      this.canEdit = !this.canEdit;
+      this.showToolBars = !this.showToolBars;
+      this.isSubField = !this.isSubField;
     },
-    getBlog () {
-      const id = this.$route.params.id
-      this.loading = true
+    getBlog() {
+      const id = this.$route.params.id;
+      this.loading = true;
       getBlog(id)
         .then((res) => {
-          this.title = res.data.result.title
-          this.content = res.data.result.content
-          this.tags = res.data.result.tags
-          this.allInfo = res.data.result
-          this.hasContent = true
-          this.loading = false
+          this.title = res.data.result.title;
+          this.content = res.data.result.content;
+          this.tags = res.data.result.tags;
+          this.allInfo = res.data.result;
+          this.hasContent = true;
+          this.loading = false;
         })
         .catch((err) => {
-          this.$router.push('/blog')
-          throw new Error('Get blog failed' + err)
-        })
+          this.$router.push("/blog");
+          throw new Error("Get blog failed" + err);
+        });
     },
-    handleClose (tag) {
-      this.tags.splice(this.tags.indexOf(tag), 1)
+    handleClose(tag) {
+      this.tags.splice(this.tags.indexOf(tag), 1);
     },
-    showInput () {
-      this.inputVisible = true
+    showInput() {
+      this.inputVisible = true;
       this.$nextTick((_) => {
-        this.$refs.saveTagInput.$refs.input.focus()
-      })
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
     },
-    handleInputConfirm () {
-      const inputValue = this.inputValue
+    handleInputConfirm() {
+      const inputValue = this.inputValue;
       if (inputValue) {
-        this.tags.push(inputValue)
+        this.tags.push(inputValue);
       }
-      this.inputVisible = false
-      this.inputValue = ''
+      this.inputVisible = false;
+      this.inputValue = "";
     },
   },
-  mounted () {
-    this.getBlog()
+  mounted() {
+    this.getBlog();
   },
   // deactivated() {
   //   this.content = ''
   // }
-}
+};
 </script>
 <style lang="scss" scoped>
 .content-wrapper {
@@ -172,7 +173,7 @@ export default {
   margin-top: 20px;
   .content-header {
     margin-top: 20px;
-    font-family: 'main-font';
+    font-family: "main-font";
     display: flex;
     justify-content: space-between;
     .edit-tag-box {

@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import { mavonEditor } from 'mavon-editor'
-import { uploadImg } from '../api/file'
+import { mavonEditor } from "mavon-editor";
+import { uploadImg } from "../api/file";
 export default {
   props: {
     content: {
@@ -26,7 +26,7 @@ export default {
     },
     defaultOpen: {
       type: String,
-      default: 'preview',
+      default: "preview",
     },
     canEdit: {
       type: Boolean,
@@ -46,24 +46,24 @@ export default {
   },
 
   methods: {
-    onSaveContent (value) {
-      this.$emit('saveContent', value)
+    onSaveContent(value) {
+      this.$emit("saveContent", value);
     },
-    onImgAdd (fileName, file) {
-      const { token } = localStorage
+    onImgAdd(fileName, file) {
+      const { token } = localStorage;
       uploadImg(file, token)
         .then((res) => {
-          this.$refs.md.$img2Url(fileName, `${process.env.VUE_APP_BASE}/static/${res.imgUrl}`)
+          this.$refs.md.$img2Url(fileName, `${process.env.VUE_APP_BASE}/static/${res.imgUrl}`);
         })
         .catch((err) => {
-          this.$message({ message: `can not upload image ${err}`, type: 'error' })
-        })
+          this.$message({ message: `can not upload image ${err}`, type: "error" });
+        });
     },
   },
-}
+};
 </script>
 <style lang="scss" scoped>
-@import '~mavon-editor/dist/css/index.css';
+@import "~mavon-editor/dist/css/index.css";
 .markdown {
   margin-top: 20px;
 }

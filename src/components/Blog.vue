@@ -21,8 +21,22 @@
         <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
       </div>
       <div class="media_box">
-        <videoPlayer v-if="mediaType === 'video'" class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions" />
-        <audio :src="`${resUrl}/${mediaSources[0]}`" v-if="mediaType === 'music'" controls controlsList="nodownload"></audio>
+        <videoPlayer
+          ref="videoPlayer"
+          v-if="mediaType === 'video'"
+          class="video-player vjs-custom-skin"
+          :playsinline="true"
+          @play="onVideoPlay"
+          :options="playerOptions"
+        />
+        <audio
+          @play="onMusicPlay"
+          ref="musicPlayer"
+          :src="`${resUrl}/${mediaSources[0]}`"
+          v-if="mediaType === 'music'"
+          controls
+          controlsList="nodownload"
+        ></audio>
         <div v-if="mediaType === 'image'" class="img-container">
           <el-image :src="`${resUrl}/${mediaSources[0]}`" :preview-src-list="[`${resUrl}/${mediaSources[0]}`]"></el-image>
         </div>
@@ -38,6 +52,8 @@ import Component from "vue-class-component";
 import { videoPlayer } from "vue-video-player";
 import "video.js/dist/video-js.css";
 
+import { Mutation, State, Getter } from "vuex-class";
+
 @Component({
   name: "CardView",
   props: {
@@ -51,6 +67,8 @@ import "video.js/dist/video-js.css";
   components: { videoPlayer },
 })
 export default class CardView extends Vue {
+  @Getter("currentMediaRef") public currentMediaRef!: any;
+  @Mutation("SET_CURRENT_MEDIA_REF") public setMediaRef!: (mediaRef: any) => void;
   public playerOptions: any = {
     playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
     autoplay: false, // 如果为true,浏览器准备好时开始回放。
@@ -75,6 +93,8 @@ export default class CardView extends Vue {
 
   public isDrawerShow: boolean = false;
 
+  public currentMedia: any = null;
+
   public select(id: string): void {
     this.$router.push(`/content/${id}`);
   }
@@ -85,6 +105,36 @@ export default class CardView extends Vue {
 
   public toggleDrawer(isDrawerShow: boolean) {
     this.isDrawerShow = isDrawerShow;
+  }
+
+  public onMusicPlay(player: any) {
+    if (this.currentMediaRef) {
+      if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
+        this.currentMediaRef.ele.pause();
+      }
+      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== this.$refs.videoPlayer) {
+        this.currentMediaRef.ele.pause();
+      }
+    }
+    this.setMediaRef({
+      type: "music",
+      ele: this.$refs.musicPlayer,
+    });
+  }
+
+  public onVideoPlay() {
+    if (this.currentMediaRef) {
+      if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
+        this.currentMediaRef.ele.pause();
+      }
+      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== this.$refs.videoPlayer) {
+        this.currentMediaRef.ele.pause();
+      }
+    }
+    this.setMediaRef({
+      type: "video",
+      ele: (this.$refs["videoPlayer"] as any).$refs.video,
+    });
   }
 
   public mounted() {
