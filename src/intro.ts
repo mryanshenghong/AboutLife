@@ -8,8 +8,8 @@ export const intro = {
   music: {
     title: "Music",
     intro: ["练练指弹...", "梦想有一把泰勒吉他...", "现在实现了一半那就是有了一把吉他...", "有了泰勒也是个菜逼..."],
-    media_type: "video",
-    media_url: require("./assets/intro_guitar.mp4"),
+    media_type: "img",
+    media_url: require("./assets/intro_guitar.jpg"),
   },
   dota: {
     title: "Dota",

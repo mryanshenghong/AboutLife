@@ -33,7 +33,7 @@ const IntroProps = Vue.extend({
     },
   },
 });
-export default class Introduction extends IntroProps { }
+export default class Introduction extends IntroProps {}
 </script>
 <style lang="scss" scoped>
 #intro-wrapper {

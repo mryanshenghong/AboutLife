@@ -133,7 +133,7 @@ export default class CardView extends Vue {
     }
     this.setMediaRef({
       type: "video",
-      ele: (this.$refs["videoPlayer"] as any).$refs.video,
+      ele: (this.$refs.videoPlayer as any).$refs.video,
     });
   }
 
