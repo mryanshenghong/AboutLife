@@ -112,7 +112,7 @@ export default class CardView extends Vue {
       if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
         this.currentMediaRef.ele.pause();
       }
-      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== this.$refs.videoPlayer) {
+      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== (this.$refs.videoPlayer as any).$refs.video) {
         this.currentMediaRef.ele.pause();
       }
     }
@@ -127,7 +127,7 @@ export default class CardView extends Vue {
       if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
         this.currentMediaRef.ele.pause();
       }
-      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== this.$refs.videoPlayer) {
+      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== (this.$refs.videoPlayer as any).$refs.video) {
         this.currentMediaRef.ele.pause();
       }
     }
