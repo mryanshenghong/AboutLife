@@ -109,12 +109,7 @@ export default class CardView extends Vue {
 
   public onMusicPlay(player: any) {
     if (this.currentMediaRef) {
-      if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
-        this.currentMediaRef.ele.pause();
-      }
-      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== (this.$refs.videoPlayer as any).$refs.video) {
-        this.currentMediaRef.ele.pause();
-      }
+      this.currentMediaRef.ele.pause();
     }
     this.setMediaRef({
       type: "music",
@@ -124,12 +119,7 @@ export default class CardView extends Vue {
 
   public onVideoPlay() {
     if (this.currentMediaRef) {
-      if (this.currentMediaRef.type === "music" && this.currentMediaRef.ele !== this.$refs.musicPlayer) {
-        this.currentMediaRef.ele.pause();
-      }
-      if (this.currentMediaRef.type === "video" && this.currentMediaRef.ele !== (this.$refs.videoPlayer as any).$refs.video) {
-        this.currentMediaRef.ele.pause();
-      }
+      this.currentMediaRef.ele.pause();
     }
     this.setMediaRef({
       type: "video",
