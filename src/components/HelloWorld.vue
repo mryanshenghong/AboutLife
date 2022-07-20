@@ -52,14 +52,6 @@
       </li>
       <li>
         <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-e2e-nightwatch"
-          target="_blank"
-          rel="noopener"
-          >e2e-nightwatch</a
-        >
-      </li>
-      <li>
-        <a
           href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript"
           target="_blank"
           rel="noopener"
@@ -127,16 +119,14 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import Vue from "vue";
 
-@Options({
+export default Vue.extend({
+  name: "HelloWorld",
   props: {
     msg: String,
   },
-})
-export default class HelloWorld extends Vue {
-  msg!: string;
-}
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
