@@ -1,60 +1,26 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "@/views/home/Home.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
-Vue.use(VueRouter);
-const Content = () => import("@/views/content/Content.vue");
-const Staging = () => import("@/views/staging/Staging.vue");
-const Active = () => import("@/views/active/Active.vue");
-const NotFound = () => import("@/views/notFound/NotFound.vue");
-const Media = () => import("@/views/media/Media.vue");
-// 如果Content 是按需引入的话 会出现网页元素闪动 上线了以后看看到底影响大不大
-// import Content from '@/views/content/Content.vue'
-const routes = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "home",
+    component: HomeView,
   },
   {
-    path: "/content/:id",
-    name: "Content",
-    component: Content,
-  },
-  {
-    path: "/staging",
-    name: "Staging",
-    component: Staging,
-    props: true,
-  },
-  {
-    path: "/active/:id",
-    name: "Active",
-    component: Active,
-  },
-  {
-    path: "/media",
-    name: "Media",
-    component: Media,
-  },
-  {
-    path: "/404",
-    alias: "*",
-    name: "NotFound",
-    component: NotFound,
+    path: "/about",
+    name: "about",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes,
-});
-
-router.beforeEach((to, from, next) => {
-  if (to.name === "Media" && localStorage.role !== "0") {
-    next({ name: "NotFound" });
-  } else { next(); }
 });
 
 export default router;
