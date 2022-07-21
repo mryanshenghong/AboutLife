@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1568233832699'); /* IE9 */
+  src: url('iconfont.eot?t=1568233832699#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAPAAAsAAAAAB8QAAANxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqDHIJpATYCJAMMCwgABCAFhG0HRxvABsgOJaHAwADgAVlCPHztx/7c3X2CaVOLVLFqlhgSiUYonqGTaJT2S/6hWaj2823qI1AjdaEzqbl/EiKQEup+NM06MzmJyW07VXyey+ndVeLzW5bjGrTGwqNegHFAAY21KToLuEAC8oaxC1riYQKdxm2B7cUkZYGuwhwViDtGUg66Gb3SUBpaoa5YWCDeQUubBkQPgLfg+/GbR+iCpMpgTjy6ja6CsB9T3zV4+8qDIo8A6XRWsGVkrAKFuK60X8Gj+Cpcp6ohmnNrRUhThVb+E0g0Xb3RP14iajCLu8EiTCR+TDkigh+aRRLIoPYYyVcAn4gzzEAR/QRpmd5kOHjBmpi8uNZo92U7ralLUhIXZ5C7DnXsH9q77QAisY5D5OAe8xGA0o7wcdl36El20+PnWU985kfFQ+NYzo51t65Zze0z37fbYgg7eRH2nhUP7baanrZ6+jSn4/jmsQWnjt13/W8PRZ+/vxMOasz3HnV4/Dhr9CDAQ++trJ49y3360ms1tNulkZ1ktqZdYxFcZ/y3jc1hV2Oa954rvu9E778G2fOrJhyt9pQEGl2vfFu3hesav+g4SELlsIvEooi4FlO7v/e5huH6B/Vg/9Xt01ni/6JhaRgG1TwuHjU33t219u9EMtFYJGpf25Ibx61EWvXbEqHkUXUaZsTFxbYQeLt0cDJxzoZq1Zs1wMP6XHd/x6aIa39EcMMcmh9w4P/lfCWH/a3fmFq/NFpqFPSvFRMA3+cbpYH3/+UC3ZygvRdH8G+kHeuKJjcNuSgSR2I4suNUjoROTeuPlMOgt8N1I52LCa2RBEljDFlrliycVVS6rKHW2kSnFbHLuwzh4aLoAct6AEK/w0h6fUPW7yFZOG9QGfUHtf7A0ekizDbsMh8MGcmjcgFVURUNFFPJsbRtEsiwNANJahTlfFoecHMQr2ZClLuLWz4Vi1jETzFFXSvxEASaonlOScWA45BCwVEqnpOhSsFFKgiqAFdXuupFLpWcEki7eEg5AVKFUqEBhVGJw6K95gKy8PkMiEQNhXJ8A60qngPhqTHtU9y5cOtAxmrYTrRbeUatloQHgYBGofE4SpQYYEUUVpxDUVX3k0EqCVxIB0RVAriiRnRXjcvyOuX7bYFO5sE5RBiOEdB7z1Uy5QoFw8pRFcPqp2skjCCtqQAAAAAA') format('woff2'),
+  url('iconfont.woff?t=1568233832699') format('woff'),
+  url('iconfont.ttf?t=1568233832699') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1568233832699#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 1.5rem;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconsociallinkedin:before {
+  content: "\e89a";
+}
+
+.iconsocialgithub:before {
+  content: "\e8a0";
+}
+
