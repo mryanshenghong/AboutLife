@@ -3,7 +3,7 @@ import axios from "axios";
 export const getBlogsBasicInfo = (cat: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/findBlogsByCate`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/findBlogsByCate`, {
         params: {
           isTech: false,
           cat,
@@ -21,7 +21,7 @@ export const getBlogsBasicInfo = (cat: string) => {
 export const getBlogCats = (token: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/findBlogCats`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/findBlogCats`, {
         headers: {
           authorization: "Bearer " + token,
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const getBlogCats = (token: string) => {
 export const getBlog = (id: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/getBlog`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/getBlog`, {
         params: {
           id,
         },
@@ -59,7 +59,7 @@ export const getBlog = (id: string) => {
 export const saveBlog = (blogInfo: any, token: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${process.env.VUE_APP_URL}/myWeb/updateBlog`, blogInfo, {
+      .post(`${import.meta.env.VITE_APP_URL}/myWeb/updateBlog`, blogInfo, {
         headers: {
           authorization: "Bearer " + token,
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export const saveBlog = (blogInfo: any, token: string) => {
 export const createBlog = (newBlog: any, token: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${process.env.VUE_APP_URL}/myWeb/newBlog`, newBlog, {
+      .post(`${import.meta.env.VITE_APP_URL}/myWeb/newBlog`, newBlog, {
         headers: {
           authorization: "Bearer " + token,
           "Content-Type": "application/json",

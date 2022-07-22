@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, getCurrentInstance, reactive, onMounted } from "vue";
+import { defineAsyncComponent, getCurrentInstance, reactive, onMounted, computed } from "vue";
 import mainHeader from "@/components/header.vue";
 
 import { verifyToken } from "./api/login";
@@ -16,6 +16,7 @@ const router = useRouter();
 
 // Async import components on demand
 const Login = defineAsyncComponent(() => import("@/components/LoginModal.vue"));
+const WriteBlog = defineAsyncComponent(() => import("@/components/createBlog.vue"));
 
 // config element-plus i18n
 const { locale } = useI18n();
@@ -45,9 +46,14 @@ onMounted(async () => {
   }
 });
 
+// Computed state
+const isLogin = computed(() => store.state.isLogin);
+
 // Methods
 const showLoginModal = (show: boolean) => (data.isLoginModalShow = show);
+
 const showCreateModal = (show: boolean) => (data.isCreateModalShow = show);
+
 const onCreateBlog = async (newBlog: any) => {
   const $message = useMessage(getCurrentInstance());
   showCreateModal(false);
@@ -81,12 +87,7 @@ const onCreateBlog = async (newBlog: any) => {
         <mainHeader @onShowLoginModal="showLoginModal" @onShowCreateModal="showCreateModal"></mainHeader>
         <router-view />
         <Login :show="data.isLoginModalShow" @closeModal="showLoginModal" />
-        <!-- <CreateModal
-        v-if="store.state.isLogin"
-        :showCreateModal="isCreateModalShow"
-        @onCloseCreateModal="showCreateModal"
-        @onCreateBlog="onCreateBlog"
-      ></CreateModal> -->
+        <WriteBlog v-if="isLogin" :showCreateModal="data.isCreateModalShow" @onCloseCreateModal="showCreateModal" @onCreateBlog="onCreateBlog"></WriteBlog>
       </el-main>
     </el-container>
   </el-config-provider>

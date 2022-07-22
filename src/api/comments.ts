@@ -13,7 +13,7 @@ export interface IComment {
 export const queryComments = (blogId: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/comments`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/comments`, {
         params: { blogId },
       })
       .then((res) => {
@@ -29,7 +29,7 @@ export const newComment = (comment: IComment, token: string) => {
   return new Promise((resolve, reject) => {
     axios
       .post(
-        `${process.env.VUE_APP_URL}/myWeb/comment`,
+        `${import.meta.env.VITE_APP_URL}/myWeb/comment`,
         {
           data: { ...comment },
         },

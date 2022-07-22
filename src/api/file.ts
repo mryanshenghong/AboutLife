@@ -5,7 +5,7 @@ export const uploadImg = (imgFile: any, token: string) => {
     const fordata = new FormData();
     fordata.append("data", imgFile);
     axios
-      .post(`${process.env.VUE_APP_URL}/myWeb/uploadImg`, fordata, {
+      .post(`${import.meta.env.VITE_APP_URL}/myWeb/uploadImg`, fordata, {
         headers: { authorization: "Bearer " + token, "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -24,7 +24,7 @@ export const uploadFiles = (files: any, token: string) => {
       formdata.append("data", file);
     });
     axios
-      .post(`${process.env.VUE_APP_URL}/myWeb/uploadFiles`, formdata, {
+      .post(`${import.meta.env.VITE_APP_URL}/myWeb/uploadFiles`, formdata, {
         headers: { authorization: "Bearer " + token, "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -39,7 +39,7 @@ export const uploadFiles = (files: any, token: string) => {
 export const getCloudFiles = (token: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/files`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/files`, {
         headers: { authorization: "Bearer " + token, "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -54,7 +54,7 @@ export const getCloudFiles = (token: string) => {
 export const getCloudFilesDetail = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${process.env.VUE_APP_URL}/myWeb/filesDetail`, {
+      .get(`${import.meta.env.VITE_APP_URL}/myWeb/filesDetail`, {
         headers: { authorization: "Bearer " + localStorage.token, "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
@@ -69,7 +69,7 @@ export const getCloudFilesDetail = () => {
 export const deleteFile = (fileName: string) => {
   return new Promise((resolve, reject) => {
     axios
-      .delete(`${process.env.VUE_APP_URL}/myWeb/file`, {
+      .delete(`${import.meta.env.VITE_APP_URL}/myWeb/file`, {
         params: { fileName },
         headers: { authorization: "Bearer " + localStorage.token, "Content-Type": "multipart/form-data" },
       })
