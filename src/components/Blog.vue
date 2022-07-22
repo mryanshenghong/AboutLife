@@ -18,17 +18,9 @@
     <div class="media_multi" v-else>
       <div class="des-box">
         <h3 class="title">{{ title }}</h3>
-        <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
+        <el-tag class="tag" size="small" type="info">{{ formatTime(time) }}</el-tag>
       </div>
       <div class="media_box">
-        <!-- <videoPlayer
-          ref="videoPlayerRef"
-          v-if="mediaType === 'video'"
-          class="video-player vjs-custom-skin"
-          :playsinline="true"
-          @play="onVideoPlay"
-          :options="playerOptions"
-        /> -->
         <video
           width="400"
           height="300"
@@ -38,6 +30,7 @@
           :src="`${resUrl}/${mediaSources?.[0]}`"
           @play="onVideoPlay"
           controls="true"
+          controlslist="nodownload"
         ></video>
         <audio
           @play="onMusicPlay"
@@ -163,7 +156,7 @@ const onVideoPlay = () => {
     }
   }
 
-  .img-container .el-image {
+  .img-container ::v-deep(.el-image) {
     max-width: 200px;
     height: auto;
   }

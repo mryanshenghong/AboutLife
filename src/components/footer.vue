@@ -8,10 +8,6 @@
   </div>
 </template>
 
-<script>
-export default {};
-</script>
-
 <style lang="scss" scoped>
 @import "~@/styles/webfont/cerepf/mainFont.css";
 @import "~@/styles/consts.scss";

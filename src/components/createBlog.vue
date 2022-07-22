@@ -54,7 +54,15 @@
         <el-select style="margin-top: 10px" v-if="state.cloudFiles.length" @change="onCloudFileSelect" filterable placeholder="选择Cloud files">
           <el-option v-for="(file, index) in state.cloudFiles" :key="index" :label="file" :value="file" />
         </el-select>
-        <input id="fileInput" type="file" @change="fileChange" v-show="false" :multiple="true" accept="image/jpg, image/jpeg, image/png, video/mp4, audio/*" />
+        <input
+          ref="fileInputRef"
+          id="fileInput"
+          type="file"
+          @change="fileChange"
+          v-show="false"
+          :multiple="true"
+          accept="image/jpg, image/jpeg, image/png, video/mp4, audio/*"
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -82,7 +90,19 @@ const formRules = {
   cat: [{ required: true, message: "请选择种类", trigger: "change" }],
   media_type: [{ required: true, message: "请选择媒体类型", trigger: "change" }],
 };
-const state = reactive({
+const state = reactive<{
+  form: {
+    title: string;
+    tag: string;
+    cat: string;
+    media_type: string;
+    mediaSources: any[];
+  };
+  tags: string[];
+  cats: string[];
+  cloudFiles: string[];
+  onUpload: boolean;
+}>({
   form: {
     title: "",
     tag: "",
@@ -98,11 +118,12 @@ const state = reactive({
 
 // Refs
 const blogFromRef = ref();
-
+const fileInputRef = ref();
 // Liefcycle
 onMounted(async () => {
   await nextTick();
-  const res = await getBlogCats(localStorage.token);
+  //   typedef
+  const res: any = await getBlogCats(localStorage.token);
   if (res) state.cats = res.data.result.cats;
   else state.cats = [];
 });
@@ -142,7 +163,7 @@ const fileChange = async (e: any) => {
   const $message = useMessage(getCurrentInstance());
   state.onUpload = true;
   try {
-    const res = await uploadFiles(e.target.files, localStorage.token);
+    const res: any = await uploadFiles(e.target.files, localStorage.token);
     state.form.mediaSources.push(...res.fileUrls);
     state.onUpload = false;
   } catch (err) {
@@ -150,9 +171,9 @@ const fileChange = async (e: any) => {
     $message?.error("Cannot upload files" + err);
   }
 };
-const openFileInput = () => window.document.getElementById("fileInput").click();
+const openFileInput = () => fileInputRef.value.click();
 const openCloudFiles = async () => {
-  const resp = await getCloudFiles(localStorage.token);
+  const resp: any = await getCloudFiles(localStorage.token);
   if (resp && resp?.files.length) {
     state.cloudFiles = resp.files;
   }

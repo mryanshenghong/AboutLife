@@ -1,36 +1,27 @@
 <template>
   <div class="comment-item">
     <div class="comment-item-header">
-      <el-avatar
-        shape="square"
-        size="small"
-        class="comment-item-avatar"
-      >{{comment.commentedBy.name.charAt(0).toUpperCase()}}</el-avatar>
+      <el-avatar shape="square" size="small" class="comment-item-avatar">{{ comment.commentedBy.name.charAt(0).toUpperCase() }}</el-avatar>
       <div class="whoAndWhen">
-        <span class="who">{{comment.commentedBy.name}}</span>
-        <span class="when">{{format(comment.commentedDate)}}</span>
+        <span class="who">{{ comment.commentedBy.name }}</span>
+        <span class="when">{{ formatTime(comment.commentedDate) }}</span>
       </div>
     </div>
     <div class="comment-content">
-      <p class="content">{{comment.content}}</p>
+      <p class="content">{{ comment.content }}</p>
       <div>
         <el-button type="text" class="link-btn" @click="showNestedCommentBox">评论</el-button>
         <div class="comment-tools">
           <el-input
             v-if="visibleNestedCommentBox === idx"
-            size="medium"
+            size="default"
             type="textarea"
             autosize
             class="input"
             placeholder="comment"
-            v-model="inputComment"
+            v-model="state.inputComment"
           />
-          <el-button
-            @click="writeComment"
-            v-if="visibleNestedCommentBox === idx"
-            size="small"
-            style="margin:0 10px; max-height: 33px"
-          >Comment</el-button>
+          <el-button @click="writeComment" v-if="visibleNestedCommentBox === idx" size="small" style="margin: 0 10px; max-height: 33px">Comment</el-button>
         </div>
       </div>
       <slot></slot>
@@ -38,46 +29,45 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+<script lang="ts" setup>
+import { reactive } from "vue";
 import { format } from "@/utils/formatTime";
 
 import { newComment, IComment } from "@/api/comments";
 
-@Component({
-  name: "CommentItem",
-  props: {
-    idx: String,
-    comment: Object,
-    visibleNestedCommentBox: String,
-    isNested: Boolean,
+// State, props
+const props = defineProps<{
+  idx: string;
+  //   typedef
+  comment: any;
+  visibleNestedCommentBox: string | null;
+  isNested: boolean;
+  showNestedCommentBox: Function;
+  getComments: Function;
+}>();
 
-    showNestedCommentBox: Function,
-    getComments: Function,
-  }
-})
-export default class CommentItem extends Vue {
-  public inputComment: string = "";
+const state = reactive({
+  inputComment: "",
+});
 
-  public async writeComment() {
-    const comment = this.$props.comment;
-    const nComment: IComment = {
-      blogId: comment.blogId,
-      parentId: this.$props.isNested ? comment.parentId : comment.id,
-      repliedTo: comment.commentedBy,
-      content: this.inputComment
-    };
-    const token = localStorage.getItem("token");
-    await newComment(nComment, token!).then(async () => this.$props.getComments()).catch((err) => err);
-    this.inputComment = "";
-    this.$props.showNestedCommentBox();
-  }
+// Methods
+const writeComment = async () => {
+  const comment = props.comment;
+  const nComment: IComment = {
+    blogId: comment.blogId,
+    parentId: props.isNested ? comment.parentId : comment.id,
+    repliedTo: comment.commentedBy,
+    content: state.inputComment,
+  };
+  const token = localStorage.getItem("token");
+  await newComment(nComment, token!)
+    .then(async () => props.getComments())
+    .catch((err) => err);
+  state.inputComment = "";
+  props.showNestedCommentBox();
+};
 
-  private format(time: string) {
-    return format(time);
-  }
-}
+const formatTime = (time: string): string => format(time);
 </script>
 
 <style scoped lang="scss">
@@ -121,8 +111,8 @@ export default class CommentItem extends Vue {
         font-weight: 900;
       }
     }
-    & /deep/ .el-button--text {
-      color: '#909399';
+    & ::v-deep(.el-button--text) {
+      color: "#909399";
       padding: 0;
     }
     .comment-tools {
@@ -130,9 +120,9 @@ export default class CommentItem extends Vue {
       justify-content: space-between;
       .input {
         margin-left: 33px;
-        & /deep/ .el-textarea__inner {
+        & ::v-deep(.el-textarea__inner) {
           border-radius: 0px;
-          font-family: 'main-font' !important;
+          font-family: "main-font" !important;
           padding: 5px 5px;
           border-radius: 3px !important;
         }

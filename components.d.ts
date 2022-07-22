@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Aync: typeof import('./src/components/aync.vue')['default']
     Blog: typeof import('./src/components/Blog.vue')['default']
     CardView: typeof import('./src/components/CardView.vue')['default']
     CommentItem: typeof import('./src/components/comments/components/CommentItem.vue')['default']
@@ -36,7 +35,6 @@ declare module '@vue/runtime-core' {
     ElTag: typeof import('element-plus/es')['ElTag']
     Footer: typeof import('./src/components/footer.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LoginModal: typeof import('./src/components/LoginModal.vue')['default']
     MarkDown: typeof import('./src/components/MarkDown.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

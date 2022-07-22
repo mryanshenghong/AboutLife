@@ -1,6 +1,6 @@
 <template>
   <mavon-editor
-    ref="md"
+    ref="mdRef"
     :transition="true"
     :boxShadow="false"
     class="markdown"
@@ -15,51 +15,51 @@
   />
 </template>
 
-<script>
-import { mavonEditor } from "mavon-editor";
-import { uploadImg } from "../api/file";
-export default {
-  props: {
-    content: {
-      type: String,
-      default: undefined,
-    },
-    defaultOpen: {
-      type: String,
-      default: "preview",
-    },
-    canEdit: {
-      type: Boolean,
-      default: false,
-    },
-    showToolBars: {
-      type: Boolean,
-      default: false,
-    },
-    isSubField: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  components: {
-    mavonEditor,
-  },
+<script lang="ts" setup>
+import mavonEditor from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+import { uploadImg } from "@/api/file";
+import { useMessage } from "@/utils/element-plus";
+import { getCurrentInstance, ref } from "vue";
 
-  methods: {
-    onSaveContent(value) {
-      this.$emit("saveContent", value);
-    },
-    onImgAdd(fileName, file) {
-      const { token } = localStorage;
-      uploadImg(file, token)
-        .then((res) => {
-          this.$refs.md.$img2Url(fileName, `${process.env.VUE_APP_BASE}/static/${res.imgUrl}`);
-        })
-        .catch((err) => {
-          this.$message({ message: `can not upload image ${err}`, type: "error" });
-        });
-    },
+const emit = defineEmits<{ (e: "saveContent", value: any): void }>();
+// Props
+defineProps({
+  content: {
+    type: String,
+    default: undefined,
   },
+  defaultOpen: {
+    type: String,
+    default: "preview",
+  },
+  canEdit: {
+    type: Boolean,
+    default: false,
+  },
+  showToolBars: {
+    type: Boolean,
+    default: false,
+  },
+  isSubField: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const mdRef = ref();
+
+// Methods
+const onSaveContent = (value: any) => emit("saveContent", value);
+const onImgAdd = async (fileName: string, file: any) => {
+  const $message = useMessage(getCurrentInstance());
+  const { token } = localStorage;
+  try {
+    const res: any = await uploadImg(file, token);
+    mdRef.value.md.$img2Url(fileName, `${process.env.VUE_APP_BASE}/static/${res.imgUrl}`);
+  } catch (err) {
+    $message?.error(`can not upload image ${err}`);
+  }
 };
 </script>
 <style lang="scss" scoped>

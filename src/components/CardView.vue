@@ -1,24 +1,23 @@
 <template>
   <el-card class="box-card">
     <Blog :title="title" :time="time" :id="id" :cat="cat" :mediaType="mediaType" :mediaSources="mediaSources" />
-    <!-- <div v-if="mediaType !== 'blog'" class="comment_box">
-      <el-button type="text" size="small" @click="showComment">查看评论</el-button>
-    </div> -->
-    <!-- <div v-if="state.displayComments" class="comment-box">
+    <div v-if="mediaType !== 'blog'" class="comment_box">
+      <el-button link size="small" @click="showComment">查看评论</el-button>
+    </div>
+    <div v-if="state.displayComments" class="comment-box">
       <Comment :blogId="id" />
-    </div> -->
+    </div>
   </el-card>
 </template>
 
 <script lang="ts" setup>
 import { defineAsyncComponent, reactive } from "vue";
 import Blog from "../components/Blog.vue";
+import Comment from "./comments/Comments.vue";
 
-const Comment = () => defineAsyncComponent(() => import("./comments/Comments.vue"));
+// const Comment = () => defineAsyncComponent(() => import("./comments/Comments.vue"));
 
-const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/static`;
-
-defineProps<{
+const props = defineProps<{
   title: string;
   time: string;
   id: string;

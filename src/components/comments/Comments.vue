@@ -1,15 +1,15 @@
 <template>
   <div class="comment-container">
     <div class="comment-input-wrapper notPadding">
-      <el-input size="medium" type="textarea" autosize class="input" v-model="commentInput" placeholder="comment" />
+      <el-input size="small" type="textarea" autosize class="input" v-model="state.commentInput" placeholder="comment" />
       <el-button size="small" style="margin: 0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
     </div>
     <CommentItem
-      v-for="(comment, index) in comments"
+      v-for="(comment, index) in state.comments"
       :key="index.toString()"
       :idx="index.toString()"
       :comment="comment"
-      :visibleNestedCommentBox="visibleNestedCommentBox"
+      :visibleNestedCommentBox="state.visibleNestedCommentBox"
       :showNestedCommentBox="() => showNestedCommentBox(index.toString())"
       :isNested="false"
       :getComments="() => getComments()"
@@ -20,7 +20,7 @@
           :key="subindex + '-' + index"
           :idx="index + '-' + subindex"
           :comment="childComment"
-          :visibleNestedCommentBox="visibleNestedCommentBox"
+          :visibleNestedCommentBox="state.visibleNestedCommentBox"
           :showNestedCommentBox="() => showNestedCommentBox(`${index}-${subindex}`)"
           :isNested="true"
           :getComments="() => getComments()"
@@ -30,64 +30,70 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+<script lang="ts" setup>
+import { getCurrentInstance, onMounted, reactive } from "vue";
 import CommentItem from "./components/CommentItem.vue";
 
 import { queryComments, newComment, IComment } from "@/api/comments";
+import { useMessage } from "@/utils/element-plus";
 
-@Component({
-  name: "Comment",
-  props: {
-    blogId: {
-      type: String,
-    },
-  },
-  components: { CommentItem },
-})
-export default class Comment extends Vue {
-  public visibleNestedCommentBox: string | null = null;
-  public commentInput: string = "";
-  public comments: any[] = [];
-  public showNestedCommentBox(index: string): void {
-    if (index === this.visibleNestedCommentBox) {
-      this.visibleNestedCommentBox = null;
-      return;
-    }
-    this.visibleNestedCommentBox = index;
+const $message = useMessage(getCurrentInstance());
+
+// State, props
+const props = defineProps<{ blogId: string }>();
+const state = reactive<{
+  visibleNestedCommentBox: string | null;
+  commentInput: string;
+  comments: any[];
+}>({
+  visibleNestedCommentBox: null,
+  commentInput: "",
+  comments: [],
+});
+
+// Lifecycle
+onMounted(async () => {
+  await getComments();
+});
+
+// Methods
+const showNestedCommentBox = (index: string) => {
+  if (index === state.visibleNestedCommentBox) {
+    state.visibleNestedCommentBox = null;
+    return;
   }
+  state.visibleNestedCommentBox = index;
+};
 
-  public writeComment() {
-    const nComment: IComment = {
-      content: this.commentInput,
-      blogId: this.$props.blogId,
-      parentId: "",
-      repliedTo: null,
-    };
-    const token = localStorage.getItem("token");
-    newComment(nComment, token!)
-      .then(async (res) => await this.getComments())
-      .catch((err) => this.$message.error("can not comment"));
-    this.commentInput = "";
+const writeComment = async () => {
+  const nComment: IComment = {
+    content: state.commentInput,
+    blogId: props.blogId,
+    parentId: "",
+    repliedTo: null,
+  };
+  const token = localStorage.getItem("token");
+  try {
+    await newComment(nComment, token!);
+    await getComments();
+  } catch (err) {
+    $message?.error(`can not comment, ${err}`);
+  } finally {
+    state.commentInput = "";
   }
+};
 
-  public async mounted() {
-    await this.getComments();
+const getComments = async () => {
+  const res: any = await queryComments(props.blogId)
+    .then((data) => data)
+    .catch((err) => null);
+
+  if (res.code === 200) {
+    state.comments = res.result;
+  } else {
+    $message?.error("Can not get comments");
   }
-
-  private async getComments() {
-    const res: any = await queryComments(this.$props.blogId)
-      .then((data) => data)
-      .catch((err) => err);
-
-    if (res.code === 200) {
-      this.comments = res.result;
-    } else {
-      this.$message.error("Can not get comments");
-    }
-  }
-}
+};
 </script>
 <style lang="scss" scoped>
 .link-btn {
@@ -104,7 +110,7 @@ export default class Comment extends Vue {
     margin-bottom: 10px;
     .input {
       flex: 1;
-      & /deep/ .el-textarea__inner {
+      ::v-deep(.el-textarea__inner) {
         font-family: "main-font" !important;
         padding: 5px 5px;
         border-radius: 3px !important;
