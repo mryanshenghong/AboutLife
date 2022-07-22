@@ -21,124 +21,108 @@
         <el-tag class="tag" size="mini" type="info">{{ formatTime(time) }}</el-tag>
       </div>
       <div class="media_box">
-        <videoPlayer
-          ref="videoPlayer"
+        <!-- <videoPlayer
+          ref="videoPlayerRef"
           v-if="mediaType === 'video'"
           class="video-player vjs-custom-skin"
           :playsinline="true"
           @play="onVideoPlay"
           :options="playerOptions"
-        />
+        /> -->
+        <video
+          width="400"
+          height="300"
+          ref="videoPlayerRef"
+          v-if="mediaType === 'video'"
+          playinline
+          :src="`${resUrl}/${mediaSources?.[0]}`"
+          @play="onVideoPlay"
+          controls="true"
+        ></video>
         <audio
           @play="onMusicPlay"
-          ref="musicPlayer"
-          :src="`${resUrl}/${mediaSources[0]}`"
+          ref="musicPlayerRef"
+          :src="`${resUrl}/${mediaSources?.[0]}`"
           v-if="mediaType === 'music'"
           controls
           controlsList="nodownload"
         ></audio>
         <div v-if="mediaType === 'image'" class="img-container">
-          <el-image :src="`${resUrl}/${mediaSources[0]}`" :preview-src-list="[`${resUrl}/${mediaSources[0]}`]"></el-image>
+          <el-image :src="`${resUrl}/${mediaSources?.[0]}`" :preview-src-list="[`${resUrl}/${mediaSources?.[0]}`]"></el-image>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-import { format } from "../utils/formatTime";
-import Component from "vue-class-component";
-import { videoPlayer } from "vue-video-player";
-import "video.js/dist/video-js.css";
+<script lang="ts" setup>
+import { computed, nextTick, onMounted, ref, reactive } from "vue";
+import { format } from "@/utils/formatTime";
 
-import { Mutation, State, Getter } from "vuex-class";
+import { useStore } from "@/store";
+import { useRouter } from "vue-router";
 
-@Component({
-  name: "CardView",
-  props: {
-    title: String,
-    time: String,
-    id: String,
-    cat: String,
-    mediaType: String,
-    mediaSources: Array,
-  },
-  components: { videoPlayer },
-})
-export default class CardView extends Vue {
-  @Getter("currentMediaRef") public currentMediaRef!: any;
-  @Mutation("SET_CURRENT_MEDIA_REF") public setMediaRef!: (mediaRef: any) => void;
-  public playerOptions: any = {
-    playbackRates: [0.5, 1.0, 1.5, 2.0], // 可选的播放速度
-    autoplay: false, // 如果为true,浏览器准备好时开始回放。
-    muted: false, // 默认情况下将会消除任何音频。
-    loop: false, // 是否视频一结束就重新开始。
-    preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-    language: "zh-CN",
-    aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
-    fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-    sources: [],
-    poster: "", // 封面地址
-    notSupportedMessage: "此视频暂无法播放，请稍后再试", // 允许覆盖Video.js无法播放媒体源时显示的默认信息。
-    controlBar: {
-      timeDivider: true, // 当前时间和持续时间的分隔符
-      durationDisplay: true, // 显示持续时间
-      remainingTimeDisplay: false, // 是否显示剩余时间功能
-      fullscreenToggle: true, // 是否显示全屏按钮
-    },
-  };
+const store = useStore();
+const router = useRouter();
+const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}`;
 
-  public resUrl: string = process.env.NODE_ENV === "development" ? `${process.env.VUE_APP_RES_URL}` : `${process.env.VUE_APP_BASE}/static`;
+const playerOptions: any = {
+  control: true,
+};
 
-  public isDrawerShow: boolean = false;
+// Props
+const props = defineProps<{
+  title: string;
+  time: string;
+  id: string;
+  cat: string;
+  mediaType: string;
+  mediaSources: string[];
+}>();
 
-  public currentMedia: any = null;
+// Lifecycle
+// onMounted(async () => {
+//   await nextTick();
+//   playerOptions.sources = props.mediaSources.map((source: string) => {
+//     return {
+//       type: "video/mp4",
+//       src: `${resUrl}/` + source,
+//     };
+//   });
+// });
 
-  public select(id: string): void {
-    this.$router.push(`/content/${id}`);
-  }
+// Refs
+const musicPlayerRef = ref();
+const videoPlayerRef = ref();
 
-  public formatTime(time: string) {
-    return format(time);
-  }
+const state = reactive({
+  isDrawerShow: false,
+  currentMedia: null,
+});
 
-  public toggleDrawer(isDrawerShow: boolean) {
-    this.isDrawerShow = isDrawerShow;
-  }
+// Computed
+const currentMediaRef = computed(() => store.getters["currentMediaRef"]);
+const select = (id: string) => router.push(`/content/${id}`);
 
-  public onMusicPlay(player: any) {
-    if (this.currentMediaRef) {
-      this.currentMediaRef.ele.pause();
-    }
-    this.setMediaRef({
-      type: "music",
-      ele: this.$refs.musicPlayer,
-    });
-  }
+const formatTime = (time: string) => format(time);
 
-  public onVideoPlay() {
-    if (this.currentMediaRef) {
-      this.currentMediaRef.ele.pause();
-    }
-    this.setMediaRef({
-      type: "video",
-      ele: (this.$refs.videoPlayer as any).$refs.video,
-    });
-  }
+// const toggleDrawer = (isDrawerShow: boolean) => (state.isDrawerShow = isDrawerShow);
 
-  public mounted() {
-    this.$nextTick(() => {
-      const sources = this.$props.mediaSources;
-      this.playerOptions.sources = sources.map((source: string) => {
-        return {
-          type: "video/mp4",
-          src: `${this.resUrl}/` + source,
-        };
-      });
-    });
-  }
-}
+const onMusicPlay = (player: any) => {
+  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
+  store.commit("setMediaRef", {
+    type: "music",
+    ele: player,
+  });
+};
+
+const onVideoPlay = () => {
+  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
+  store.commit("setMediaRef", {
+    type: "video",
+    ele: videoPlayerRef,
+  });
+};
 </script>
 <style lang="scss" scoped>
 @import "@/styles/consts.scss";
@@ -179,7 +163,7 @@ export default class CardView extends Vue {
     }
   }
 
-  .img-container /deep/ .el-image {
+  .img-container .el-image {
     max-width: 200px;
     height: auto;
   }

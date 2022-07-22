@@ -142,7 +142,7 @@ const fileChange = async (e: any) => {
   const $message = useMessage(getCurrentInstance());
   state.onUpload = true;
   try {
-    const res = uploadFiles(e.target.files, localStorage.token);
+    const res = await uploadFiles(e.target.files, localStorage.token);
     state.form.mediaSources.push(...res.fileUrls);
     state.onUpload = false;
   } catch (err) {

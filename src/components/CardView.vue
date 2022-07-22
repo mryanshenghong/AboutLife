@@ -1,18 +1,17 @@
 <template>
   <el-card class="box-card">
     <Blog :title="title" :time="time" :id="id" :cat="cat" :mediaType="mediaType" :mediaSources="mediaSources" />
-    <div v-if="mediaType !== 'blog'" class="comment_box">
+    <!-- <div v-if="mediaType !== 'blog'" class="comment_box">
       <el-button type="text" size="small" @click="showComment">查看评论</el-button>
-    </div>
-    <div v-if="state.displayComments" class="comment-box">
+    </div> -->
+    <!-- <div v-if="state.displayComments" class="comment-box">
       <Comment :blogId="id" />
-    </div>
+    </div> -->
   </el-card>
 </template>
 
 <script lang="ts" setup>
 import { defineAsyncComponent, reactive } from "vue";
-import { format } from "../utils/formatTime";
 import Blog from "../components/Blog.vue";
 
 const Comment = () => defineAsyncComponent(() => import("./comments/Comments.vue"));
@@ -31,8 +30,6 @@ defineProps<{
 const state = reactive({
   displayComments: false,
 });
-
-const formatTime = (time: string) => format(time);
 
 const showComment = () => (state.displayComments = !state.displayComments);
 </script>

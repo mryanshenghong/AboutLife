@@ -18,16 +18,13 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import vuescroll from "vuescroll";
 import CardView from "@/components/CardView.vue";
 import { useStore } from "@/store";
 
 const store = useStore();
 const intro = computed(() => store.getters["home/getIntroduction"]);
-
-// Refs
-const vsRef = ref();
 
 const scrollOptions: object = {
   vuescroll: {
