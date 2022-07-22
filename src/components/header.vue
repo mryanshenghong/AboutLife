@@ -7,26 +7,35 @@
     <div class="header-right">
       <el-button class="login-btn" @click="onCommandChange('login')" v-if="!isLogin">Login</el-button>
       <el-dropdown v-if="isLogin" szie="mini" @command="onCommandChange" trigger="click">
-        <el-avatar size="medium">{{ user.user_name.charAt(0).toUpperCase() }}</el-avatar>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
-          <el-dropdown-item v-if="isLogin && user.role === 0" command="write_blog">{{ this.$t("message.login.write_blog") }}</el-dropdown-item>
-          <el-dropdown-item v-if="isLogin && user.role === 0" command="media_sys">{{ this.$t("message.login.media_sys") }}</el-dropdown-item>
-          <el-dropdown-item v-if="isLogin" command="logout">logout</el-dropdown-item>
-        </el-dropdown-menu>
+        <el-avatar size="default">{{ user.user_name.charAt(0).toUpperCase() }}</el-avatar>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
+            <el-dropdown-item v-if="isLogin && user.role === 0" command="write_blog">{{ $t("message.login.write_blog") }}</el-dropdown-item>
+            <el-dropdown-item v-if="isLogin && user.role === 0" command="media_sys">{{ $t("message.login.media_sys") }}</el-dropdown-item>
+            <el-dropdown-item v-if="isLogin" command="logout">logout</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
       </el-dropdown>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { getCurrentInstance, computed } from "vue";
 import { logout as userLogout } from "@/api/login";
 import { useRouter } from "vue-router";
 import { useStore } from "@/store";
+import { useMessage } from "@/utils/element-plus";
+import { useI18n } from "vue-i18n";
 
+const $message = useMessage(getCurrentInstance());
+const $t = useI18n();
 const router = useRouter();
 const store = useStore();
-const { isLogin, user } = store.state;
+
+const isLogin = computed(() => store.state.isLogin);
+const user = computed(() => store.state.user);
 
 const emit = defineEmits(["onShowLoginModal", "onShowCreateModal"]);
 
@@ -59,7 +68,7 @@ const onLogout = () => {
       }
     })
     .catch(() => {
-      this.$message.error("Can not logout");
+      $message?.error("Can not logout");
     });
 };
 </script>

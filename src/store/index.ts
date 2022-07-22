@@ -1,5 +1,6 @@
 import { InjectionKey } from "vue";
 import { createLogger, createStore, Store, useStore as useBaseStore } from "vuex";
+import { MODULE_HOME } from "./modules/home";
 
 import * as getters from "./getters";
 import mutations from "./mutations";
@@ -49,7 +50,7 @@ export default createStore<GlobalState>({
   },
   getters,
   mutations: mutations,
-  modules: {},
+  modules: { home: MODULE_HOME },
   strict: import.meta.env.DEV,
   plugins: import.meta.env.DEV ? [createLogger()] : [],
 });
