@@ -3,7 +3,14 @@ import { HomeState } from ".";
 import { GlobalState } from "../../";
 
 export const homeGetter: GetterTree<HomeState, GlobalState> = {
-  getIntroduction(state): object {
+  getIntroduction(state): {
+    nav: string;
+    title: string;
+    content: string[];
+    media_type: string;
+    media: any;
+    blogs: any;
+  } {
     return {
       nav: state.currentNav,
       title: state.currentTitle,

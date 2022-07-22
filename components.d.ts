@@ -8,9 +8,14 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Aync: typeof import('./src/components/aync.vue')['default']
+    Blog: typeof import('./src/components/Blog.vue')['default']
+    CardView: typeof import('./src/components/CardView.vue')['default']
+    CommentItem: typeof import('./src/components/comments/components/CommentItem.vue')['default']
+    Comments: typeof import('./src/components/comments/Comments.vue')['default']
     CreateBlog: typeof import('./src/components/createBlog.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElDialog: typeof import('element-plus/es')['ElDialog']
@@ -30,6 +35,7 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./src/components/header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     LoginModal: typeof import('./src/components/LoginModal.vue')['default']
+    MarkDown: typeof import('./src/components/MarkDown.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
