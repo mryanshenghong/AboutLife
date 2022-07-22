@@ -28,4 +28,21 @@ export default defineConfig({
     port: 8081,
     hmr: true,
   },
+  build: {
+    sourcemap: false,
+    commonjsOptions: {
+      sourceMap: false,
+    },
+    minify: true,
+    rollupOptions: {
+      output: {
+        chunkFileNames: "static/js/[name]-[hash].js",
+        assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+        manualChunks: {
+          "md-editor": ["mavon-editor"],
+          element: ["element-plus"],
+        },
+      },
+    },
+  },
 });
