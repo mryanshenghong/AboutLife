@@ -57,7 +57,7 @@ import { useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
-const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}`;
+const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/static`;
 
 const playerOptions: any = {
   control: true,
