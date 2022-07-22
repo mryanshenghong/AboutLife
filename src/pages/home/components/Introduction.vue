@@ -7,6 +7,8 @@
         </div>
         <transition name="blur" mode="out-in">
           <el-image v-if="media_type === 'img'" class="intro-img" :src="media" alt :key="media" />
+        </transition>
+        <transition name="blur" mode="out-in">
           <video v-if="media_type === 'video'" class="intro-video" :src="media" controls />
         </transition>
       </div>

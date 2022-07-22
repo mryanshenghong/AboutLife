@@ -12,16 +12,16 @@
     <el-col v-if="!state.isSm" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
       <Introduction :content="intro.content" :media="intro.media" :media_type="intro.media_type" />
     </el-col>
-    <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+    <!-- <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
       <Blogs />
-    </el-col>
+    </el-col> -->
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, nextTick, onBeforeMount, onMounted, reactive } from "vue";
 import Introduction from "./components/Introduction.vue";
-import Blogs from "./components/Blogs.vue";
+// import Blogs from "./components/Blogs.vue";
 import { useStore } from "@/store";
 
 const store = useStore();
