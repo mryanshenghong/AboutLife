@@ -5,7 +5,7 @@ name: Deployment
 
 on:
   push:
-    branches: ["master"]
+    branches: ["feature/migrate-to-vue3"]
 
 jobs:
   build:
@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: "feature/migrate-to-vue3"
 
       - uses: actions/setup-node@v3
         with:
@@ -31,4 +33,4 @@ jobs:
           username: ${{secrets.OCI_USER}}
           key: ${{secrets.OCI_SECRET}}
           source: "./dist/*"
-          target: "/usr/local/nginx/html/test"
+          target: "/usr/local/nginx/html/testaa"
