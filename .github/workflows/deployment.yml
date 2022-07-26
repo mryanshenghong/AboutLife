@@ -33,4 +33,4 @@ jobs:
           username: ${{secrets.AWS_USER}}
           key: ${{secrets.AWS_SECRET}}
           source: "./dist/*"
-          target: "/usr/local/nginx/html/testaa"
+          target: "/usr/local/nginx/html/AboutLife"
