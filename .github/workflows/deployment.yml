@@ -29,8 +29,8 @@ jobs:
       - name: Deployment
         uses: appleboy/scp-action@master
         with:
-          host: ${{secrets.OCI_HOST}}
-          username: ${{secrets.OCI_USER}}
-          key: ${{secrets.OCI_SECRET}}
+          host: ${{secrets.AWS_HOST}}
+          username: ${{secrets.AWS_USER}}
+          key: ${{secrets.AWS_SECRET}}
           source: "./dist/*"
           target: "/usr/local/nginx/html/testaa"
