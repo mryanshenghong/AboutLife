@@ -1,12 +1,12 @@
 <template>
   <el-dialog
     :title="$t('message.login.modalTitle')"
-    v-model="show"
+    :modelValue="show"
     :show-close="false"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :lock-scroll="true"
-    :modal-append-to-body="false"
+    :append-to-body="!show"
   >
     <el-tabs v-model="state.formTab" @tab-click="handleFormChange">
       <el-tab-pane label="Login" name="login">
