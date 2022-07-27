@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, reactive, ref, watch } from "vue";
+import { ComponentObjectPropsOptions, getCurrentInstance, reactive, ref, watch } from "vue";
 import { login, signup } from "../api/login";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -60,7 +60,12 @@ const store = useStore();
 
 // props, state, dispatch
 const emit = defineEmits<{ (e: "closeModal", show: boolean): void }>();
-defineProps<{ show: boolean }>();
+defineProps({
+  show: {
+    type: String,
+    default: false,
+  },
+});
 const state = reactive({
   formTab: "login",
   form: {
