@@ -101,11 +101,11 @@ const formatTime = (time: string) => format(time);
 
 // const toggleDrawer = (isDrawerShow: boolean) => (state.isDrawerShow = isDrawerShow);
 
-const onMusicPlay = (player: any) => {
+const onMusicPlay = () => {
   if (currentMediaRef.value) currentMediaRef.value.ele.pause();
   store.commit("setMediaRef", {
     type: "music",
-    ele: player,
+    ele: musicPlayerRef,
   });
 };
 
