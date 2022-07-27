@@ -102,7 +102,7 @@ const formatTime = (time: string) => format(time);
 // const toggleDrawer = (isDrawerShow: boolean) => (state.isDrawerShow = isDrawerShow);
 
 const onMusicPlay = () => {
-  if (currentMediaRef) currentMediaRef.value.ele.pause();
+  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
   store.commit("setMediaRef", {
     type: "music",
     ele: musicPlayerRef,
@@ -110,7 +110,7 @@ const onMusicPlay = () => {
 };
 
 const onVideoPlay = () => {
-  if (currentMediaRef) currentMediaRef.value.ele.pause();
+  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
   store.commit("setMediaRef", {
     type: "video",
     ele: videoPlayerRef,
