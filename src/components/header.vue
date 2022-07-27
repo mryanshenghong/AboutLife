@@ -62,7 +62,7 @@ const onLogout = () => {
   userLogout(store.state.user.email)
     .then((res: any) => {
       if (res.data.code === 200) {
-        store.commit("setUserInfo", { user_name: "", email: "", role: null });
+        store.commit("setUser", { user_name: "", email: "", role: null });
         store.commit("setLoginStatus", false);
         localStorage.clear();
       }

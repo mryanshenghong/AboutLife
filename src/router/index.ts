@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/pages/home/Home.vue";
-// import Content from "@/pages/content/Content.vue";
-import { defineAsyncComponent } from "vue";
-const Content = defineAsyncComponent(() => import("@/pages/content/Content.vue"));
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -12,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/content/:id",
     name: "Content",
-    component: Content,
+    component: () => import("@/pages/content/Content.vue"),
   },
   //   {
   //     path: "/about",

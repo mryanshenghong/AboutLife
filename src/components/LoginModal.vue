@@ -182,7 +182,6 @@ const submitLogin = async () => {
   submiting = true;
   try {
     const res: any = await login(form.email, form.password);
-    console.log(res);
     if (res.code === 200) {
       localStorage.setItem("user_name", res.result.user_name);
       localStorage.setItem("token", res.result.token);
