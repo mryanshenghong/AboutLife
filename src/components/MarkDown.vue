@@ -11,7 +11,7 @@
     :toolbars="toolbarOptions"
     :footers="[]"
   />
-  <md-editor ref="readonlyMDRef" v-else :modelValue="content" class="markdown" preview-only codeTheme="github" />
+  <md-editor ref="readonlyMDRef" v-else :modelValue="content" v-model="content" class="markdown" preview-only codeTheme="github" />
 </template>
 
 <script lang="ts" setup>
