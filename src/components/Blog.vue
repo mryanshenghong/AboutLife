@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, onMounted, ref, reactive } from "vue";
+import { computed, ref, reactive } from "vue";
 import { format } from "@/utils/formatTime";
 
 import { useStore } from "@/store";
@@ -102,7 +102,7 @@ const formatTime = (time: string) => format(time);
 // const toggleDrawer = (isDrawerShow: boolean) => (state.isDrawerShow = isDrawerShow);
 
 const onMusicPlay = () => {
-  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
+  if (currentMediaRef) currentMediaRef.value.ele.pause();
   store.commit("setMediaRef", {
     type: "music",
     ele: musicPlayerRef,
@@ -110,7 +110,7 @@ const onMusicPlay = () => {
 };
 
 const onVideoPlay = () => {
-  if (currentMediaRef.value) currentMediaRef.value.ele.pause();
+  if (currentMediaRef) currentMediaRef.value.ele.pause();
   store.commit("setMediaRef", {
     type: "video",
     ele: videoPlayerRef,

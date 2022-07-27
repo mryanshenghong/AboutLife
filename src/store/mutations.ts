@@ -12,6 +12,8 @@ export default {
     state.user = user;
   },
   setMediaRef(state, mediaRef: any) {
-    state.currentMediaRef = mediaRef;
+    Object.assign(state, {
+      currentMediaRef: mediaRef,
+    });
   },
 } as MutationTree<GlobalState>;

@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import vuescroll from "vuescroll";
 import CardView from "@/components/CardView.vue";
 import { useStore } from "@/store";
