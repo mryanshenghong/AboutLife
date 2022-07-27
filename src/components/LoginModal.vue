@@ -62,7 +62,7 @@ const store = useStore();
 const emit = defineEmits<{ (e: "closeModal", show: boolean): void }>();
 defineProps({
   show: {
-    type: String,
+    type: Boolean,
     default: false,
   },
 });
