@@ -6,7 +6,7 @@
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :lock-scroll="true"
-    :modal-append-to-body="false"
+    :append-to-body="false"
   >
     <el-form @submit.prevent ref="blogFromRef" :model="state.form" :inline="true" size="small" :rules="formRules">
       <el-form-item label="博客主题" prop="title">
