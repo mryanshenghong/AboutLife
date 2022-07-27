@@ -1,5 +1,6 @@
 <template>
   <md-editor
+    ref="editableMDRef"
     v-if="canEdit"
     v-model="content"
     class="markdown"
@@ -10,7 +11,7 @@
     :toolbars="toolbarOptions"
     :footers="[]"
   />
-  <md-editor v-else v-model="content" class="markdown" preview-only codeTheme="github" />
+  <md-editor ref="readonlyMDRef" v-else :modelValue="content" class="markdown" preview-only codeTheme="github" />
 </template>
 
 <script lang="ts" setup>
@@ -22,6 +23,11 @@ import { useMessage } from "@/utils/element-plus";
 import { getCurrentInstance, ref } from "vue";
 
 const emit = defineEmits<{ (e: "saveContent", value: any): void }>();
+
+// Refs
+const editableMDRef = ref();
+const readonlyMDRef = ref();
+
 // Props
 defineProps({
   content: {
