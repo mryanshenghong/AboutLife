@@ -5,7 +5,7 @@ name: Deployment
 
 on:
   push:
-    branches: ["feature/migrate-to-vue3"]
+    branches: ["master"]
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: "feature/migrate-to-vue3"
+          ref: "master"
 
       - uses: actions/setup-node@v3
         with:
