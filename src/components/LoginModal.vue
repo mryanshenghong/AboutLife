@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentObjectPropsOptions, getCurrentInstance, reactive, ref, watch } from "vue";
+import { getCurrentInstance, reactive, ref, watch } from "vue";
 import { login, signup } from "../api/login";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
