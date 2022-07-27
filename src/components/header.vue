@@ -30,7 +30,7 @@ import { useMessage } from "@/utils/element-plus";
 import { useI18n } from "vue-i18n";
 
 const $message = useMessage(getCurrentInstance());
-const $t = useI18n();
+const { t: $t } = useI18n();
 const router = useRouter();
 const store = useStore();
 

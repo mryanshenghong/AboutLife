@@ -1,3 +1,16 @@
+<template>
+  <el-config-provider :locale="elementPlusI18n[lang]">
+    <el-container>
+      <el-main>
+        <mainHeader @onShowLoginModal="showLoginModal" @onShowCreateModal="showCreateModal"></mainHeader>
+        <router-view />
+        <Login :show="data.isLoginModalShow" @closeModal="showLoginModal" />
+        <WriteBlog v-if="isLogin" :showCreateModal="data.isCreateModalShow" @onCloseCreateModal="showCreateModal" @onCreateBlog="onCreateBlog"></WriteBlog>
+      </el-main>
+    </el-container>
+  </el-config-provider>
+</template>
+
 <script setup lang="ts">
 import { defineAsyncComponent, getCurrentInstance, reactive, onMounted, computed } from "vue";
 import mainHeader from "@/components/header.vue";
@@ -79,19 +92,6 @@ const onCreateBlog = async (newBlog: any) => {
   }
 };
 </script>
-
-<template>
-  <el-config-provider :locale="elementPlusI18n[lang]">
-    <el-container>
-      <el-main>
-        <mainHeader @onShowLoginModal="showLoginModal" @onShowCreateModal="showCreateModal"></mainHeader>
-        <router-view />
-        <Login :show="data.isLoginModalShow" @closeModal="showLoginModal" />
-        <WriteBlog v-if="isLogin" :showCreateModal="data.isCreateModalShow" @onCloseCreateModal="showCreateModal" @onCreateBlog="onCreateBlog"></WriteBlog>
-      </el-main>
-    </el-container>
-  </el-config-provider>
-</template>
 
 <style scoped>
 .logo {

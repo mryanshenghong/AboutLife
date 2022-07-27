@@ -45,6 +45,9 @@ const cn = {
     },
     // 标签翻译
     building: "开发中",
+    comments: {
+      comment: "评论",
+    },
   },
 };
 

@@ -10,7 +10,7 @@
     <div class="comment-content">
       <p class="content">{{ comment.content }}</p>
       <div>
-        <el-button type="text" class="link-btn" @click="showNestedCommentBox">评论</el-button>
+        <el-button v-if="isLogin" link class="link-btn" @click="showNestedCommentBox">{{ $t("message.comments.comment") }}</el-button>
         <div class="comment-tools">
           <el-input
             v-if="visibleNestedCommentBox === idx"
@@ -21,7 +21,9 @@
             placeholder="comment"
             v-model="state.inputComment"
           />
-          <el-button @click="writeComment" v-if="visibleNestedCommentBox === idx" size="small" style="margin: 0 10px; max-height: 33px">Comment</el-button>
+          <el-button link @click="writeComment" v-if="visibleNestedCommentBox === idx && isLogin" size="small" style="margin: 0 10px; max-height: 33px">{{
+            $t("message.comments.comment")
+          }}</el-button>
         </div>
       </div>
       <slot></slot>
@@ -30,10 +32,14 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
 import { format } from "@/utils/formatTime";
-
 import { newComment, IComment } from "@/api/comments";
+import { useStore } from "@/store";
+import { useI18n } from "vue-i18n";
+
+// Directives
+const { t: $t } = useI18n();
 
 // State, props
 const props = defineProps<{
@@ -49,6 +55,8 @@ const props = defineProps<{
 const state = reactive({
   inputComment: "",
 });
+const store = useStore();
+const isLogin = computed(() => store.state.isLogin);
 
 // Methods
 const writeComment = async () => {

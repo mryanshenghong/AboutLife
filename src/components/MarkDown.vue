@@ -1,23 +1,22 @@
 <template>
-  <mavon-editor
-    ref="mdRef"
-    :transition="true"
-    :boxShadow="false"
+  <md-editor
+    v-if="canEdit"
+    v-model="content"
     class="markdown"
-    defaultOpen="preview"
-    :toolbarsFlag="showToolBars"
-    :ishljs="false"
-    :value="content"
-    :editable="canEdit"
-    :subfield="isSubField"
+    :preview="true"
+    codeTheme="github"
     @save="onSaveContent"
-    @imgAdd="onImgAdd"
+    @on-upload-img="onImgAdd"
+    :toolbars="toolbarOptions"
+    :footers="[]"
   />
+  <md-editor v-else v-model="content" class="markdown" preview-only codeTheme="github" />
 </template>
 
 <script lang="ts" setup>
-import mavonEditor from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
+import MdEditor from "md-editor-v3";
+import type { ToolbarNames } from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
 import { uploadImg } from "@/api/file";
 import { useMessage } from "@/utils/element-plus";
 import { getCurrentInstance, ref } from "vue";
@@ -29,41 +28,55 @@ defineProps({
     type: String,
     default: undefined,
   },
-  defaultOpen: {
-    type: String,
-    default: "preview",
-  },
   canEdit: {
-    type: Boolean,
-    default: false,
-  },
-  showToolBars: {
-    type: Boolean,
-    default: false,
-  },
-  isSubField: {
     type: Boolean,
     default: false,
   },
 });
 
-const mdRef = ref();
+const toolbarOptions: ToolbarNames[] = [
+  "bold",
+  "underline",
+  "italic",
+  "-",
+  "title",
+  "strikeThrough",
+  "sub",
+  "sup",
+  "quote",
+  "unorderedList",
+  "orderedList",
+  "-",
+  "codeRow",
+  "code",
+  "link",
+  "image",
+  "table",
+  "-",
+  "revoke",
+  "next",
+  "save",
+  "-",
+  "pageFullscreen",
+  "fullscreen",
+  "preview",
+];
 
 // Methods
 const onSaveContent = (value: any) => emit("saveContent", value);
-const onImgAdd = async (fileName: string, file: any) => {
+const onImgAdd = async (files: Array<File>, callback: Function) => {
   const $message = useMessage(getCurrentInstance());
   const { token } = localStorage;
   try {
-    const res: any = await uploadImg(file, token);
-    mdRef.value.md.$img2Url(fileName, `${process.env.VUE_APP_BASE}/static/${res.imgUrl}`);
+    const res: any = await uploadImg(files[0], token);
+    const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/static`;
+    callback([`${resUrl}/${res.imgUrl}`]);
   } catch (err) {
     $message?.error(`can not upload image ${err}`);
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "~mavon-editor/dist/css/index.css";
 .markdown {
   margin-top: 20px;
 }

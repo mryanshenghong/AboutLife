@@ -45,6 +45,9 @@ const en = {
     },
     // tag translation
     building: "building",
+    comments: {
+      comment: "Comment",
+    },
   },
   //   ...enLocale,
 };

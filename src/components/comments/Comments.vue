@@ -1,8 +1,8 @@
 <template>
   <div class="comment-container">
-    <div class="comment-input-wrapper notPadding">
+    <div v-if="isLogin" class="comment-input-wrapper notPadding">
       <el-input size="small" type="textarea" autosize class="input" v-model="state.commentInput" placeholder="comment" />
-      <el-button size="small" style="margin: 0 10px; max-height: 33px" @click="writeComment">Comment</el-button>
+      <el-button size="small" style="margin: 0 10px; max-height: 33px" @click="writeComment" link>{{ $t("message.comments.comment") }}</el-button>
     </div>
     <CommentItem
       v-for="(comment, index) in state.comments"
@@ -31,13 +31,15 @@
 </template>
 
 <script lang="ts" setup>
-import { getCurrentInstance, onMounted, reactive } from "vue";
+import { computed, getCurrentInstance, onMounted, reactive } from "vue";
 import CommentItem from "./components/CommentItem.vue";
 
 import { queryComments, newComment, IComment } from "@/api/comments";
 import { useMessage } from "@/utils/element-plus";
+import { useStore } from "@/store";
 
 const $message = useMessage(getCurrentInstance());
+const store = useStore();
 
 // State, props
 const props = defineProps<{ blogId: string }>();
@@ -50,6 +52,8 @@ const state = reactive<{
   commentInput: "",
   comments: [],
 });
+
+const isLogin = computed(() => store.state.isLogin);
 
 // Lifecycle
 onMounted(async () => {

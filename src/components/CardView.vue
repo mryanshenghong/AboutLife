@@ -13,9 +13,8 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, reactive } from "vue";
 import Blog from "../components/Blog.vue";
-import Comment from "./comments/Comments.vue";
 
-// const Comment = () => defineAsyncComponent(() => import("./comments/Comments.vue"));
+const Comment = () => defineAsyncComponent(() => import("./comments/Comments.vue"));
 
 const props = defineProps<{
   title: string;

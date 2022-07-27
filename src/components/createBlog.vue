@@ -8,7 +8,7 @@
     :lock-scroll="true"
     :modal-append-to-body="false"
   >
-    <el-form ref="blogFromRef" :model="state.form" :inline="true" size="small" :rules="formRules">
+    <el-form @submit.prevent ref="blogFromRef" :model="state.form" :inline="true" size="small" :rules="formRules">
       <el-form-item label="博客主题" prop="title">
         <el-input v-model="state.form.title" autocomplete="off"></el-input>
       </el-form-item>
@@ -67,7 +67,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="small" @click="onCloseModal">取 消</el-button>
-      <el-button size="small" type="primary" @click="onCreateBlog">确 定</el-button>
+      <el-button size="small" type="primary" @click="onCreateBlog(blogFromRef)">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -76,6 +76,7 @@
 import { getBlogCats } from "@/api/blog";
 import { uploadFiles, getCloudFiles } from "@/api/file";
 import { useMessage } from "@/utils/element-plus";
+import { FormInstance } from "element-plus";
 import { getCurrentInstance, nextTick, onMounted, reactive, ref } from "vue";
 
 // Props, state, dispatch
@@ -117,7 +118,7 @@ const state = reactive<{
 });
 
 // Refs
-const blogFromRef = ref();
+const blogFromRef = ref<FormInstance>();
 const fileInputRef = ref();
 // Liefcycle
 onMounted(async () => {
@@ -131,23 +132,26 @@ onMounted(async () => {
 // Methods
 const onCloseModal = () => emit("onCloseCreateModal", false);
 
-const onCreateBlog = () => {
-  const newBlog = {
-    title: state.form.title,
-    tags: state.tags,
-    cat: state.form.cat,
-    mediaType: state.form.media_type,
-    mediaSources: state.form.mediaSources,
-    isTech: false,
-  };
-  blogFromRef.value.validate((valid: boolean) => {
+const onCreateBlog = async (formRef: FormInstance | undefined) => {
+  if (!formRef) return;
+  await formRef.validate((valid: boolean) => {
+    const $message = useMessage(getCurrentInstance());
     if (valid) {
+      const newBlog = {
+        title: state.form.title,
+        tags: state.tags,
+        cat: state.form.cat,
+        mediaType: state.form.media_type,
+        mediaSources: state.form.mediaSources,
+        isTech: false,
+      };
       emit("onCreateBlog", newBlog);
     } else {
-      throw new Error("invalid");
+      $message?.info("invalid");
     }
   });
-  blogFromRef.value.resetFields();
+
+  formRef.resetFields();
   state.tags = [];
 };
 const addTag = () => {
