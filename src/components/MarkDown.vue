@@ -75,7 +75,7 @@ const onImgAdd = async (files: Array<File>, callback: Function) => {
   const { token } = localStorage;
   try {
     const res: any = await uploadImg(files[0], token);
-    const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/static`;
+    const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/files`;
     callback([`${resUrl}/${res.imgUrl}`]);
   } catch (err) {
     $message?.error(`can not upload image ${err}`);
