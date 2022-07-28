@@ -40,7 +40,7 @@ import { getCloudFilesDetail, deleteFile } from "@/api/file";
 import { format } from "@/utils/formatTime";
 import { useMessage } from "@/utils/element-plus";
 
-const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/static`;
+const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/files`;
 // Directives
 const $message = useMessage(getCurrentInstance());
 
