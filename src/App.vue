@@ -52,9 +52,9 @@ const data = reactive({
 onMounted(async () => {
   if (localStorage.user_name && localStorage.role && localStorage.token) {
     try {
-      const res: any = await verifyToken(localStorage.user_name, localStorage.token);
+      const user = await verifyToken(localStorage.user_name, localStorage.token);
       store.commit("setLoginStatus", true);
-      store.commit("setUser", res);
+      store.commit("setUser", user);
     } catch (err) {
       localStorage.clear();
     }
@@ -76,15 +76,15 @@ const onCreateBlog = async (newBlog: NewBlogInput) => {
     $message?.error("please login first");
   } else {
     try {
-      const res: any = createBlog(newBlog, localStorage.token);
-      if (res.result._id) {
-        if (res.result.mediaType === "blog") {
-          router.push(`/content/${res.result._id}`);
+      const blog = await createBlog(newBlog, localStorage.token);
+      if (blog._id) {
+        if (blog.mediaType === "blog") {
+          router.push(`/content/${blog._id}`);
           return;
         }
         const intro = store.getters["home/getIntroduction"];
-        if (res.result.cat === intro.nav) {
-          store.commit("home/updateBlogs", res.result);
+        if (blog.cat === intro.nav) {
+          store.commit("home/updateBlogs", blog);
           return;
         }
       }

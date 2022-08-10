@@ -1,3 +1,4 @@
+import { GlobalState } from "@/store";
 import axios from "axios";
 
 export const login = (email: string, pwd: string) => {
@@ -48,7 +49,7 @@ export const signup = (user: { user_name: string; user_pwd: string; email: strin
   });
 };
 
-export const verifyToken = (user_name: string, token: string) => {
+export const verifyToken = (user_name: string, token: string): Promise<GlobalState["user"]> => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${import.meta.env.VITE_APP_URL}/myWeb/verifyToken`, {
@@ -60,10 +61,12 @@ export const verifyToken = (user_name: string, token: string) => {
       .then((res) => {
         if (res.data.code === 200) {
           resolve(res.data.result);
+        } else {
+          reject();
         }
       })
       .catch(() => {
-        reject({ invalid: false });
+        reject();
       });
   });
 };

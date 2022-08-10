@@ -17,10 +17,10 @@ export const uploadImg = (imgFile: any, token: string) => {
   });
 };
 
-export const uploadFiles = (files: any, token: string) => {
+export const uploadFiles = (files: FileList, token: string) => {
   return new Promise((resolve, reject) => {
     const formdata = new FormData();
-    files.forEach((file: any) => {
+    [...files].forEach((file: File) => {
       formdata.append("data", file);
     });
     axios

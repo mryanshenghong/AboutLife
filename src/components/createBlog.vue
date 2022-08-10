@@ -171,6 +171,7 @@ const fileChange = async (e: any) => {
     state.form.mediaSources.push(...res.fileUrls);
     state.onUpload = false;
   } catch (err) {
+    console.log(err);
     state.onUpload = false;
     $message?.error("Cannot upload files" + err);
   }

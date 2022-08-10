@@ -1,4 +1,4 @@
-import { NewBlogInput } from "@/types/blog";
+import { Blog, NewBlogInput } from "@/types/blog";
 import axios from "axios";
 
 export const getBlogsBasicInfo = (cat: string) => {
@@ -75,7 +75,7 @@ export const saveBlog = (blogInfo: any, token: string) => {
   });
 };
 
-export const createBlog = (newBlog: NewBlogInput, token: string) => {
+export const createBlog = (newBlog: NewBlogInput, token: string): Promise<Blog> => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${import.meta.env.VITE_APP_URL}/myWeb/newBlog`, newBlog, {
@@ -85,7 +85,7 @@ export const createBlog = (newBlog: NewBlogInput, token: string) => {
         },
       })
       .then((res) => {
-        resolve(res.data);
+        resolve(res.data.result);
       })
       .catch((err) => {
         reject(err);
