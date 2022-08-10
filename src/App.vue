@@ -24,6 +24,8 @@ import enLocale from "element-plus/lib/locale/lang/en";
 import { useMessage } from "./utils/element-plus";
 import { useRouter } from "vue-router";
 
+import { NewBlogInput } from "./types/blog";
+
 const store = useStore();
 const router = useRouter();
 
@@ -67,7 +69,7 @@ const showLoginModal = (show: boolean) => (data.isLoginModalShow = show);
 
 const showCreateModal = (show: boolean) => (data.isCreateModalShow = show);
 
-const onCreateBlog = async (newBlog: any) => {
+const onCreateBlog = async (newBlog: NewBlogInput) => {
   const $message = useMessage(getCurrentInstance());
   showCreateModal(false);
   if (!localStorage.token) {

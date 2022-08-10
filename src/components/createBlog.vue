@@ -162,7 +162,7 @@ const addTag = () => {
 };
 const onCatSelect = (val: string) => (state.form.cat = val);
 const onMediaSelet = (val: string) => (state.form.media_type = val);
-const onCloudFileSelect = (val: any) => state.form.mediaSources.push(val);
+const onCloudFileSelect = (val: string) => state.form.mediaSources.push(val);
 const fileChange = async (e: any) => {
   const $message = useMessage(getCurrentInstance());
   state.onUpload = true;
