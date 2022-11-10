@@ -17,6 +17,7 @@ const app = createApp(App)
   .use(i18n)
   .use(registerGlobalElementPlus);
 
+
 Sentry.init({
   app,
   dsn: import.meta.env.VITE_APP_SENTRY_DSN,
@@ -26,7 +27,6 @@ Sentry.init({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
     }),
   ],
-  release: "3.0.0",
   environment: import.meta.env.NODE_ENV,
   tracesSampleRate: 1.0,
 });
