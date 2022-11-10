@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "sentry:upload": "sentry-cli releases files '$VERSION' upload-sourcemaps ./dist/* --ext js --ext map",
+        "sentry:generate": "echo `sentry-cli releases propose-version`",
+        "sentry:upload": "sentry-cli releases files '799b87b66a507214171e2549d531ccfd08d0d659' upload-sourcemaps ./dist/* --ext js --ext map",
         "preview": "vite preview"
     },
     "dependencies": {
