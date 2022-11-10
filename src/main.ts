@@ -5,7 +5,7 @@ import "./styles/global.scss";
 import registerGlobalElementPlus from "@/utils/element-plus";
 import router from "./router";
 import store, { key } from "./store";
-import i18n from "@/utils/i18n";
+// import i18n from "@/utils/i18n";
 
 // Sentry
 import * as Sentry from "@sentry/vue";
@@ -14,7 +14,7 @@ import { BrowserTracing } from "@sentry/tracing";
 const app = createApp(App)
   .use(store, key)
   .use(router)
-  .use(i18n)
+  //   .use(i18n)
   .use(registerGlobalElementPlus);
 
 Sentry.init({
