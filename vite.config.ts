@@ -28,8 +28,11 @@ export default defineConfig({
     port: 8081,
     hmr: true,
   },
+  css: {
+    devSourcemap: true,
+  },
   build: {
-    sourcemap: false,
+    sourcemap: "hidden",
     commonjsOptions: {
       sourceMap: false,
     },
