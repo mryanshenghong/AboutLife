@@ -34,7 +34,7 @@ export default defineConfig({
   build: {
     sourcemap: 'hidden',
     commonjsOptions: {
-      sourceMap: false,
+      sourceMap: true,
     },
     // minify: true,
     rollupOptions: {
