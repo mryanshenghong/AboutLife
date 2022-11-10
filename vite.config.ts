@@ -47,5 +47,6 @@ export default defineConfig({
         },
       },
     },
+    reportCompressedSize: false
   },
 });
