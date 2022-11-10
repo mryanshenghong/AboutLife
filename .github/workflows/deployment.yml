@@ -41,7 +41,7 @@ jobs:
           curl -sL https://sentry.io/get-cli/ | bash
           export VERSION=$(echo `sentry-cli releases propose-version`)
           echo $VERSION
-          sentry-cli releases files '$VERSION' upload-sourcemaps ./dist --ext js --ext map --url-prefix '/'
+          sentry-cli releases files '$VERSION' upload-sourcemaps ./dist  --url-prefix '/' --finalize
 
 
       - name: Deployment
