@@ -25,6 +25,7 @@ Sentry.init({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
     }),
   ],
+  environment: import.meta.env.NODE_ENV,
   tracesSampleRate: 1.0,
 });
 
