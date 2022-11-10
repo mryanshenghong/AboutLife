@@ -32,7 +32,7 @@ export default defineConfig({
     devSourcemap: true,
   },
   build: {
-    sourcemap: "hidden",
+    sourcemap: 'inline',
     commonjsOptions: {
       sourceMap: false,
     },
