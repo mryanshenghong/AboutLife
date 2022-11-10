@@ -39,7 +39,7 @@ jobs:
       - name: Install Sentry CLI
         run: |
           curl -sL https://sentry.io/get-cli/ | bash
-          EXPORT VERSION=$(echo `sentry-cli releases propose-version`)
+          export VERSION=$(echo `sentry-cli releases propose-version`)
           echo $VERSION
 
 
