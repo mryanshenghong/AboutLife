@@ -21,22 +21,29 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install Sentry CLI
+        run: |
+          curl -sL https://sentry.io/get-cli/ | bash
+
+      - name: Create new release and save to .env
+        run: |
+          export VERSION=$(echo `sentry-cli releases propose-version`)
+          echo VITE_APP_SENTRY_RELEASE="$VERSION" >> .env
+
       - name: Build
         run: |
           npm install
           npm run build
 
-      - name: Install Sentry CLI
+      - name: Sentry release and upload sourcemap
         run: |
-          curl -sL https://sentry.io/get-cli/ | bash
-          export VERSION=$(echo `sentry-cli releases propose-version`)
-          echo "$VERSION"
           sentry-cli releases new "$VERSION"
           sentry-cli releases set-commits --auto "$VERSION"
           sentry-cli releases files "$VERSION" upload-sourcemaps ./dist --url-prefix='http://blog.yanshenghong.com/'
-          find ./dist -name "*.map" -type f -print -exec rm -rf {} \;
           sentry-cli releases finalize "$VERSION"
 
+      - name: Remove sourcemaps
+        run: rm -rf ./dist/**/*.map
 
       - name: Deployment
         uses: appleboy/scp-action@master
