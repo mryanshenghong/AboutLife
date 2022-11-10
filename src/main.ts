@@ -7,4 +7,25 @@ import router from "./router";
 import store, { key } from "./store";
 import i18n from "@/utils/i18n";
 
-createApp(App).use(store, key).use(router).use(i18n).use(registerGlobalElementPlus).mount("#app");
+// Sentry
+import * as Sentry from "@sentry/vue";
+import { BrowserTracing } from "@sentry/tracing";
+
+const app = createApp(App)
+  .use(store, key)
+  .use(router)
+  .use(i18n)
+  .use(registerGlobalElementPlus);
+
+Sentry.init({
+  app,
+  dsn: import.meta.env.VITE_APP_SENTRY_DSN,
+  integrations: [
+    new BrowserTracing({
+      routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+    }),
+  ],
+  tracesSampleRate: 1.0,
+});
+
+app.mount("#app");
