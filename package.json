@@ -7,7 +7,7 @@
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
         "sentry:generate": "echo `sentry-cli releases propose-version`",
-        "sentry:upload": "sentry-cli releases files '58bb77b19bb474b405192e1865dcd021cd3bde06' upload-sourcemaps ./dist --ext js --ext map --url-prefix 'http://blog.yanshenghong.com/'",
+        "sentry:upload": "sentry-cli releases files '800a95694f7eba1fe5d4b448d5ff612077ac3f42' upload-sourcemaps ./dist --ext js --ext map",
         "preview": "vite preview"
     },
     "dependencies": {
