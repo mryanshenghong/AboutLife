@@ -9,6 +9,7 @@ const messages = {
 
 export default createI18n({
   locale: "cn",
+  allowComposition: true,
   fallbackLocale: "cn",
   messages,
   silentTranslationWarn: import.meta.env.DEV,
