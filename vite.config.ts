@@ -32,7 +32,7 @@ export default defineConfig({
     devSourcemap: true,
   },
   build: {
-    sourcemap: 'hidden',
+    sourcemap: true,
     commonjsOptions: {
       sourceMap: true,
     },
@@ -45,7 +45,6 @@ export default defineConfig({
           "md-editor": ["md-editor-v3"],
           element: ["element-plus"],
         },
-        sourcemap: 'hidden'
       },
     },
     reportCompressedSize: false
