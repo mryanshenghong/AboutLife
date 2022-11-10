@@ -50,6 +50,7 @@ const data = reactive({
 
 // Lifecycle
 onMounted(async () => {
+    console.log(a.b)
   if (localStorage.user_name && localStorage.role && localStorage.token) {
     try {
       const user = await verifyToken(localStorage.user_name, localStorage.token);
