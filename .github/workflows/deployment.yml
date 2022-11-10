@@ -42,7 +42,7 @@ jobs:
           export VERSION=$(echo `sentry-cli releases propose-version`)
           echo $VERSION
           sentry-cli releases new $VERSION
-          sentry-cli releases files $VERSION upload-sourcemaps ./dist/**/* --url-prefix 'http://blog.yanshenghong.com/'
+          sentry-cli releases files $VERSION upload-sourcemaps ./dist/* --url-prefix '~/'
           find ./dist -name "*.map" -type f -print -exec rm -rf {} \;
           sentry-cli releases finalize $VERSION
 
