@@ -25,16 +25,6 @@ jobs:
         run: |
           npm install
           npm run build
-          ls
-
-      # - name: Create Sentry release
-      #   uses: getsentry/action-release@v1.2.1
-      #   env:
-      #     SENTRY_AUTH_TOKEN: 4e1ecee376434c46a1e55ab7290d2992da6dfc11ebbf417ea6991bf320bfc703
-      #     SENTRY_ORG: shenghongyan-org
-      #     SENTRY_PROJECT: about-lifte
-      #   with:
-      #     sourcemaps: "./dist"
 
       - name: Install Sentry CLI
         run: |
@@ -42,7 +32,7 @@ jobs:
           export VERSION=$(echo `sentry-cli releases propose-version`)
           echo $VERSION
           sentry-cli releases new $VERSION
-          sentry-cli releases files $VERSION upload-sourcemaps ./dist/* --url-prefix='http://blog.yanshenghong.com/'
+          sentry-cli releases files $VERSION upload-sourcemaps ./dist --url-prefix='http://blog.yanshenghong.com/'
           find ./dist -name "*.map" -type f -print -exec rm -rf {} \;
           sentry-cli releases finalize $VERSION
 
