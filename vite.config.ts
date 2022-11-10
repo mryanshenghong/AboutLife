@@ -36,17 +36,18 @@ export default defineConfig({
     commonjsOptions: {
       sourceMap: true,
     },
-    // minify: true,
-    // rollupOptions: {
-    //   output: {
-    //     chunkFileNames: "static/js/[name]-[hash].js",
-    //     assetFileNames: "static/[ext]/[name]-[hash].[ext]",
-    //     manualChunks: {
-    //       "md-editor": ["md-editor-v3"],
-    //       element: ["element-plus"],
-    //     },
-    //   },
-    // },
+    minify: true,
+    rollupOptions: {
+      output: {
+        chunkFileNames: "static/js/[name]-[hash].js",
+        assetFileNames: "static/[ext]/[name]-[hash].[ext]",
+        manualChunks: {
+          "md-editor": ["md-editor-v3"],
+          element: ["element-plus"],
+        },
+        sourcemap: 'hidden'
+      },
+    },
     reportCompressedSize: false
   },
 });
