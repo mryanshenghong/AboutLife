@@ -22,6 +22,7 @@ Sentry.init({
   app,
   dsn: import.meta.env.VITE_APP_SENTRY_DSN,
   attachProps: true,
+  release: `3.0.1`,
   integrations: [
     new BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
