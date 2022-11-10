@@ -41,7 +41,7 @@ jobs:
           curl -sL https://sentry.io/get-cli/ | bash
           export VERSION=$(echo `sentry-cli releases propose-version`)
           echo $VERSION
-          sentry-cli releases files '$VERSION' upload-sourcemaps ./dist  --url-prefix '/' --finalize
+          sentry-cli releases finalize files '$VERSION' upload-sourcemaps ./dist  --url-prefix 'http://blog.yanshenghong.com'
 
 
       - name: Deployment
