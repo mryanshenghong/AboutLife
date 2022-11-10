@@ -36,6 +36,13 @@ jobs:
       #   with:
       #     sourcemaps: "./dist"
 
+      - name: Install Sentry CLI
+        run: |
+          curl -sL https://sentry.io/get-cli/ | bash
+          EXPORT VERSION=$(echo `sentry-cli releases propose-version`)
+          echo $VERSION
+
+
       - name: Deployment
         uses: appleboy/scp-action@master
         with:
