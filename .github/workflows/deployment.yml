@@ -28,6 +28,7 @@ jobs:
       - name: Create new release and save to .env
         run: |
           export VERSION=$(echo `sentry-cli releases propose-version`)
+          echo "::set-env name=VERSION::$VERSION"
           echo VITE_APP_SENTRY_RELEASE="$VERSION" >> .env
 
       - name: Build
