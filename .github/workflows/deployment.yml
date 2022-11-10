@@ -28,14 +28,12 @@ jobs:
           ls
 
       # - name: Create Sentry release
-      #   uses: getsentry/action-release@v1
+      #   uses: getsentry/action-release@v1.2.1
       #   env:
       #     SENTRY_AUTH_TOKEN: 4e1ecee376434c46a1e55ab7290d2992da6dfc11ebbf417ea6991bf320bfc703
       #     SENTRY_ORG: shenghongyan-org
       #     SENTRY_PROJECT: about-lifte
       #   with:
-      #     environment: production
-      #     set_commits: "auto"
       #     sourcemaps: "./dist"
 
       - name: Deployment
