@@ -34,7 +34,6 @@ jobs:
           SENTRY_PROJECT: about-lifte
         with:
           environment: production
-          set_commits: "auto"
           sourcemaps: "./dist/*"
 
       - name: Deployment
