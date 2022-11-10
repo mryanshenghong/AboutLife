@@ -20,11 +20,13 @@ const app = createApp(App)
 Sentry.init({
   app,
   dsn: import.meta.env.VITE_APP_SENTRY_DSN,
+  attachProps: true,
   integrations: [
     new BrowserTracing({
       routingInstrumentation: Sentry.vueRouterInstrumentation(router),
     }),
   ],
+  release: "3.0.0",
   environment: import.meta.env.NODE_ENV,
   tracesSampleRate: 1.0,
 });
