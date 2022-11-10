@@ -36,7 +36,7 @@ export default defineConfig({
     commonjsOptions: {
       sourceMap: true,
     },
-    minify: true,
+    // minify: true,
     // rollupOptions: {
     //   output: {
     //     chunkFileNames: "static/js/[name]-[hash].js",
