@@ -17,7 +17,8 @@ const app = createApp(App)
   .use(i18n)
   .use(registerGlobalElementPlus);
 
-
+console.log(import.meta.env.NODE_ENV);
+console.log(import.meta.env.VITE_APP_SENTRY_RELEASE);
 Sentry.init({
   app,
   dsn: import.meta.env.VITE_APP_SENTRY_DSN,

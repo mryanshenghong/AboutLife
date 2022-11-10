@@ -2,17 +2,31 @@
   <el-config-provider :locale="elementPlusI18n[lang]">
     <el-container>
       <el-main>
-        <mainHeader @onShowLoginModal="showLoginModal" @onShowCreateModal="showCreateModal"></mainHeader>
+        <mainHeader
+          @onShowLoginModal="showLoginModal"
+          @onShowCreateModal="showCreateModal"
+        ></mainHeader>
         <router-view />
         <Login :show="data.isLoginModalShow" @closeModal="showLoginModal" />
-        <WriteBlog v-if="isLogin" :showCreateModal="data.isCreateModalShow" @onCloseCreateModal="showCreateModal" @onCreateBlog="onCreateBlog"></WriteBlog>
+        <WriteBlog
+          v-if="isLogin"
+          :showCreateModal="data.isCreateModalShow"
+          @onCloseCreateModal="showCreateModal"
+          @onCreateBlog="onCreateBlog"
+        ></WriteBlog>
       </el-main>
     </el-container>
   </el-config-provider>
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, getCurrentInstance, reactive, onMounted, computed } from "vue";
+import {
+  defineAsyncComponent,
+  getCurrentInstance,
+  reactive,
+  onMounted,
+  computed,
+} from "vue";
 import mainHeader from "@/components/header.vue";
 
 import { verifyToken } from "./api/login";
@@ -31,7 +45,9 @@ const router = useRouter();
 
 // Async import components on demand
 const Login = defineAsyncComponent(() => import("@/components/LoginModal.vue"));
-const WriteBlog = defineAsyncComponent(() => import("@/components/createBlog.vue"));
+const WriteBlog = defineAsyncComponent(
+  () => import("@/components/createBlog.vue")
+);
 
 // config element-plus i18n
 const { locale } = useI18n();
@@ -50,11 +66,12 @@ const data = reactive({
 
 // Lifecycle
 onMounted(async () => {
-    const { a } = localStorage;
-    console.log(a.b)
   if (localStorage.user_name && localStorage.role && localStorage.token) {
     try {
-      const user = await verifyToken(localStorage.user_name, localStorage.token);
+      const user = await verifyToken(
+        localStorage.user_name,
+        localStorage.token
+      );
       store.commit("setLoginStatus", true);
       store.commit("setUser", user);
     } catch (err) {
