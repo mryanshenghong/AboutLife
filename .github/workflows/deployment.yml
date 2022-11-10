@@ -26,6 +26,11 @@ jobs:
           npm install
           npm run build
 
+      - name: Upload sourcemap to Sentry
+        run: |
+          VERSION=`sentry-cli releases propose-version`
+          sentry-cli releases files '$VERSION' upload-sourcemaps ./dist/* --ext js --ext map
+
       - name: Deployment
         uses: appleboy/scp-action@master
         with:
