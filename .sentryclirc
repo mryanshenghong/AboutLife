@@ -5,5 +5,5 @@ project=about-lifte
 [auth]
 token=4e1ecee376434c46a1e55ab7290d2992da6dfc11ebbf417ea6991bf320bfc703
 [log]
-level=info
+level=error
 # cli.executable=../path/to/bin/sentry-cli
