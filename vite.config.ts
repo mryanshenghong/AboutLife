@@ -32,7 +32,7 @@ export default defineConfig({
     devSourcemap: true,
   },
   build: {
-    sourcemap: true,
+    sourcemap: "hidden",
     commonjsOptions: {
       sourceMap: true,
     },
@@ -47,6 +47,6 @@ export default defineConfig({
         },
       },
     },
-    reportCompressedSize: false
+    reportCompressedSize: false,
   },
 });
