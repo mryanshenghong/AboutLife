@@ -1,14 +1,21 @@
 <template>
   <el-dialog
     title="新建博客"
-    v-model="showCreateModal"
+    :model-value="showCreateModal"
     :show-close="false"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
     :lock-scroll="true"
     :append-to-body="false"
   >
-    <el-form @submit.prevent ref="blogFromRef" :model="state.form" :inline="true" size="small" :rules="formRules">
+    <el-form
+      @submit.prevent
+      ref="blogFromRef"
+      :model="state.form"
+      :inline="true"
+      size="small"
+      :rules="formRules"
+    >
       <el-form-item label="博客主题" prop="title">
         <el-input v-model="state.form.title" autocomplete="off"></el-input>
       </el-form-item>
@@ -18,25 +25,60 @@
           <el-button class="addTagBtn" @click="addTag">添加</el-button>
         </div>
         <div class="tagsBox">
-          <el-tag size="small" v-for="(value, index) in state.tags" :key="index">{{ value }}</el-tag>
+          <el-tag
+            size="small"
+            v-for="(value, index) in state.tags"
+            :key="index"
+            >{{ value }}</el-tag
+          >
         </div>
       </el-form-item>
       <el-form-item label="博客种类" prop="cat">
-        <el-select @change="onCatSelect" filterable allow-create v-model="state.form.cat" placeholder="请选一个博客种类">
-          <el-option v-for="(value, index) in state.cats" :key="index" :label="value" :value="value"></el-option>
+        <el-select
+          @change="onCatSelect"
+          filterable
+          allow-create
+          v-model="state.form.cat"
+          placeholder="请选一个博客种类"
+        >
+          <el-option
+            v-for="(value, index) in state.cats"
+            :key="index"
+            :label="value"
+            :value="value"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="媒体类型" prop="media_type">
-        <el-select @change="onMediaSelet" filterable v-model="state.form.media_type" placeholder="选择博客媒体类型">
+        <el-select
+          @change="onMediaSelet"
+          filterable
+          v-model="state.form.media_type"
+          placeholder="选择博客媒体类型"
+        >
           <el-option key="1" label="文章" value="blog" />
           <el-option key="2" label="图片" value="image" />
           <el-option key="3" label="音乐" value="music" />
           <el-option key="4" label="视频" value="video" />
         </el-select>
       </el-form-item>
-      <el-form-item label="媒体文件" prop="mediaSources" style="margin-left: 10px; display: block">
-        <el-button type="primary" :disabled="state.onUpload" @click="openFileInput">add</el-button>
-        <el-button type="primary" :disabled="state.onUpload" @click="openCloudFiles">Add from Cloud</el-button>
+      <el-form-item
+        label="媒体文件"
+        prop="mediaSources"
+        style="margin-left: 10px; display: block"
+      >
+        <el-button
+          type="primary"
+          :disabled="state.onUpload"
+          @click="openFileInput"
+          >add</el-button
+        >
+        <el-button
+          type="primary"
+          :disabled="state.onUpload"
+          @click="openCloudFiles"
+          >Add from Cloud</el-button
+        >
         <i class="el-icon-loading spin" v-if="state.onUpload"></i>
         <div style="display: block">
           <el-tag
@@ -51,8 +93,19 @@
             >{{ url }}</el-tag
           >
         </div>
-        <el-select style="margin-top: 10px" v-if="state.cloudFiles.length" @change="onCloudFileSelect" filterable placeholder="选择Cloud files">
-          <el-option v-for="(file, index) in state.cloudFiles" :key="index" :label="file" :value="file" />
+        <el-select
+          style="margin-top: 10px"
+          v-if="state.cloudFiles.length"
+          @change="onCloudFileSelect"
+          filterable
+          placeholder="选择Cloud files"
+        >
+          <el-option
+            v-for="(file, index) in state.cloudFiles"
+            :key="index"
+            :label="file"
+            :value="file"
+          />
         </el-select>
         <input
           ref="fileInputRef"
@@ -67,7 +120,9 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button size="small" @click="onCloseModal">取 消</el-button>
-      <el-button size="small" type="primary" @click="onCreateBlog(blogFromRef)">确 定</el-button>
+      <el-button size="small" type="primary" @click="onCreateBlog(blogFromRef)"
+        >确 定</el-button
+      >
     </div>
   </el-dialog>
 </template>
@@ -89,7 +144,9 @@ const emit = defineEmits<{
 const formRules = {
   title: [{ required: true, message: "请输入主题", trigger: "change" }],
   cat: [{ required: true, message: "请选择种类", trigger: "change" }],
-  media_type: [{ required: true, message: "请选择媒体类型", trigger: "change" }],
+  media_type: [
+    { required: true, message: "请选择媒体类型", trigger: "change" },
+  ],
 };
 const state = reactive<{
   form: {
@@ -183,7 +240,8 @@ const openCloudFiles = async () => {
     state.cloudFiles = resp.files;
   }
 };
-const removeFile = (url: string) => state.form.mediaSources.filter((source) => source !== url);
+const removeFile = (url: string) =>
+  state.form.mediaSources.filter((source) => source !== url);
 </script>
 
 <style lang="scss" scoped>

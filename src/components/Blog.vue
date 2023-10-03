@@ -18,7 +18,9 @@
     <div class="media_multi" v-else>
       <div class="des-box">
         <h3 class="title">{{ title }}</h3>
-        <el-tag class="tag" size="small" type="info">{{ formatTime(time) }}</el-tag>
+        <el-tag class="tag" size="small" type="info">{{
+          formatTime(time)
+        }}</el-tag>
       </div>
       <div class="media_box">
         <video
@@ -41,7 +43,10 @@
           controlsList="nodownload"
         ></audio>
         <div v-if="mediaType === 'image'" class="img-container">
-          <el-image :src="`${resUrl}/${mediaSources?.[0]}`" :preview-src-list="[`${resUrl}/${mediaSources?.[0]}`]"></el-image>
+          <el-image
+            :src="`${resUrl}/${mediaSources?.[0]}`"
+            :preview-src-list="[`${resUrl}/${mediaSources?.[0]}`]"
+          ></el-image>
         </div>
       </div>
     </div>
@@ -57,7 +62,9 @@ import { useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
-const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/files`;
+const resUrl: string = import.meta.env.DEV
+  ? `${import.meta.env.VITE_APP_RES_URL}`
+  : `${import.meta.env.VITE_APP_BASE}/files`;
 
 const playerOptions: any = {
   control: true,

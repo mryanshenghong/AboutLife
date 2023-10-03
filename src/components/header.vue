@@ -5,15 +5,39 @@
       <h2 class="main-font">BOUT LIFE</h2>
     </div>
     <div class="header-right">
-      <el-button class="login-btn" @click="onCommandChange('login')" v-if="!isLogin">Login</el-button>
-      <el-dropdown v-if="isLogin" szie="mini" @command="onCommandChange" trigger="click">
-        <el-avatar size="default">{{ user.user_name.charAt(0).toUpperCase() }}</el-avatar>
+      <el-button
+        class="login-btn"
+        @click="onCommandChange('login')"
+        v-if="!isLogin"
+        >Login</el-button
+      >
+      <el-dropdown
+        v-if="isLogin"
+        szie="mini"
+        @command="onCommandChange"
+        trigger="click"
+      >
+        <el-avatar size="default">{{
+          user.user_name.charAt(0).toUpperCase()
+        }}</el-avatar>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-if="isLogin" command="profile">profile</el-dropdown-item>
-            <el-dropdown-item v-if="isLogin && user.role === 0" command="write_blog">{{ $t("message.login.write_blog") }}</el-dropdown-item>
-            <el-dropdown-item v-if="isLogin && user.role === 0" command="media_sys">{{ $t("message.login.media_sys") }}</el-dropdown-item>
-            <el-dropdown-item v-if="isLogin" command="logout">logout</el-dropdown-item>
+            <el-dropdown-item v-if="isLogin" command="profile"
+              >profile</el-dropdown-item
+            >
+            <el-dropdown-item
+              v-if="isLogin && user.role === 0"
+              command="write_blog"
+              >{{ $t("message.login.write_blog") }}</el-dropdown-item
+            >
+            <el-dropdown-item
+              v-if="isLogin && user.role === 0"
+              command="media_sys"
+              >{{ $t("message.login.media_sys") }}</el-dropdown-item
+            >
+            <el-dropdown-item v-if="isLogin" command="logout"
+              >logout</el-dropdown-item
+            >
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -27,10 +51,8 @@ import { logout as userLogout } from "@/api/login";
 import { useRouter } from "vue-router";
 import { useStore } from "@/store";
 import { useMessage } from "@/utils/element-plus";
-import { useI18n } from "vue-i18n";
 
 const $message = useMessage(getCurrentInstance());
-const { t: $t } = useI18n();
 const router = useRouter();
 const store = useStore();
 
@@ -54,6 +76,7 @@ const onCommandChange = (cm: string) => {
       router.push("/media");
       break;
     default:
+      break;
   }
 };
 

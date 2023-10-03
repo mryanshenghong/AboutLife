@@ -2,7 +2,7 @@
   <md-editor
     ref="editableMDRef"
     v-if="canEdit"
-    v-model="content"
+    v-model="state.editableContent"
     class="markdown"
     :preview="true"
     codeTheme="github"
@@ -11,7 +11,14 @@
     :toolbars="toolbarOptions"
     :footers="[]"
   />
-  <md-editor ref="readonlyMDRef" v-else :modelValue="content" v-model="content" class="markdown" preview-only codeTheme="github" />
+  <md-editor
+    ref="readonlyMDRef"
+    v-else
+    :modelValue="content"
+    class="markdown"
+    preview-only
+    codeTheme="github"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -20,7 +27,7 @@ import type { ToolbarNames } from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { uploadImg } from "@/api/file";
 import { useMessage } from "@/utils/element-plus";
-import { getCurrentInstance, ref } from "vue";
+import { getCurrentInstance, reactive, ref } from "vue";
 
 const emit = defineEmits<{ (e: "saveContent", value: any): void }>();
 
@@ -29,7 +36,7 @@ const editableMDRef = ref();
 const readonlyMDRef = ref();
 
 // Props
-defineProps({
+const props = defineProps({
   content: {
     type: String,
     default: undefined,
@@ -38,6 +45,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+});
+
+const state = reactive({
+  editableContent: props.content,
 });
 
 const toolbarOptions: ToolbarNames[] = [
@@ -75,7 +86,9 @@ const onImgAdd = async (files: Array<File>, callback: Function) => {
   const { token } = localStorage;
   try {
     const res: any = await uploadImg(files[0], token);
-    const resUrl: string = import.meta.env.DEV ? `${import.meta.env.VITE_APP_RES_URL}` : `${import.meta.env.VITE_APP_BASE}/files`;
+    const resUrl: string = import.meta.env.DEV
+      ? `${import.meta.env.VITE_APP_RES_URL}`
+      : `${import.meta.env.VITE_APP_BASE}/files`;
     callback([`${resUrl}/${res.imgUrl}`]);
   } catch (err) {
     $message?.error(`can not upload image ${err}`);

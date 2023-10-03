@@ -2,7 +2,11 @@
   <div class="footer">
     <el-row>
       <el-col>
-        <div class="email">©2020<a href="mailto:mryanshenghong@gamil.com">&nbsp; Shenghong Yan</a></div>
+        <div class="email">
+          ©2020<a href="mailto:mryanshenghong@gamil.com"
+            >&nbsp; Shenghong Yan</a
+          >
+        </div>
       </el-col>
     </el-row>
   </div>

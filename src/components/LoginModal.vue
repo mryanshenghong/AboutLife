@@ -10,35 +10,84 @@
   >
     <el-tabs v-model="state.formTab" @tab-click="handleFormChange">
       <el-tab-pane label="Login" name="login">
-        <el-form ref="loginModalRef" @submit.native.prevent :model="state.form" :rules="rules">
-          <el-form-item :label="$t('message.login.modalEmailLabel')" prop="email">
+        <el-form
+          ref="loginModalRef"
+          @submit.native.prevent
+          :model="state.form"
+          :rules="rules"
+        >
+          <el-form-item
+            :label="$t('message.login.modalEmailLabel')"
+            prop="email"
+          >
             <el-input v-model="state.form.email" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.login.modalPwdLabel')" prop="password">
-            <el-input v-model="state.form.password" type="password" autocomplete="off"></el-input>
+          <el-form-item
+            :label="$t('message.login.modalPwdLabel')"
+            prop="password"
+          >
+            <el-input
+              v-model="state.form.password"
+              type="password"
+              autocomplete="off"
+            ></el-input>
           </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="Signup" name="signup">
-        <el-form ref="signupModalRef" @submit.native.prevent :model="state.signupForm" :rules="signupRules">
+        <el-form
+          ref="signupModalRef"
+          @submit.native.prevent
+          :model="state.signupForm"
+          :rules="signupRules"
+        >
           <el-form-item label="Name" prop="nickname">
-            <el-input v-model="state.signupForm.nickname" autocomplete="off" type="text"></el-input>
+            <el-input
+              v-model="state.signupForm.nickname"
+              autocomplete="off"
+              type="text"
+            ></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.login.modalEmailLabel')" prop="email">
-            <el-input v-model="state.signupForm.email" autocomplete="off" type="email"></el-input>
+          <el-form-item
+            :label="$t('message.login.modalEmailLabel')"
+            prop="email"
+          >
+            <el-input
+              v-model="state.signupForm.email"
+              autocomplete="off"
+              type="email"
+            ></el-input>
           </el-form-item>
-          <el-form-item :label="$t('message.login.modalPwdLabel')" prop="password">
-            <el-input v-model="state.signupForm.password" type="password" autocomplete="off"></el-input>
+          <el-form-item
+            :label="$t('message.login.modalPwdLabel')"
+            prop="password"
+          >
+            <el-input
+              v-model="state.signupForm.password"
+              type="password"
+              autocomplete="off"
+            ></el-input>
           </el-form-item>
           <el-form-item label="Confirm Password" prop="confirmPassword">
-            <el-input v-model="state.signupForm.confirmPassword" type="password" autocomplete="off"></el-input>
+            <el-input
+              v-model="state.signupForm.confirmPassword"
+              type="password"
+              autocomplete="off"
+            ></el-input>
           </el-form-item>
         </el-form>
       </el-tab-pane>
     </el-tabs>
     <div slot="footer" class="login-footer">
-      <el-button @click="closeModal">{{ $t("message.login.modalCancel") }}</el-button>
-      <el-button :disabled="!state.canSubmit" :loading="state.submiting" @click="loginOrSignUp" type="primary">
+      <el-button @click="closeModal">{{
+        $t("message.login.modalCancel")
+      }}</el-button>
+      <el-button
+        :disabled="!state.canSubmit"
+        :loading="state.submiting"
+        @click="loginOrSignUp"
+        type="primary"
+      >
         {{ $t("message.login.modalConfirm") }}
       </el-button>
     </div>
@@ -206,7 +255,8 @@ const submitLogin = async () => {
   }
 };
 
-const loginOrSignUp = () => (state.formTab === "login" ? submitLogin() : submitSignUp());
+const loginOrSignUp = () =>
+  state.formTab === "login" ? submitLogin() : submitSignUp();
 
 const submitSignUp = async () => {
   signupModalRef.value.validate(async (valid: boolean) => {
