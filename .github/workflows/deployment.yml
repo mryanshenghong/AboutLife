@@ -40,7 +40,7 @@ jobs:
         run: |
           sentry-cli releases new "$VERSION"
           sentry-cli releases set-commits --auto "$VERSION"
-          sentry-cli releases files "$VERSION" upload-sourcemaps ./dist --url-prefix='http://blog.yanshenghong.com/'
+          sentry-cli releases files "$VERSION" upload-sourcemaps ./dist --url-prefix='http://blog.yanshenghong.top/'
           sentry-cli releases finalize "$VERSION"
 
       - name: Remove sourcemaps
